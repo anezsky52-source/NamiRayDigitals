@@ -140,50 +140,15 @@ input,select,textarea,.output{border-color:#279ddc88!important;background:linear
 <div id="nrdRobot" role="button" tabindex="0" aria-label="Robot asisten NamiRayDigitals"><div class="head"><i class="ear l"></i><i class="ear r"></i><i class="eye l"></i><i class="eye r"></i><i class="mouth"></i></div><div class="neck"></div><div class="arm l"></div><div class="arm r"></div><div class="body"><i class="core"></i></div><div class="label">NamiRayDigitals</div></div></div>
 <button id="nrdRobotSound" type="button" aria-pressed="true">🔊 Suara robot: aktif</button>
 <script>
-(()=> {
- if(window.__NRD_ROBOT_V06__) return;
- window.__NRD_ROBOT_V06__=true;
+(()=>{
+ if(window.__NRD_ROBOT_V07__)return;
+ window.__NRD_ROBOT_V07__=true;
  const $=id=>document.getElementById(id);
- const talk=$('nrdRobotTalk'), sound=$('nrdRobotSound'), robot=$('nrdRobot'), repeat=$('nrdRobotRepeat');
- if(!talk||!sound||!robot) return;
+ const talk=$('nrdRobotTalk'),sound=$('nrdRobotSound'),robot=$('nrdRobot');
+ if(!talk||!sound||!robot)return;
  const synth=window.speechSynthesis;
- let enabled=true, lastText='Halo! Aku asisten robot NamiRayDigitals. Sentuh menu untuk mendengar penjelasannya.', voices=[];
- const initial=talk.querySelector('b');
- function showText(message){
-   const b=talk.querySelector('b');
-   talk.innerHTML='';
-   if(b){talk.appendChild(b);talk.appendChild(document.createElement('br'));}
-   else {const head=document.createElement('b');head.textContent='NAMIRAYDIGITALS AI';talk.appendChild(head);talk.appendChild(document.createElement('br'));}
-   talk.appendChild(document.createTextNode(message+' '));
-   const btn=document.createElement('button');btn.type='button';btn.id='nrdRobotRepeat';btn.textContent='Dengarkan lagi';talk.appendChild(document.createElement('br'));talk.appendChild(btn);
-   btn.addEventListener('click',()=>speak(lastText));
- }
- function loadVoices(){
-   if(!synth)return;
-   voices=synth.getVoices()||[];
- }
- function chooseVoice(){
-   const indo=voices.filter(v=>/^id([_-]|$)/i.test(v.lang)||/indonesia|bahasa/i.test(v.name+' '+v.lang));
-   return indo.find(v=>/female|woman|perempuan|google/i.test(v.name))||indo[0]||null;
- }
- function speak(message){
-   lastText=message;
-   showText(message);
-   if(!enabled)return;
-   if(!synth){sound.textContent='🔇 Browser tidak mendukung suara';return;}
-   try{
-     loadVoices();
-     if(synth.speaking||synth.pending)synth.cancel();
-     synth.resume();
-     const utter=new SpeechSynthesisUtterance(message);
-     utter.lang='id-ID';utter.rate=.91;utter.pitch=1.48;utter.volume=1;
-     const voice=chooseVoice();if(voice)utter.voice=voice;
-     utter.onstart=()=>{robot.classList.add('nrd-speaking');sound.textContent='🗣️ Robot sedang berbicara';};
-     utter.onend=()=>{robot.classList.remove('nrd-speaking');sound.textContent=enabled?'🔊 Suara robot: aktif':'🔇 Suara robot: mati';};
-     utter.onerror=(e)=>{robot.classList.remove('nrd-speaking');sound.textContent='⚠️ Suara gagal — tekan untuk coba lagi';};
-     synth.speak(utter);
-   }catch(e){sound.textContent='⚠️ Suara gagal — tekan untuk coba lagi';}
- }
+ let enabled=true,lastText='Halo! Aku asisten robot NamiRayDigitals. Tekan menu untuk mendengar penjelasannya.';
+ let audio=null,playing=false,voices=[];
  const descriptions={
  dashboard:'Yeay! Ini Dashboard NamiRayDigitals. Dari sini kamu bisa memulai dan melihat ringkasan proyek kreatif.',
  idea:'Selamat datang di Idea Studio! Tulis ide cerita kamu. Aku akan membantu menyusun konsep produksi.',
@@ -194,26 +159,76 @@ input,select,textarea,.output{border-color:#279ddc88!important;background:linear
  social:'Ini Social Media Kit! Aku bisa membantu membuat caption dan hashtag untuk karya kamu.',
  archive:'Ini Project Archive! Semua proyek yang kamu simpan di browser bisa dibuka dan dikelola di sini.'
  };
- const nav=$('nav');
- if(nav)nav.addEventListener('click',e=>{
-   const el=e.target.closest('button[data-go],a');
-   if(!el)return;
-   const key=el.getAttribute('data-go');
-   const label=(el.textContent||'menu').trim().replace(/\s+/g,' ');
-   speak(descriptions[key]||('Kamu membuka '+label+'. Yuk, kita lanjutkan bersama!'));
- },true);
+ function render(message){
+  talk.replaceChildren();
+  const b=document.createElement('b');b.textContent='NAMIRAYDIGITALS AI';
+  talk.append(b,document.createElement('br'),document.createTextNode(message+' '));
+  const br=document.createElement('br');talk.append(br);
+  const btn=document.createElement('button');btn.type='button';btn.textContent='Dengarkan lagi';
+  btn.addEventListener('click',()=>speak(lastText));talk.append(btn);
+ }
+ function chunks(text){
+  const words=text.split(/\s+/),out=[];let part='';
+  for(const word of words){if((part+' '+word).trim().length>145&&part){out.push(part);part=word;}else part=(part+' '+word).trim();}
+  if(part)out.push(part);return out;
+ }
+ function loadVoices(){if(synth)voices=synth.getVoices()||[];}
+ function browserSpeak(text){
+  return new Promise((resolve,reject)=>{
+   if(!synth||typeof SpeechSynthesisUtterance==='undefined'){reject(new Error('TTS browser tidak tersedia'));return;}
+   try{
+    synth.cancel();synth.resume();loadVoices();
+    const u=new SpeechSynthesisUtterance(text);u.lang='id-ID';u.rate=.92;u.pitch=1.4;u.volume=1;
+    const v=voices.find(x=>/^id([_-]|$)/i.test(x.lang));if(v)u.voice=v;
+    let done=false;const finish=ok=>{if(done)return;done=true;robot.classList.remove('nrd-speaking');ok?resolve():reject(new Error('Browser TTS gagal'));};
+    u.onstart=()=>{robot.classList.add('nrd-speaking');sound.textContent='🗣️ Robot berbicara';};
+    u.onend=()=>finish(true);u.onerror=()=>finish(false);
+    synth.speak(u);
+    setTimeout(()=>{if(!done&&!synth.speaking&&!synth.pending)finish(false);},1800);
+   }catch(e){reject(e);}
+  });
+ }
+ async function onlineSpeak(text){
+  if(!navigator.onLine)throw new Error('Tidak ada koneksi internet');
+  if(audio){audio.pause();audio.src='';audio=null;}
+  const parts=chunks(text);
+  for(const part of parts){
+   if(!enabled)throw new Error('Suara dimatikan');
+   const url='https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl=id&ttsspeed=0.85&q='+encodeURIComponent(part);
+   await new Promise((resolve,reject)=>{
+    const a=new Audio();audio=a;a.preload='auto';
+    a.onended=()=>resolve();a.onerror=()=>reject(new Error('Audio online tidak dapat dimuat'));
+    a.play().then(()=>{robot.classList.add('nrd-speaking');sound.textContent='🗣️ Robot berbicara';}).catch(reject);
+   });
+  }
+ }
+ async function speak(message){
+  lastText=message;render(message);
+  if(!enabled)return;
+  playing=true;sound.textContent='⏳ Menyiapkan suara...';
+  try{await onlineSpeak(message);sound.textContent='🔊 Suara robot: aktif';}
+  catch(e){
+   if(!enabled)return;
+   try{if(audio){audio.pause();audio=null;}await browserSpeak(message);sound.textContent='🔊 Suara robot: aktif';}
+   catch(err){sound.textContent='⚠️ Audio gagal dimuat';render(message+' Maaf, audio belum tersedia. Periksa koneksi internet dan layanan suara Android.');}
+  }finally{playing=false;robot.classList.remove('nrd-speaking');}
+ }
  sound.addEventListener('click',()=>{
-   enabled=!enabled;
-   sound.textContent=enabled?'🔊 Suara robot: aktif':'🔇 Suara robot: mati';
-   sound.setAttribute('aria-pressed',String(enabled));
-   if(!enabled&&synth)synth.cancel();
-   if(enabled)speak('Yeay! Suara robot aktif. Halo teman kreatif! Aku siap menemanimu.');
+  enabled=!enabled;sound.setAttribute('aria-pressed',String(enabled));
+  if(!enabled){if(audio){audio.pause();audio=null;}if(synth)synth.cancel();robot.classList.remove('nrd-speaking');sound.textContent='🔇 Suara robot: mati';}
+  else{sound.textContent='🔊 Suara robot: aktif';speak('Yeay! Suara robot aktif. Halo teman kreatif! Aku siap menemanimu.');}
  });
  robot.addEventListener('click',()=>speak('Hai! Aku robot kecil NamiRayDigitals. Senang menemanimu berkarya hari ini!'));
  robot.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();speak('Hai! Aku robot kecil NamiRayDigitals. Senang menemanimu berkarya hari ini!');}});
+ const nav=$('nav');
+ if(nav)nav.addEventListener('click',e=>{
+  const el=e.target.closest('button[data-go],a');if(!el)return;
+  const key=el.getAttribute('data-go'),label=(el.textContent||'menu').trim().replace(/\s+/g,' ');
+  speak(descriptions[key]||('Kamu membuka '+label+'. Yuk, kita lanjutkan bersama!'));
+ },true);
  if(synth){loadVoices();if(typeof synth.addEventListener==='function')synth.addEventListener('voiceschanged',loadVoices);else synth.onvoiceschanged=loadVoices;}
- sound.textContent=synth?'🔊 Suara robot: aktif':'🔇 Browser tidak mendukung suara';
- showText('Halo! Aku asisten robot perempuan NamiRayDigitals. Tekan salah satu menu atau sentuh aku untuk mendengar suaraku.');
+ sound.textContent='🔊 Suara robot: aktif';
+ render('Halo! Aku asisten robot perempuan NamiRayDigitals. Tekan menu atau sentuh aku untuk mendengar suaraku.');
 })();
 </script>
 
