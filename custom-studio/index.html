@@ -119,22 +119,94 @@ body{background-color:#050b18!important;background-image:radial-gradient(ellipse
 #nrdRobotSound{box-shadow:0 0 18px #139dff44}
 #nrdRobot:focus-visible{outline:2px solid #8ff6ff;outline-offset:7px;border-radius:20px}
 @media(max-width:560px){#nrdRobotDock{right:8px;bottom:8px}}
+
+/* FULL BLUE HOLOGRAM INTERFACE */
+body{background:radial-gradient(ellipse at 50% -15%,#087eb966 0,transparent 42%),radial-gradient(ellipse at 8% 40%,#064c8266 0,transparent 36%),radial-gradient(ellipse at 92% 55%,#122d7766 0,transparent 35%),#020817!important}
+.top,.hero,.nav,.panel,.mini,.scene,.output{backdrop-filter:blur(18px) saturate(155%)!important}
+.nav,.panel{background:linear-gradient(145deg,#071c32ed,#091329f2 58%,#101a39e8)!important;border:1px solid #28caff66!important;box-shadow:inset 0 1px #b5f6ff22,0 0 22px #078bdf20,0 15px 38px #0006!important}
+.hero{background:linear-gradient(115deg,#062b49ed,#101b3bed 58%,#10113aed)!important;border:1px solid #45ddff99!important;box-shadow:inset 0 1px #c8fbff44,0 0 30px #078bdf33,0 22px 55px #0007!important}
+.logo{background:linear-gradient(135deg,#d9ffff,#39cfff 38%,#1764ff 78%,#b7a6ff)!important;box-shadow:0 0 12px #29dfff,0 0 32px #147bff88!important}
+.brand h1,.hero h2,.panel h3{ text-shadow:0 0 16px #26bfff44}
+.nav button{border:1px solid transparent!important;background:linear-gradient(100deg,#0b2845aa,#0b1835aa)!important;color:#b9eaff!important;box-shadow:inset 0 1px #b7f5ff12!important;transition:.22s ease!important}
+.nav button:hover,.nav button.active{border-color:#43dcffbb!important;background:linear-gradient(100deg,#075080,#182d68)!important;color:#e5fcff!important;box-shadow:0 0 14px #08baff55,inset 0 0 14px #28cfff22!important;transform:translateX(2px)}
+.btn{border-color:#39cfff77!important;background:linear-gradient(135deg,#0b3556,#142b54)!important;box-shadow:0 0 12px #009dff22,inset 0 1px #d7ffff22!important}
+.btn.primary{background:linear-gradient(110deg,#7df5ff,#27baff 52%,#728cff)!important;color:#031327!important;box-shadow:0 0 20px #14cfff66!important}
+input,select,textarea,.output{border-color:#279ddc88!important;background:linear-gradient(145deg,#061426,#0b1c35)!important;box-shadow:inset 0 0 14px #087bc322!important}
+.mini,.scene{border-color:#29bfff66!important;background:linear-gradient(145deg,#0b2741,#101a36)!important;box-shadow:inset 0 1px #baf8ff22,0 0 16px #008dff18!important}
+#nrdRobotDock{z-index:99999!important}
+@media(max-width:760px){.nav button{min-height:46px}.nav button:hover,.nav button.active{transform:none}}
 </style>
 <div id="nrdRobotDock"><div id="nrdRobotTalk" role="status" aria-live="polite"><b>NAMIRAYDIGITALS AI</b>Halo! Aku asisten robot kamu. Tekan menu, nanti aku jelaskan dengan suara. <br><button type="button" id="nrdRobotRepeat">Dengarkan lagi</button></div>
 <div id="nrdRobot" role="button" tabindex="0" aria-label="Robot asisten NamiRayDigitals"><div class="head"><i class="ear l"></i><i class="ear r"></i><i class="eye l"></i><i class="eye r"></i><i class="mouth"></i></div><div class="neck"></div><div class="arm l"></div><div class="arm r"></div><div class="body"><i class="core"></i></div><div class="label">NamiRayDigitals</div></div></div>
 <button id="nrdRobotSound" type="button" aria-pressed="true">🔊 Suara robot: aktif</button>
 <script>
-(()=>{if(window.__NRD_ROBOT_V04__)return;window.__NRD_ROBOT_V04__=true;
-let enabled=true,lastText='Halo! Selamat datang di NamiRayDigitals Studio. Aku asisten robot kamu. Pilih menu, dan aku akan menjelaskan fungsinya.';
-const talk=document.getElementById('nrdRobotTalk'),sound=document.getElementById('nrdRobotSound');
-function voice(){if(!('speechSynthesis'in window))return null;const vs=speechSynthesis.getVoices();const id=vs.filter(v=>/^id(-|_)/i.test(v.lang)||/indonesia/i.test(v.name));return id.find(v=>/female|woman|perempuan|google.*bahasa indonesia/i.test(v.name))||id[0]||null}
-function speak(message){lastText=message;talk.querySelector('b').textContent='NAMIRAYDIGITALS AI';talk.childNodes[1].textContent=message+' ';if(!enabled||!('speechSynthesis'in window))return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(message);u.lang='id-ID';u.rate=.91;u.pitch=1.32;u.volume=1;const v=voice();if(v)u.voice=v;speechSynthesis.speak(u)}
-sound.addEventListener('click',()=>{enabled=!enabled;sound.textContent=enabled?'🔊 Suara robot: aktif':'🔇 Suara robot: mati';sound.setAttribute('aria-pressed',String(enabled));if(!enabled&&'speechSynthesis'in window)speechSynthesis.cancel();else speak('Yeay! Suara robot aktif lagi. Yuk, kita mulai berkarya!')});
-document.getElementById('nrdRobotRepeat').addEventListener('click',()=>speak(lastText));
-const robot=document.getElementById('nrdRobot');robot.addEventListener('click',()=>speak('Hai! Aku robot kecil NamiRayDigitals. Senang bisa menemanimu berkarya hari ini!'));robot.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();speak('Hai! Aku robot kecil NamiRayDigitals. Senang bisa menemanimu berkarya hari ini!')}});
-const desc={dashboard:'Yeay, ini Dashboard! Dari sini kamu bisa memulai perjalanan kreatifmu.',idea:'Kita masuk ke Idea Studio, ya! Tulis ide ceritamu. Aku bantu susun konsep produksi.',character:'Ini Character DNA! Di sini kita menjaga wajah, rambut, kostum, dan ciri karakter tetap konsisten.',world:'Selamat datang di Environment Lab! Kita bisa merancang tempat dan dunia untuk ceritamu.',storyboard:'Ini Storyboard! Yuk, susun adegan satu per satu, lengkap dengan aksi dan dialog.',prompts:'Ini Prompt Lab! Di sini kita siapkan prompt gambar dan video agar hasilnya lebih terarah.',social:'Ini Social Media Kit! Kita siapkan caption dan hashtag untuk membagikan karya kamu.',archive:'Ini Project Archive! Semua proyek yang kamu simpan bisa dikelola dari sini.'};
-const nav=document.getElementById('nav');if(nav)nav.addEventListener('click',e=>{const el=e.target.closest('button[data-go],a');if(!el)return;const key=el.getAttribute('data-go');const label=(el.textContent||'menu').replace(/[^\\p{L}\\p{N}\\s&]/gu,'').trim();speak(desc[key]||('Kamu memilih '+label+'. Silakan gunakan panel ini untuk melanjutkan proyekmu, ya!'))},true);
-if(!('speechSynthesis'in window)){sound.textContent='Suara tidak tersedia di browser';sound.disabled=true}else speechSynthesis.getVoices();
+(()=> {
+ if(window.__NRD_ROBOT_V05__) return;
+ window.__NRD_ROBOT_V05__=true;
+ const $=id=>document.getElementById(id);
+ const talk=$('nrdRobotTalk'), sound=$('nrdRobotSound'), robot=$('nrdRobot'), repeat=$('nrdRobotRepeat');
+ if(!talk||!sound||!robot) return;
+ let enabled=true, lastText='Halo! Selamat datang di NamiRayDigitals Studio. Aku asisten robot perempuanmu. Sentuh menu untuk mendengar penjelasannya.';
+ const synth=window.speechSynthesis;
+ function chooseVoice(){
+   if(!synth) return null;
+   const voices=synth.getVoices()||[];
+   const indo=voices.filter(v=>/^id([_-]|$)/i.test(v.lang)||/indonesia|bahasa/i.test(v.name+' '+v.lang));
+   return indo.find(v=>/female|woman|perempuan|google.*indonesia/i.test(v.name))||indo[0]||voices.find(v=>/^id/i.test(v.lang))||null;
+ }
+ function speak(message){
+   lastText=message;
+   const b=talk.querySelector('b');
+   if(b) b.textContent='NAMIRAYDIGITALS AI';
+   const nodes=[...talk.childNodes].filter(n=>n.nodeType===3);
+   if(nodes[0]) nodes[0].textContent=message+' ';
+   else talk.insertBefore(document.createTextNode(message+' '),talk.querySelector('button'));
+   if(!enabled) return;
+   if(!synth){sound.textContent='🔇 Browser tidak mendukung suara';return;}
+   try{
+     synth.cancel(); synth.resume();
+     const utter=new SpeechSynthesisUtterance(message);
+     utter.lang='id-ID'; utter.rate=.88; utter.pitch=1.42; utter.volume=1;
+     const v=chooseVoice(); if(v) utter.voice=v;
+     utter.onerror=()=>{sound.textContent='🔊 Coba tekan suara lagi';};
+     synth.speak(utter);
+   }catch(e){sound.textContent='🔊 Coba tekan suara lagi';}
+ }
+ const say=msg=>{if(enabled)speak(msg);};
+ sound.addEventListener('click',()=>{
+   enabled=!enabled;
+   sound.textContent=enabled?'🔊 Suara robot: aktif':'🔇 Suara robot: mati';
+   sound.setAttribute('aria-pressed',String(enabled));
+   if(!enabled&&synth)synth.cancel();
+   if(enabled)speak('Yeay! Suara robot aktif. Halo, teman kreatif! Aku siap menemanimu.');
+ });
+ if(repeat) repeat.addEventListener('click',()=>speak(lastText));
+ const hello=()=>speak('Hai! Aku robot kecil NamiRayDigitals. Senang menemanimu berkarya hari ini!');
+ robot.addEventListener('click',hello);
+ robot.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();hello();}});
+ const descriptions={
+ dashboard:'Yeay, ini Dashboard! Tempat melihat ringkasan dan memulai proyek kreatifmu.',
+ idea:'Selamat datang di Idea Studio! Tulis ide cerita, lalu kita susun konsep produksinya bersama.',
+ character:'Ini Character DNA! Kita jaga wajah, rambut, kostum, dan ciri karakter supaya konsisten.',
+ world:'Ini Environment Lab! Mari bangun dunia, lokasi, suasana, dan pencahayaan cerita.',
+ storyboard:'Ini Storyboard! Kita susun adegan demi adegan dengan aksi dan dialog.',
+ prompts:'Ini Prompt Lab! Di sini kita siapkan prompt gambar dan video.',
+ social:'Ini Social Media Kit! Mari buat caption dan hashtag untuk karyamu.',
+ archive:'Ini Project Archive! Tempat mengelola proyek yang sudah kamu simpan.'
+ };
+ const nav=$('nav');
+ if(nav) nav.addEventListener('click',e=>{
+   const el=e.target.closest('button[data-go],a');
+   if(!el)return;
+   const key=el.getAttribute('data-go');
+   const label=(el.textContent||'menu').trim().replace(/\\s+/g,' ');
+   say(descriptions[key]||('Kamu membuka '+label+'. Yuk kita lanjutkan!'));
+ },true);
+ if(synth){
+   synth.getVoices();
+   if('onvoiceschanged' in synth) synth.onvoiceschanged=()=>synth.getVoices();
+   sound.textContent='🔊 Suara robot: aktif';
+ } else sound.textContent='🔇 Browser tidak mendukung suara';
 })();
 </script>
 
