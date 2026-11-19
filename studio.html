@@ -136,6 +136,17 @@ input,select,textarea,.output{border-color:#279ddc88!important;background:linear
 #nrdRobotDock{z-index:99999!important}
 @media(max-width:760px){.nav button{min-height:46px}.nav button:hover,.nav button.active{transform:none}}
 @media(max-width:560px){#nrdRobotDock{left:8px!important;right:8px!important;bottom:8px!important;width:auto!important;display:flex!important;flex-direction:column-reverse!important;align-items:flex-end!important;gap:8px!important}#nrdRobot{flex:0 0 142px!important;align-self:flex-end!important;margin:0!important;transform:none!important}#nrdRobotTalk{box-sizing:border-box!important;width:min(290px,calc(100vw - 24px))!important;max-width:calc(100vw - 24px)!important;min-width:0!important;margin:0!important;position:relative!important;z-index:100002!important;pointer-events:auto!important}#nrdRobotTalk button{position:relative!important;z-index:100003!important;white-space:normal!important}#nrdRobotSound{display:none!important}}
+/* NRD speech bubble detached from robot: fixed independent layer */
+#nrdRobotDock{position:fixed!important;right:8px!important;bottom:8px!important;left:auto!important;width:120px!important;height:145px!important;display:block!important;z-index:99999!important;pointer-events:none!important}
+#nrdRobot{position:absolute!important;right:0!important;bottom:0!important;width:112px!important;height:142px!important;transform:none!important;margin:0!important;pointer-events:auto!important}
+#nrdRobotTalk{position:fixed!important;right:12px!important;bottom:166px!important;left:auto!important;box-sizing:border-box!important;width:min(300px,calc(100vw - 24px))!important;max-width:calc(100vw - 24px)!important;min-width:0!important;margin:0!important;z-index:100010!important;pointer-events:auto!important}
+#nrdRobotTalk button{position:relative!important;z-index:100011!important;display:inline-block!important;white-space:normal!important;pointer-events:auto!important}
+#nrdRobotSound{display:none!important}
+@media(max-width:560px){
+ #nrdRobotDock{right:6px!important;bottom:6px!important;left:auto!important;width:100px!important;height:112px!important}
+ #nrdRobot{width:112px!important;height:142px!important;transform:scale(.78)!important;transform-origin:bottom right!important;right:0!important;bottom:0!important}
+ #nrdRobotTalk{right:8px!important;bottom:122px!important;width:min(290px,calc(100vw - 16px))!important;max-width:calc(100vw - 16px)!important;left:auto!important;margin:0!important;padding:12px!important}
+}
 </style>
 <div id="nrdRobotDock"><div id="nrdRobotTalk" role="status" aria-live="polite"><b>NAMIRAYDIGITALS AI</b>Halo! Aku asisten robot kamu. Tekan menu, nanti aku jelaskan dengan suara. <br><button type="button" id="nrdRobotRepeat">Dengarkan lagi</button></div>
 <div id="nrdRobot" role="button" tabindex="0" aria-label="Robot asisten NamiRayDigitals"><div class="head"><i class="ear l"></i><i class="ear r"></i><i class="eye l"></i><i class="eye r"></i><i class="mouth"></i></div><div class="neck"></div><div class="arm l"></div><div class="arm r"></div><div class="body"><i class="core"></i></div><div class="label">NamiRayDigitals</div></div></div>
