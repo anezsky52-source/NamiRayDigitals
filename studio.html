@@ -141,7 +141,7 @@ input,select,textarea,.output{border-color:#279ddc88!important;background:linear
 <button id="nrdRobotSound" type="button" aria-pressed="true">🔊 Suara robot: aktif</button>
 <script>
 (()=>{
- if(window.__NRD_ROBOT_V08__)return;
+ if(window.__NRD_ROBOT_V09__)return;
  window.__NRD_ROBOT_V08__=true;
  const $=id=>document.getElementById(id);
  const talk=$('nrdRobotTalk'),sound=$('nrdRobotSound'),robot=$('nrdRobot');
@@ -206,15 +206,27 @@ input,select,textarea,.output{border-color:#279ddc88!important;background:linear
    }catch(e){reject(e);}
   });
  }
- async function speak(text){
+ function speak(text){
   if(!enabled)return;
-  const token=++requestNo;stopAudio();display(text);sound.textContent='⏳ Menyiapkan suara...';
-  try{await googleAudio(text,token);if(token===requestNo)sound.textContent='🔊 Tes suara / suara aktif';}
-  catch(e){
-   if(token!==requestNo)return;
-   try{await browserVoice(text,token);if(token===requestNo)sound.textContent='🔊 Suara robot aktif (suara perangkat)';}
-   catch(err){if(token===requestNo){sound.textContent='⚠️ Audio tidak berhasil dimuat';display(text+' — Audio gagal diputar. Tekan tombol Tes Suara untuk mencoba lagi.');}}
-  }finally{if(token===requestNo)robot.classList.remove('nrd-speaking');}
+  ++requestNo;stopAudio();display(text);
+  if(!synth||typeof SpeechSynthesisUtterance==='undefined'){
+   sound.textContent='⚠️ Mesin suara browser tidak tersedia';
+   return;
+  }
+  try{
+   const u=new SpeechSynthesisUtterance(text);
+   u.lang='id-ID';u.rate=.92;u.pitch=1.22;u.volume=1;
+   const voices=synth.getVoices?synth.getVoices():[];
+   const indo=voices.find(v=>/^id([-_]|$)/i.test(v.lang));
+   if(indo)u.voice=indo;
+   u.onstart=()=>{robot.classList.add('nrd-speaking');sound.textContent='🗣️ Robot sedang berbicara';};
+   u.onend=()=>{robot.classList.remove('nrd-speaking');sound.textContent='🔊 Tes suara robot';};
+   u.onerror=(e)=>{robot.classList.remove('nrd-speaking');sound.textContent='⚠️ TTS gagal: '+(e.error||'coba lagi');};
+   synth.cancel();synth.resume();
+   /* Penting: speak dipanggil langsung di dalam klik pengguna, tanpa menunggu jaringan */
+   synth.speak(u);
+   sound.textContent='⏳ Memulai suara...';
+  }catch(e){sound.textContent='⚠️ '+(e.message||'Suara gagal dimulai');}
  }
  sound.textContent='🔊 Tes suara robot';
  sound.setAttribute('aria-label','Tes suara robot');
