@@ -141,44 +141,53 @@ input,select,textarea,.output{border-color:#279ddc88!important;background:linear
 <button id="nrdRobotSound" type="button" aria-pressed="true">🔊 Suara robot: aktif</button>
 <script>
 (()=> {
- if(window.__NRD_ROBOT_V05__) return;
- window.__NRD_ROBOT_V05__=true;
+ if(window.__NRD_ROBOT_V06__) return;
+ window.__NRD_ROBOT_V06__=true;
  const $=id=>document.getElementById(id);
  const talk=$('nrdRobotTalk'), sound=$('nrdRobotSound'), robot=$('nrdRobot'), repeat=$('nrdRobotRepeat');
  if(!talk||!sound||!robot) return;
- let enabled=true, lastText='Halo! Selamat datang di NamiRayDigitals Studio. Aku asisten robot perempuanmu. Sentuh menu untuk mendengar penjelasannya.';
  const synth=window.speechSynthesis;
- function chooseVoice(){
-   if(!synth) return null;
-   const voices=synth.getVoices()||[];
-   const indo=voices.filter(v=>/^id([_-]|$)/i.test(v.lang)||/indonesia|bahasa/i.test(v.name+' '+v.lang));
-   return indo.find(v=>/female|woman|perempuan|google.*indonesia/i.test(v.name))||indo[0]||voices.find(v=>/^id/i.test(v.lang))||null;
- }
- function speak(message){
+ let enabled=true, lastText='Halo! Selamat datang di NamiRayDigitals Studio. Aku asisten robot perempuanmu. Sentuh menu untuk mendengar penjelasannya.';
+ let voices=[];
+ const loadVoices=()=>{if(synth) voices=synth.getVoices()||[];};
+ loadVoices();
+ if(synth && 'onvoiceschanged' in synth) synth.addEventListener('voiceschanged',loadVoices);
+ function showText(message){
    lastText=message;
    const b=talk.querySelector('b');
    if(b) b.textContent='NAMIRAYDIGITALS AI';
-   const nodes=[...talk.childNodes].filter(n=>n.nodeType===3);
-   if(nodes[0]) nodes[0].textContent=message+' ';
-   else talk.insertBefore(document.createTextNode(message+' '),talk.querySelector('button'));
-   if(!enabled) return;
-   if(!synth){sound.textContent='🔇 Browser tidak mendukung suara';return;}
-   try{
-     synth.cancel(); synth.resume();
-     const utter=new SpeechSynthesisUtterance(message);
-     utter.lang='id-ID'; utter.rate=.88; utter.pitch=1.42; utter.volume=1;
-     const v=chooseVoice(); if(v) utter.voice=v;
-     utter.onerror=()=>{sound.textContent='🔊 Coba tekan suara lagi';};
-     synth.speak(utter);
-   }catch(e){sound.textContent='🔊 Coba tekan suara lagi';}
+   let node=[...talk.childNodes].find(n=>n.nodeType===3);
+   if(!node){node=document.createTextNode('');talk.insertBefore(node,talk.querySelector('button'));}
+   node.textContent=message+' ';
  }
- const say=msg=>{if(enabled)speak(msg);};
+ function speak(message){
+   showText(message);
+   if(!enabled) return;
+   if(!synth || !('SpeechSynthesisUtterance' in window)){
+     sound.textContent='🔇 Suara tidak didukung browser ini'; return;
+   }
+   try{
+     loadVoices();
+     synth.cancel();
+     const utter=new SpeechSynthesisUtterance(message);
+     utter.lang='id-ID'; utter.rate=0.92; utter.pitch=1.35; utter.volume=1;
+     const indo=voices.filter(v=>/^id([_-]|$)/i.test(v.lang)||/indonesia|bahasa/i.test(v.name+' '+v.lang));
+     const voice=indo.find(v=>/female|woman|perempuan|google/i.test(v.name))||indo[0];
+     if(voice) utter.voice=voice;
+     utter.onstart=()=>{sound.textContent='🔊 Robot sedang berbicara';};
+     utter.onend=()=>{sound.textContent='🔊 Suara robot: aktif';};
+     utter.onerror=()=>{sound.textContent='🔊 Ketuk tombol suara untuk mencoba lagi';};
+     synth.resume();
+     // Speak directly from the user's tap/click handler to satisfy mobile browser gesture rules.
+     synth.speak(utter);
+   }catch(err){sound.textContent='🔊 Ketuk tombol suara untuk mencoba lagi';}
+ }
+ sound.textContent='🔊 Tes / aktifkan suara robot';
+ sound.setAttribute('aria-pressed','true');
  sound.addEventListener('click',()=>{
-   enabled=!enabled;
-   sound.textContent=enabled?'🔊 Suara robot: aktif':'🔇 Suara robot: mati';
-   sound.setAttribute('aria-pressed',String(enabled));
-   if(!enabled&&synth)synth.cancel();
-   if(enabled)speak('Yeay! Suara robot aktif. Halo, teman kreatif! Aku siap menemanimu.');
+   enabled=true;
+   if(synth) synth.resume();
+   speak('Halo! Suara robot NamiRayDigitals sudah aktif. Senang menemanimu!');
  });
  if(repeat) repeat.addEventListener('click',()=>speak(lastText));
  const hello=()=>speak('Hai! Aku robot kecil NamiRayDigitals. Senang menemanimu berkarya hari ini!');
@@ -194,19 +203,13 @@ input,select,textarea,.output{border-color:#279ddc88!important;background:linear
  social:'Ini Social Media Kit! Mari buat caption dan hashtag untuk karyamu.',
  archive:'Ini Project Archive! Tempat mengelola proyek yang sudah kamu simpan.'
  };
- const nav=$('nav');
- if(nav) nav.addEventListener('click',e=>{
-   const el=e.target.closest('button[data-go],a');
+ document.addEventListener('click',e=>{
+   const el=e.target.closest('#nav button[data-go],#nav a,nav button[data-go],nav a');
    if(!el)return;
    const key=el.getAttribute('data-go');
    const label=(el.textContent||'menu').trim().replace(/\\s+/g,' ');
-   say(descriptions[key]||('Kamu membuka '+label+'. Yuk kita lanjutkan!'));
+   speak(descriptions[key]||('Kamu membuka '+label+'. Yuk kita lanjutkan!'));
  },true);
- if(synth){
-   synth.getVoices();
-   if('onvoiceschanged' in synth) synth.onvoiceschanged=()=>synth.getVoices();
-   sound.textContent='🔊 Suara robot: aktif';
- } else sound.textContent='🔇 Browser tidak mendukung suara';
 })();
 </script>
 
