@@ -72,4 +72,49 @@ const NRD_STUDIO_PASSWORD = "Bandung1989";
   });
 })();
 
-</script></body></html>
+</script>
+<!-- NamiRayDigitals Studio 0.4.0: Blue hologram robot assistant -->
+<style>
+body{background-color:#050b18!important;background-image:radial-gradient(ellipse at 12% 0%,#103b68 0,transparent 38%),radial-gradient(ellipse at 92% 18%,#102c56 0,transparent 36%),#050b18!important}
+.brand .logo{background:linear-gradient(135deg,#39cfff,#1675ff 65%,#9cefff)!important;color:#031326!important;box-shadow:0 0 24px #1a9dff77!important}
+.hero{border-color:#248bdc88!important;background:linear-gradient(115deg,#0d2c4bef,#111d3bef 62%,#101b37)!important}.hero:after{background:#159dff22!important}
+.eyebrow,.nav button.active,.nav button:hover{color:#55eaff!important}.btn.primary{background:linear-gradient(110deg,#50e5ff,#258aff)!important;color:#041426!important}
+.nav button.active,.nav button:hover{background:#12365b!important}.panel,.nav{border-color:#24466c!important}
+#nrdRobotDock{position:fixed;right:20px;bottom:16px;z-index:9000;display:flex;align-items:flex-end;gap:10px;pointer-events:none}
+#nrdRobot{width:112px;height:142px;position:relative;pointer-events:auto;cursor:pointer;filter:drop-shadow(0 0 15px #139dff88);animation:nrdFloat 3.6s ease-in-out infinite;transform-origin:50% 90%}
+#nrdRobot .head{position:absolute;left:23px;top:4px;width:67px;height:61px;border:2px solid #9beeff;border-radius:23px;background:linear-gradient(145deg,#e4faff,#6b9fbd 20%,#172f53 54%,#071326);box-shadow:inset 0 0 12px #b9f8ff88,0 0 20px #159dff88}
+#nrdRobot .ear{position:absolute;top:22px;width:9px;height:23px;border-radius:6px;background:linear-gradient(#a5f7ff,#0879d9)}#nrdRobot .ear.l{left:-7px}#nrdRobot .ear.r{right:-7px}
+#nrdRobot .eye{position:absolute;top:25px;width:12px;height:8px;border-radius:9px;background:#72f4ff;box-shadow:0 0 12px 4px #28baff;animation:nrdBlink 5s infinite}#nrdRobot .eye.l{left:14px}#nrdRobot .eye.r{right:14px}
+#nrdRobot .mouth{position:absolute;left:25px;bottom:9px;width:14px;height:4px;border-radius:8px;background:#68eaff}
+#nrdRobot .neck{position:absolute;top:63px;left:49px;width:18px;height:9px;background:linear-gradient(90deg,#315b7b,#b5f5ff,#24517b);border-radius:4px}
+#nrdRobot .body{position:absolute;left:25px;top:69px;width:63px;height:55px;border:2px solid #83e9ff;border-radius:17px 17px 12px 12px;background:linear-gradient(145deg,#bcefff,#3d7095 25%,#122c4d 65%,#071326);box-shadow:inset 0 0 13px #a9f4ff88,0 0 16px #159dff66}
+#nrdRobot .core{position:absolute;left:23px;top:17px;width:15px;height:15px;border:2px solid #baf8ff;border-radius:50%;background:#24cfff;box-shadow:0 0 9px 4px #23cfff}
+#nrdRobot .arm{position:absolute;top:77px;width:12px;height:39px;border-radius:9px;background:linear-gradient(90deg,#123a61,#9aeaff,#174b7c);transform-origin:top center}#nrdRobot .arm.l{left:15px;transform:rotate(12deg)}#nrdRobot .arm.r{right:7px;transform:rotate(-18deg);animation:nrdWave 3.8s ease-in-out infinite}
+#nrdRobot .label{position:absolute;left:5px;bottom:0;width:102px;text-align:center;color:#8ceeff;font:800 9px/1.2 system-ui;letter-spacing:1.2px}
+#nrdRobotTalk{pointer-events:auto;max-width:225px;margin-bottom:48px;padding:11px 14px;border:1px solid #49cfff88;border-radius:14px 14px 3px 14px;background:#071a30ed;color:#dffaff;font:12px/1.5 system-ui;box-shadow:0 8px 30px #0008;backdrop-filter:blur(12px)}
+#nrdRobotTalk b{display:block;color:#65eaff;font-size:10px;letter-spacing:1px;margin-bottom:3px}
+#nrdRobotTalk button,#nrdRobotSound{border:1px solid #48cfff66;border-radius:99px;padding:5px 10px;background:#0d3151;color:#bdf7ff;font-size:10px}
+#nrdRobotSound{position:fixed;right:20px;bottom:169px;z-index:9001;padding:7px 11px;font-size:11px}
+@keyframes nrdFloat{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-9px) rotate(1deg)}}@keyframes nrdWave{0%,75%,100%{transform:rotate(-18deg)}82%,90%{transform:rotate(-65deg)}}@keyframes nrdBlink{0%,46%,50%,100%{transform:scaleY(1)}48%{transform:scaleY(.12)}}
+@media(max-width:560px){#nrdRobotDock{right:6px;bottom:6px;gap:3px}#nrdRobot{transform:scale(.78);transform-origin:bottom right;margin-left:-20px}#nrdRobotTalk{max-width:165px;margin-bottom:32px;font-size:11px}#nrdRobotSound{right:10px;bottom:130px}}
+@media(prefers-reduced-motion:reduce){#nrdRobot,#nrdRobot .arm.r,#nrdRobot .eye{animation:none!important}}
+</style>
+<div id="nrdRobotDock"><div id="nrdRobotTalk" role="status" aria-live="polite"><b>NAMIRAYDIGITALS AI</b>Halo! Aku asisten robot kamu. Tekan menu, nanti aku jelaskan dengan suara. <br><button type="button" id="nrdRobotRepeat">Dengarkan lagi</button></div>
+<div id="nrdRobot" role="button" tabindex="0" aria-label="Robot asisten NamiRayDigitals"><div class="head"><i class="ear l"></i><i class="ear r"></i><i class="eye l"></i><i class="eye r"></i><i class="mouth"></i></div><div class="neck"></div><div class="arm l"></div><div class="arm r"></div><div class="body"><i class="core"></i></div><div class="label">NamiRayDigitals</div></div></div>
+<button id="nrdRobotSound" type="button" aria-pressed="true">🔊 Suara robot: aktif</button>
+<script>
+(()=>{if(window.__NRD_ROBOT_V04__)return;window.__NRD_ROBOT_V04__=true;
+let enabled=true,lastText='Halo! Selamat datang di NamiRayDigitals Studio. Aku asisten robot kamu. Pilih menu, dan aku akan menjelaskan fungsinya.';
+const talk=document.getElementById('nrdRobotTalk'),sound=document.getElementById('nrdRobotSound');
+function voice(){if(!('speechSynthesis'in window))return null;const vs=speechSynthesis.getVoices();const id=vs.filter(v=>/^id(-|_)/i.test(v.lang)||/indonesia/i.test(v.name));return id.find(v=>/female|woman|perempuan|google.*bahasa indonesia/i.test(v.name))||id[0]||null}
+function speak(message){lastText=message;talk.querySelector('b').textContent='NAMIRAYDIGITALS AI';talk.childNodes[1].textContent=message+' ';if(!enabled||!('speechSynthesis'in window))return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(message);u.lang='id-ID';u.rate=.91;u.pitch=1.32;u.volume=1;const v=voice();if(v)u.voice=v;speechSynthesis.speak(u)}
+sound.addEventListener('click',()=>{enabled=!enabled;sound.textContent=enabled?'🔊 Suara robot: aktif':'🔇 Suara robot: mati';sound.setAttribute('aria-pressed',String(enabled));if(!enabled&&'speechSynthesis'in window)speechSynthesis.cancel();else speak('Yeay! Suara robot aktif lagi. Yuk, kita mulai berkarya!')});
+document.getElementById('nrdRobotRepeat').addEventListener('click',()=>speak(lastText));
+const robot=document.getElementById('nrdRobot');robot.addEventListener('click',()=>speak('Hai! Aku robot kecil NamiRayDigitals. Senang bisa menemanimu berkarya hari ini!'));robot.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();speak('Hai! Aku robot kecil NamiRayDigitals. Senang bisa menemanimu berkarya hari ini!')}});
+const desc={dashboard:'Yeay, ini Dashboard! Dari sini kamu bisa memulai perjalanan kreatifmu.',idea:'Kita masuk ke Idea Studio, ya! Tulis ide ceritamu. Aku bantu susun konsep produksi.',character:'Ini Character DNA! Di sini kita menjaga wajah, rambut, kostum, dan ciri karakter tetap konsisten.',world:'Selamat datang di Environment Lab! Kita bisa merancang tempat dan dunia untuk ceritamu.',storyboard:'Ini Storyboard! Yuk, susun adegan satu per satu, lengkap dengan aksi dan dialog.',prompts:'Ini Prompt Lab! Di sini kita siapkan prompt gambar dan video agar hasilnya lebih terarah.',social:'Ini Social Media Kit! Kita siapkan caption dan hashtag untuk membagikan karya kamu.',archive:'Ini Project Archive! Semua proyek yang kamu simpan bisa dikelola dari sini.'};
+const nav=document.getElementById('nav');if(nav)nav.addEventListener('click',e=>{const el=e.target.closest('button[data-go],a');if(!el)return;const key=el.getAttribute('data-go');const label=(el.textContent||'menu').replace(/[^\\p{L}\\p{N}\\s&]/gu,'').trim();speak(desc[key]||('Kamu memilih '+label+'. Silakan gunakan panel ini untuk melanjutkan proyekmu, ya!'))},true);
+if(!('speechSynthesis'in window)){sound.textContent='Suara tidak tersedia di browser';sound.disabled=true}else speechSynthesis.getVoices();
+})();
+</script>
+
+</body></html>
