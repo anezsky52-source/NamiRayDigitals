@@ -99,7 +99,7 @@ body{background-color:#050b18!important;background-image:radial-gradient(ellipse
 @media(max-width:560px){#nrdRobotDock{right:6px;bottom:6px;gap:3px}#nrdRobot{transform:scale(.78);transform-origin:bottom right;margin-left:-20px}#nrdRobotTalk{max-width:165px;margin-bottom:32px;font-size:11px}#nrdRobotSound{right:10px;bottom:130px}}
 @media(prefers-reduced-motion:reduce){#nrdRobot,#nrdRobot .arm.r,#nrdRobot .eye{animation:none!important}}
 
-/* NamiRayDigitals Robotic Assistant — dimensional blue hologram finish */
+\n#nrdRobot.nrd-speaking .mouth{height:10px!important;width:18px!important;left:23px!important;bottom:6px!important;border-radius:50%!important;animation:nrdTalkMouth .18s ease-in-out infinite alternate;box-shadow:0 0 13px #8fffff!important}\n@keyframes nrdTalkMouth{from{transform:scaleY(.45)}to{transform:scaleY(1.35)}}\n/* NamiRayDigitals Robotic Assistant — dimensional blue hologram finish */
 #nrdRobotDock{perspective:900px}
 #nrdRobot{transform-style:preserve-3d;filter:drop-shadow(0 12px 18px #007dff66) drop-shadow(0 0 22px #31dfff55)}
 #nrdRobot .head{background:linear-gradient(145deg,#f2fdff 0%,#8feaff 15%,#277eb9 38%,#0a2b50 72%,#06172c 100%);border:2px solid #a8f5ff;box-shadow:inset 5px 5px 9px #ffffffaa,inset -7px -8px 12px #001b3e,0 0 0 4px #168bd955,0 0 24px #23cfff99;transform:rotateX(-8deg);border-radius:23px 23px 19px 19px}
@@ -141,72 +141,79 @@ input,select,textarea,.output{border-color:#279ddc88!important;background:linear
 <button id="nrdRobotSound" type="button" aria-pressed="true">🔊 Suara robot: aktif</button>
 <script>
 (()=> {
- if(window.__NRD_ROBOT_V05__) return;
- window.__NRD_ROBOT_V05__=true;
+ if(window.__NRD_ROBOT_V06__) return;
+ window.__NRD_ROBOT_V06__=true;
  const $=id=>document.getElementById(id);
  const talk=$('nrdRobotTalk'), sound=$('nrdRobotSound'), robot=$('nrdRobot'), repeat=$('nrdRobotRepeat');
  if(!talk||!sound||!robot) return;
- let enabled=true, lastText='Halo! Selamat datang di NamiRayDigitals Studio. Aku asisten robot perempuanmu. Sentuh menu untuk mendengar penjelasannya.';
  const synth=window.speechSynthesis;
+ let enabled=true, lastText='Halo! Aku asisten robot NamiRayDigitals. Sentuh menu untuk mendengar penjelasannya.', voices=[];
+ const initial=talk.querySelector('b');
+ function showText(message){
+   const b=talk.querySelector('b');
+   talk.innerHTML='';
+   if(b){talk.appendChild(b);talk.appendChild(document.createElement('br'));}
+   else {const head=document.createElement('b');head.textContent='NAMIRAYDIGITALS AI';talk.appendChild(head);talk.appendChild(document.createElement('br'));}
+   talk.appendChild(document.createTextNode(message+' '));
+   const btn=document.createElement('button');btn.type='button';btn.id='nrdRobotRepeat';btn.textContent='Dengarkan lagi';talk.appendChild(document.createElement('br'));talk.appendChild(btn);
+   btn.addEventListener('click',()=>speak(lastText));
+ }
+ function loadVoices(){
+   if(!synth)return;
+   voices=synth.getVoices()||[];
+ }
  function chooseVoice(){
-   if(!synth) return null;
-   const voices=synth.getVoices()||[];
    const indo=voices.filter(v=>/^id([_-]|$)/i.test(v.lang)||/indonesia|bahasa/i.test(v.name+' '+v.lang));
-   return indo.find(v=>/female|woman|perempuan|google.*indonesia/i.test(v.name))||indo[0]||voices.find(v=>/^id/i.test(v.lang))||null;
+   return indo.find(v=>/female|woman|perempuan|google/i.test(v.name))||indo[0]||null;
  }
  function speak(message){
    lastText=message;
-   const b=talk.querySelector('b');
-   if(b) b.textContent='NAMIRAYDIGITALS AI';
-   const nodes=[...talk.childNodes].filter(n=>n.nodeType===3);
-   if(nodes[0]) nodes[0].textContent=message+' ';
-   else talk.insertBefore(document.createTextNode(message+' '),talk.querySelector('button'));
-   if(!enabled) return;
+   showText(message);
+   if(!enabled)return;
    if(!synth){sound.textContent='🔇 Browser tidak mendukung suara';return;}
    try{
-     synth.cancel(); synth.resume();
+     loadVoices();
+     if(synth.speaking||synth.pending)synth.cancel();
+     synth.resume();
      const utter=new SpeechSynthesisUtterance(message);
-     utter.lang='id-ID'; utter.rate=.88; utter.pitch=1.42; utter.volume=1;
-     const v=chooseVoice(); if(v) utter.voice=v;
-     utter.onerror=()=>{sound.textContent='🔊 Coba tekan suara lagi';};
+     utter.lang='id-ID';utter.rate=.91;utter.pitch=1.48;utter.volume=1;
+     const voice=chooseVoice();if(voice)utter.voice=voice;
+     utter.onstart=()=>{robot.classList.add('nrd-speaking');sound.textContent='🗣️ Robot sedang berbicara';};
+     utter.onend=()=>{robot.classList.remove('nrd-speaking');sound.textContent=enabled?'🔊 Suara robot: aktif':'🔇 Suara robot: mati';};
+     utter.onerror=(e)=>{robot.classList.remove('nrd-speaking');sound.textContent='⚠️ Suara gagal — tekan untuk coba lagi';};
      synth.speak(utter);
-   }catch(e){sound.textContent='🔊 Coba tekan suara lagi';}
+   }catch(e){sound.textContent='⚠️ Suara gagal — tekan untuk coba lagi';}
  }
- const say=msg=>{if(enabled)speak(msg);};
+ const descriptions={
+ dashboard:'Yeay! Ini Dashboard NamiRayDigitals. Dari sini kamu bisa memulai dan melihat ringkasan proyek kreatif.',
+ idea:'Selamat datang di Idea Studio! Tulis ide cerita kamu. Aku akan membantu menyusun konsep produksi.',
+ character:'Ini Character DNA! Di sini kita menjaga wajah, rambut, kostum, dan ciri karakter agar tetap konsisten di setiap adegan.',
+ world:'Ini Environment Lab! Kita bisa merancang lokasi, suasana, pencahayaan, dan dunia cerita.',
+ storyboard:'Ini Storyboard Builder! Mari susun adegan satu per satu, lengkap dengan aksi, kamera, dialog, dan transisi.',
+ prompts:'Ini Prompt Lab! Kita siapkan prompt gambar dan video yang siap kamu salin ke generator.',
+ social:'Ini Social Media Kit! Aku bisa membantu membuat caption dan hashtag untuk karya kamu.',
+ archive:'Ini Project Archive! Semua proyek yang kamu simpan di browser bisa dibuka dan dikelola di sini.'
+ };
+ const nav=$('nav');
+ if(nav)nav.addEventListener('click',e=>{
+   const el=e.target.closest('button[data-go],a');
+   if(!el)return;
+   const key=el.getAttribute('data-go');
+   const label=(el.textContent||'menu').trim().replace(/\s+/g,' ');
+   speak(descriptions[key]||('Kamu membuka '+label+'. Yuk, kita lanjutkan bersama!'));
+ },true);
  sound.addEventListener('click',()=>{
    enabled=!enabled;
    sound.textContent=enabled?'🔊 Suara robot: aktif':'🔇 Suara robot: mati';
    sound.setAttribute('aria-pressed',String(enabled));
    if(!enabled&&synth)synth.cancel();
-   if(enabled)speak('Yeay! Suara robot aktif. Halo, teman kreatif! Aku siap menemanimu.');
+   if(enabled)speak('Yeay! Suara robot aktif. Halo teman kreatif! Aku siap menemanimu.');
  });
- if(repeat) repeat.addEventListener('click',()=>speak(lastText));
- const hello=()=>speak('Hai! Aku robot kecil NamiRayDigitals. Senang menemanimu berkarya hari ini!');
- robot.addEventListener('click',hello);
- robot.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();hello();}});
- const descriptions={
- dashboard:'Yeay, ini Dashboard! Tempat melihat ringkasan dan memulai proyek kreatifmu.',
- idea:'Selamat datang di Idea Studio! Tulis ide cerita, lalu kita susun konsep produksinya bersama.',
- character:'Ini Character DNA! Kita jaga wajah, rambut, kostum, dan ciri karakter supaya konsisten.',
- world:'Ini Environment Lab! Mari bangun dunia, lokasi, suasana, dan pencahayaan cerita.',
- storyboard:'Ini Storyboard! Kita susun adegan demi adegan dengan aksi dan dialog.',
- prompts:'Ini Prompt Lab! Di sini kita siapkan prompt gambar dan video.',
- social:'Ini Social Media Kit! Mari buat caption dan hashtag untuk karyamu.',
- archive:'Ini Project Archive! Tempat mengelola proyek yang sudah kamu simpan.'
- };
- const nav=$('nav');
- if(nav) nav.addEventListener('click',e=>{
-   const el=e.target.closest('button[data-go],a');
-   if(!el)return;
-   const key=el.getAttribute('data-go');
-   const label=(el.textContent||'menu').trim().replace(/\\s+/g,' ');
-   say(descriptions[key]||('Kamu membuka '+label+'. Yuk kita lanjutkan!'));
- },true);
- if(synth){
-   synth.getVoices();
-   if('onvoiceschanged' in synth) synth.onvoiceschanged=()=>synth.getVoices();
-   sound.textContent='🔊 Suara robot: aktif';
- } else sound.textContent='🔇 Browser tidak mendukung suara';
+ robot.addEventListener('click',()=>speak('Hai! Aku robot kecil NamiRayDigitals. Senang menemanimu berkarya hari ini!'));
+ robot.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();speak('Hai! Aku robot kecil NamiRayDigitals. Senang menemanimu berkarya hari ini!');}});
+ if(synth){loadVoices();if(typeof synth.addEventListener==='function')synth.addEventListener('voiceschanged',loadVoices);else synth.onvoiceschanged=loadVoices;}
+ sound.textContent=synth?'🔊 Suara robot: aktif':'🔇 Browser tidak mendukung suara';
+ showText('Halo! Aku asisten robot perempuan NamiRayDigitals. Tekan salah satu menu atau sentuh aku untuk mendengar suaraku.');
 })();
 </script>
 
