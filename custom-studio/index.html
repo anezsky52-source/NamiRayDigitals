@@ -98,6 +98,27 @@ body{background-color:#050b18!important;background-image:radial-gradient(ellipse
 @keyframes nrdFloat{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-9px) rotate(1deg)}}@keyframes nrdWave{0%,75%,100%{transform:rotate(-18deg)}82%,90%{transform:rotate(-65deg)}}@keyframes nrdBlink{0%,46%,50%,100%{transform:scaleY(1)}48%{transform:scaleY(.12)}}
 @media(max-width:560px){#nrdRobotDock{right:6px;bottom:6px;gap:3px}#nrdRobot{transform:scale(.78);transform-origin:bottom right;margin-left:-20px}#nrdRobotTalk{max-width:165px;margin-bottom:32px;font-size:11px}#nrdRobotSound{right:10px;bottom:130px}}
 @media(prefers-reduced-motion:reduce){#nrdRobot,#nrdRobot .arm.r,#nrdRobot .eye{animation:none!important}}
+
+/* NamiRayDigitals Robotic Assistant — dimensional blue hologram finish */
+#nrdRobotDock{perspective:900px}
+#nrdRobot{transform-style:preserve-3d;filter:drop-shadow(0 12px 18px #007dff66) drop-shadow(0 0 22px #31dfff55)}
+#nrdRobot .head{background:linear-gradient(145deg,#f2fdff 0%,#8feaff 15%,#277eb9 38%,#0a2b50 72%,#06172c 100%);border:2px solid #a8f5ff;box-shadow:inset 5px 5px 9px #ffffffaa,inset -7px -8px 12px #001b3e,0 0 0 4px #168bd955,0 0 24px #23cfff99;transform:rotateX(-8deg);border-radius:23px 23px 19px 19px}
+#nrdRobot .head:after{content:"";position:absolute;left:12px;right:12px;top:7px;height:8px;border-radius:50%;background:linear-gradient(90deg,transparent,#e8ffffcc,transparent);filter:blur(2px)}
+#nrdRobot .ear{background:linear-gradient(90deg,#07335c,#a5f7ff 48%,#1268a5);border:1px solid #9af4ff;box-shadow:0 0 12px #21cfff}
+#nrdRobot .eye{height:10px;width:13px;background:radial-gradient(circle at 35% 25%,#fff 0 12%,#a8ffff 20%,#21cfff 55%,#0871c7 100%);box-shadow:0 0 7px 3px #25dfff,0 0 17px #087fff}
+#nrdRobot .mouth{height:5px;background:linear-gradient(90deg,#27baff,#c5ffff,#27baff);box-shadow:0 0 9px #3deaff}
+#nrdRobot .neck{box-shadow:0 0 12px #1acfff99}
+#nrdRobot .body{transform:rotateX(7deg);border-radius:18px 18px 15px 15px;box-shadow:inset 5px 5px 10px #e4ffffaa,inset -8px -9px 13px #001b3e,0 0 18px #159dff99}
+#nrdRobot .body:before,#nrdRobot .body:after{content:"";position:absolute;top:10px;width:5px;height:24px;border-radius:8px;background:linear-gradient(#d8ffff,#178bc9,#07345e);box-shadow:0 0 7px #45dfff}
+#nrdRobot .body:before{left:5px}#nrdRobot .body:after{right:5px}
+#nrdRobot .core{background:radial-gradient(circle at 30% 25%,#fff,#8effff 25%,#15cfff 55%,#0563c6);box-shadow:0 0 8px 4px #23cfff,0 0 20px #23cfff}
+#nrdRobot .arm{border:1px solid #8beeff;box-shadow:inset 2px 0 4px #d5ffffaa,0 0 9px #159dff88}
+#nrdRobot .label{text-shadow:0 0 8px #16cfff}
+#nrdRobotTalk{border-color:#49dfffaa;background:linear-gradient(145deg,#092746f5,#071426f5);box-shadow:0 0 24px #009dff33,0 10px 32px #0009}
+#nrdRobotTalk b{color:#8ff6ff;text-shadow:0 0 10px #19bfff}
+#nrdRobotSound{box-shadow:0 0 18px #139dff44}
+#nrdRobot:focus-visible{outline:2px solid #8ff6ff;outline-offset:7px;border-radius:20px}
+@media(max-width:560px){#nrdRobotDock{right:8px;bottom:8px}}
 </style>
 <div id="nrdRobotDock"><div id="nrdRobotTalk" role="status" aria-live="polite"><b>NAMIRAYDIGITALS AI</b>Halo! Aku asisten robot kamu. Tekan menu, nanti aku jelaskan dengan suara. <br><button type="button" id="nrdRobotRepeat">Dengarkan lagi</button></div>
 <div id="nrdRobot" role="button" tabindex="0" aria-label="Robot asisten NamiRayDigitals"><div class="head"><i class="ear l"></i><i class="ear r"></i><i class="eye l"></i><i class="eye r"></i><i class="mouth"></i></div><div class="neck"></div><div class="arm l"></div><div class="arm r"></div><div class="body"><i class="core"></i></div><div class="label">NamiRayDigitals</div></div></div>
