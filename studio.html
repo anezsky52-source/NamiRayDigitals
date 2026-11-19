@@ -180,10 +180,10 @@ input,select,textarea,.output{border-color:#279ddc88!important;background:linear
    for(const url of urls){
     try{
      await new Promise((resolve,reject)=>{
-      const a=new Audio();audio=a;a.preload='auto';a.crossOrigin='anonymous';
+      const a=new Audio();audio=a;a.preload='auto';
       a.onended=resolve;a.onerror=()=>reject(Error('Audio TTS gagal dimuat'));
+      a.src=url;
       a.play().then(()=>{robot.classList.add('nrd-speaking');sound.textContent='🗣️ Robot sedang berbicara';}).catch(reject);
-      a.src=url;a.load();
      });
      played=true;break;
     }catch(e){lastError=e;if(audio){audio.pause();audio=null;}}
