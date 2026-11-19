@@ -142,7 +142,7 @@ input,select,textarea,.output{border-color:#279ddc88!important;background:linear
 <script>
 (()=>{
  if(window.__NRD_ROBOT_V09__)return;
- window.__NRD_ROBOT_V08__=true;
+ window.__NRD_ROBOT_V09__=true;
  const $=id=>document.getElementById(id);
  const talk=$('nrdRobotTalk'),sound=$('nrdRobotSound'),robot=$('nrdRobot');
  if(!talk||!sound||!robot)return;
@@ -162,8 +162,12 @@ input,select,textarea,.output{border-color:#279ddc88!important;background:linear
   lastText=t;talk.replaceChildren();
   const b=document.createElement('b');b.textContent='NAMIRAYDIGITALS AI';
   talk.append(b,document.createElement('br'),document.createTextNode(t+' '),document.createElement('br'));
+  const test=document.createElement('button');test.type='button';test.textContent='🔊 TES SUARA ROBOT';
+  test.style.cssText='display:inline-block;margin:7px 5px 0 0;padding:9px 12px;font-size:12px;font-weight:700;background:#087eb5;color:#fff;border:1px solid #8ff6ff;border-radius:18px;cursor:pointer;pointer-events:auto';
+  test.onclick=()=>speak('Halo! Aku robot perempuan NamiRayDigitals. Sekarang aku sedang menguji suara. Apakah kamu bisa mendengarku?');
   const again=document.createElement('button');again.type='button';again.textContent='Dengarkan lagi';
-  again.onclick=()=>speak(lastText);talk.append(again);
+  again.style.cssText='display:inline-block;margin-top:7px;padding:9px 12px;font-size:12px;border-radius:18px;cursor:pointer;pointer-events:auto';
+  again.onclick=()=>speak(lastText);talk.append(test,again);
  }
  function stopAudio(){if(audio){audio.pause();audio.removeAttribute('src');audio.load();audio=null;}if(synth)synth.cancel();robot.classList.remove('nrd-speaking');}
  function splitText(t){const a=[];while(t.length>180){let p=t.lastIndexOf(' ',180);if(p<70)p=180;a.push(t.slice(0,p));t=t.slice(p).trim();}if(t)a.push(t);return a;}
