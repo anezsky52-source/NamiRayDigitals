@@ -26,7 +26,7 @@
     <div class="gate-logo">NR</div>
     <h2 id="nrdGateTitle">Studio Access</h2>
     <p>Masukkan password untuk membuka NamiRayDigitals Custom Studio.</p>
-    <input id="nrdGatePassword" type="password" autocomplete="off" name="studio-access-code" required>
+    <input id="nrdGatePassword" type="password" autocomplete="new-password" name="nrd_unlock_field" autocapitalize="off" spellcheck="false" required>
     <button type="submit">BUKA STUDIO</button>
     <div class="gate-error" id="nrdGateError" aria-live="polite"></div>
     <div class="gate-brand">NamiRayDigitals · CREATE · GENERATE · INSPIRE</div>
@@ -56,6 +56,9 @@ const NRD_STUDIO_PASSWORD = "Bandung1989";
   const gate=document.getElementById('nrdAccessGate');
   const form=document.getElementById('nrdGateForm');
   const field=document.getElementById('nrdGatePassword');
+  field.value='';
+  field.setAttribute('autocomplete','new-password');
+  window.addEventListener('pageshow',function(){field.value='';});
   const error=document.getElementById('nrdGateError');
   if(sessionStorage.getItem('nrd_studio_access')==='ok'){gate.style.display='none';return;}
   field.focus();
