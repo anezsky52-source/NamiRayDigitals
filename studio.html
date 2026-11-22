@@ -26,7 +26,7 @@
     <div class="gate-logo">NR</div>
     <h2 id="nrdGateTitle">Studio Access</h2>
     <p>Masukkan password untuk membuka NamiRayDigitals Custom Studio.</p>
-    <input id="nrdGatePassword" type="password" autocomplete="new-password" name="nrd_unlock_field" autocapitalize="off" spellcheck="false" required>
+    <input id="nrdGatePassword" type="password" value="" placeholder="" autocomplete="off" name="nrd_unlock_field" autocapitalize="off" spellcheck="false" aria-label="Password akses Studio" required>
     <button type="submit">BUKA STUDIO</button>
     <div class="gate-error" id="nrdGateError" aria-live="polite"></div>
     <div class="gate-brand">NamiRayDigitals · CREATE · GENERATE · INSPIRE</div>
@@ -152,7 +152,7 @@ input,select,textarea,.output{border-color:#279ddc88!important;background:linear
 }
 </style>
 <div id="nrdRobotDock"><div id="nrdRobotTalk" role="status" aria-live="polite"><b>NAMIRAYDIGITALS AI</b>Halo! Aku asisten robot kamu. Tekan menu, nanti aku jelaskan dengan suara. <br><button type="button" id="nrdRobotRepeat">Dengarkan lagi</button></div>
-<div id="nrdRobot" role="button" tabindex="0" aria-label="Robot asisten NamiRayDigitals"><div class="head"><i class="ear l"></i><i class="ear r"></i><i class="eye l"></i><i class="eye r"></i><i class="mouth"></i></div><div class="neck"></div><div class="arm l"></div><div class="arm r"></div><div class="body"><i class="core"></i></div><div class="label">NamiRayDigitals</div></div></div>
+<div id="nrdRobot" role="button" tabindex="0" aria-label="Robot perempuan android NamiRayDigitals"><div class="hair"></div><div class="head"><i class="ear l"></i><i class="ear r"></i><i class="eye l"></i><i class="eye r"></i><i class="mouth"></i></div><div class="neck"></div><div class="arm l"></div><div class="arm r"></div><div class="body"><i class="core"></i></div><div class="waist"></div><div class="hips"></div><div class="leg l"><i></i></div><div class="leg r"><i></i></div><div class="label">NamiRayDigitals AI</div></div></div>
 <button id="nrdRobotSound" type="button" aria-pressed="true">🔊 Suara robot: aktif</button>
 <script>
 (()=>{
@@ -261,5 +261,49 @@ input,select,textarea,.output{border-color:#279ddc88!important;background:linear
  display('Halo! Aku asisten robot perempuan NamiRayDigitals. Tekan tombol Tes Suara robot untuk mendengarkan suaraku.');
 })();
 </script>
+
+
+<style id="nrd-female-android-hologram">
+/* NamiRayDigitals Studio — female android visual upgrade; existing app logic and navigation retained */
+body{background:radial-gradient(ellipse at 50% -12%,#087eb966 0,transparent 43%),radial-gradient(ellipse at 8% 48%,#064c8266 0,transparent 37%),radial-gradient(ellipse at 92% 55%,#30206a55 0,transparent 38%),#020817!important}
+.top{padding:12px 16px;border:1px solid #43dfff66;border-radius:18px;background:#06172ad9;box-shadow:0 0 28px #12aaff20,inset 0 1px #c9ffff22}
+.wrap{max-width:1440px!important}
+.hero{min-height:265px;padding:clamp(24px,4vw,48px)!important;background:linear-gradient(115deg,#052b49f2,#111c40ed 62%,#211641e8)!important;border:1px solid #58eaff99!important;box-shadow:0 0 38px #079bdf30,inset 0 1px #d5ffff33,0 25px 70px #0008!important}
+.nav,.panel{background:linear-gradient(145deg,#061a30f5,#09152df5 60%,#11183aeF)!important;border-color:#35cfff77!important;box-shadow:inset 0 1px #c8ffff20,0 0 24px #009dff1e,0 18px 42px #0007!important}
+.nav button{border-radius:12px!important;transition:background .2s ease,transform .2s ease!important}
+.nav button.active,.nav button:hover{box-shadow:0 0 14px #08baff44!important}
+.panel{padding:clamp(17px,2.2vw,26px)!important}
+#nrdRobotDock{position:fixed!important;right:16px!important;bottom:6px!important;left:auto!important;width:235px!important;height:440px!important;display:block!important;z-index:99999!important;pointer-events:none!important;perspective:1000px!important}
+#nrdRobot{position:absolute!important;right:6px!important;bottom:0!important;width:205px!important;height:420px!important;transform:none!important;transform-origin:bottom center!important;transform-style:preserve-3d!important;pointer-events:auto!important;cursor:pointer!important;filter:drop-shadow(0 0 17px #23cfff88) drop-shadow(0 16px 22px #0009)!important;animation:nrdAndroidFloat 4.5s ease-in-out infinite!important}
+#nrdRobot .hair{position:absolute;z-index:2;left:57px;top:0;width:94px;height:105px;border-radius:48% 48% 35% 35%;background:linear-gradient(110deg,#102b58,#5bcbef 28%,#e7ffff 43%,#277ec0 65%,#12244f);box-shadow:0 0 18px #2bdcff88,inset 0 0 12px #d7ffff77;clip-path:polygon(9% 0,91% 0,100% 42%,90% 100%,75% 72%,65% 100%,50% 74%,35% 100%,24% 72%,10% 100%,0 40%)}
+#nrdRobot .head{z-index:3!important;left:69px!important;top:16px!important;width:70px!important;height:78px!important;border-radius:44% 44% 47% 47%!important;background:linear-gradient(145deg,#f4ffff 0%,#a7e9f5 17%,#497eaa 48%,#16345d 78%,#07162d)!important;border:2px solid #bafaff!important;box-shadow:inset 4px 4px 9px #fff9,inset -7px -8px 12px #001c42,0 0 0 4px #25cfff33,0 0 25px #20cfffaa!important}
+#nrdRobot .head:after{content:"";position:absolute;left:12px;right:12px;top:8px;height:9px;border-radius:50%;background:#efffffbb;filter:blur(3px)}
+#nrdRobot .ear{top:29px!important;width:8px!important;height:24px!important;background:linear-gradient(90deg,#07335c,#a5f7ff 48%,#1268a5)!important;box-shadow:0 0 12px #21cfff}
+#nrdRobot .eye{top:34px!important;width:11px!important;height:7px!important;background:radial-gradient(circle,#fff 0 12%,#baffff 25%,#25dfff 65%,#0871c7)!important;box-shadow:0 0 8px 3px #27dfff,0 0 16px #087fff!important}
+#nrdRobot .eye.l{left:14px!important}#nrdRobot .eye.r{right:14px!important}
+#nrdRobot .mouth{left:28px!important;bottom:12px!important;width:13px!important;height:4px!important;background:linear-gradient(90deg,#27baff,#e4ffff,#27baff)!important}
+#nrdRobot .neck{z-index:1;top:91px!important;left:95px!important;width:20px!important;height:22px!important;border-radius:7px!important;background:linear-gradient(90deg,#123b68,#d7ffff,#247bb2)!important;box-shadow:0 0 14px #20cfff88}
+#nrdRobot .body{z-index:2;left:61px!important;top:108px!important;width:88px!important;height:132px!important;border-radius:28px 28px 22px 22px!important;background:linear-gradient(110deg,#143b67,#d6ffff 17%,#5799c1 35%,#102b50 70%,#06152a)!important;border:2px solid #9cf5ff!important;clip-path:polygon(18% 0,82% 0,100% 17%,88% 57%,78% 100%,22% 100%,12% 57%,0 17%)!important;box-shadow:inset 5px 5px 12px #efffffaa,inset -8px -9px 13px #001b3e,0 0 22px #159dff99!important}
+#nrdRobot .body:before,#nrdRobot .body:after{top:20px!important;height:60px!important;width:5px!important}
+#nrdRobot .core{left:35px!important;top:28px!important;width:18px!important;height:18px!important}
+#nrdRobot .arm{z-index:1;top:119px!important;width:20px!important;height:113px!important;border:1px solid #9cf4ff!important;border-radius:13px!important;background:linear-gradient(90deg,#09294d,#baf8ff 42%,#2679ad 72%,#0a2344)!important;box-shadow:inset 2px 0 5px #efffffaa,0 0 12px #159dff99!important}
+#nrdRobot .arm.l{left:43px!important;transform:rotate(8deg)!important}
+#nrdRobot .arm.r{right:38px!important;transform:rotate(-8deg)!important;animation:nrdAndroidWave 5s ease-in-out infinite!important}
+#nrdRobot .waist{position:absolute;z-index:3;left:82px;top:226px;width:47px;height:35px;border:2px solid #9bf4ff;border-radius:12px 12px 16px 16px;background:linear-gradient(90deg,#10365f,#c9fbff 35%,#327fae 65%,#0b2445);box-shadow:0 0 14px #1acfff88,inset 0 0 9px #dfffff88}
+#nrdRobot .hips{position:absolute;z-index:2;left:66px;top:249px;width:78px;height:49px;border:2px solid #8cefff;border-radius:18px 18px 22px 22px;background:linear-gradient(110deg,#14385e,#b7f4ff 22%,#3b80ac 50%,#0b2343 100%);clip-path:polygon(18% 0,82% 0,100% 100%,0 100%);box-shadow:0 0 17px #1acfff77}
+#nrdRobot .leg{position:absolute;z-index:1;top:286px;width:31px;height:105px;border:2px solid #9af4ff;border-radius:13px 13px 11px 11px;background:linear-gradient(90deg,#09294d,#b9f7ff 38%,#347eae 68%,#0a2344);box-shadow:inset 3px 0 5px #efffff99,0 0 13px #159dff77}
+#nrdRobot .leg.l{left:70px;transform:rotate(2deg)}#nrdRobot .leg.r{right:69px;transform:rotate(-2deg)}
+#nrdRobot .leg i{position:absolute;left:5px;bottom:-8px;width:27px;height:17px;border:1px solid #b4faff;border-radius:8px 12px 7px 7px;background:linear-gradient(90deg,#0b2d50,#d6ffff 48%,#12649a);box-shadow:0 0 12px #22cfff88}
+#nrdRobot .label{left:35px!important;bottom:0!important;width:135px!important;font-size:10px!important;letter-spacing:1.5px!important;text-shadow:0 0 12px #1acfff!important}
+#nrdRobotTalk{right:14px!important;bottom:452px!important;width:min(300px,calc(100vw - 24px))!important;max-width:300px!important;border:1px solid #6ceeffaa!important;background:linear-gradient(145deg,#092b49f5,#08152df7)!important;box-shadow:0 0 28px #09aaff44,0 12px 35px #0009!important;backdrop-filter:blur(16px)!important}
+#nrdRobotSound{display:none!important}
+#nrdRobot.nrd-speaking .mouth{height:9px!important;width:17px!important;left:26px!important;bottom:9px!important;border-radius:50%!important;animation:nrdAndroidTalk .18s ease-in-out infinite alternate!important}
+@keyframes nrdAndroidFloat{0%,100%{transform:translateY(0) rotateY(-3deg)}50%{transform:translateY(-8px) rotateY(3deg)}}
+@keyframes nrdAndroidWave{0%,78%,100%{transform:rotate(-8deg)}84%,91%{transform:rotate(-35deg)}}
+@keyframes nrdAndroidTalk{from{transform:scaleY(.45)}to{transform:scaleY(1.35)}}
+@media(max-width:760px){.layout{grid-template-columns:1fr!important}.nav{position:relative!important;top:auto!important}}
+@media(max-width:560px){#nrdRobotDock{right:4px!important;bottom:2px!important;width:154px!important;height:312px!important}#nrdRobot{right:0!important;transform:scale(.7)!important;transform-origin:bottom right!important}#nrdRobotTalk{right:8px!important;bottom:316px!important;width:min(275px,calc(100vw - 16px))!important;max-width:calc(100vw - 16px)!important}}
+@media(prefers-reduced-motion:reduce){#nrdRobot,#nrdRobot .arm.r{animation:none!important}}
+</style>
 
 </body></html>
