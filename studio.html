@@ -597,4 +597,77 @@ body #nrdRobotTalk{right:12px!important;bottom:414px!important}
 
 </style>
 
+
+<style id="NRD_FINAL_MOBILE_FIX_20261122">
+/* Final layout correction: keep AIRA compact, menus readable, and restore login visibility */
+#nrdRobotDock{
+ position:fixed!important;right:8px!important;bottom:8px!important;left:auto!important;top:auto!important;
+ width:96px!important;height:156px!important;display:block!important;overflow:visible!important;
+ z-index:100001!important;pointer-events:none!important;filter:drop-shadow(0 5px 18px #1bdfff55)!important
+}
+#nrdRobot{
+ position:absolute!important;right:0!important;bottom:0!important;left:auto!important;top:auto!important;
+ width:96px!important;height:156px!important;transform:none!important;transform-origin:bottom right!important;
+ pointer-events:auto!important;cursor:pointer!important
+}
+#nrdRobot .nrdAiraArt{display:block!important;width:100%!important;height:100%!important}
+#nrdRobot .label{font-size:7px!important;letter-spacing:.7px!important;bottom:0!important}
+#nrdRobotTalk{display:none!important}
+#nrdRobotSound{display:none!important}
+/* Visible assistant on the login gate, without covering the password card */
+#nrdAccessGate{z-index:99999!important}
+#nrdRobotDock{z-index:100000!important}
+#nrdAccessGate:not([style*="display: none"])~.wrap{visibility:hidden}
+/* Replace generic menu buttons with distinct holographic control tiles */
+#nav{
+ display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;
+ gap:10px!important;padding:15px!important;border:1px solid #53eaff88!important;
+ border-radius:24px!important;
+ background:linear-gradient(145deg,rgba(4,29,54,.96),rgba(8,17,43,.97) 65%,rgba(30,19,65,.94))!important;
+ box-shadow:inset 0 1px #e4ffff26,0 0 28px #00baff20,0 18px 44px #0005!important;
+}
+#nav button,#nav a{
+ box-sizing:border-box!important;position:relative!important;display:flex!important;
+ align-items:center!important;min-height:62px!important;width:100%!important;
+ margin:0!important;padding:12px 11px!important;border-radius:15px!important;
+ border:1px solid rgba(86,220,255,.38)!important;
+ background:linear-gradient(135deg,rgba(13,74,105,.8),rgba(13,28,61,.96) 58%,rgba(30,26,72,.92))!important;
+ color:#c9f3ff!important;font-size:14px!important;font-weight:650!important;
+ line-height:1.35!important;text-align:left!important;text-decoration:none!important;
+ white-space:normal!important;overflow:hidden!important;
+ box-shadow:inset 0 1px #efffff20,0 5px 16px #00152c88!important;
+ transition:border-color .2s,background .2s,box-shadow .2s,transform .2s!important;
+}
+#nav button:before,#nav a:before{
+ content:"";position:absolute!important;left:0!important;top:10px!important;bottom:10px!important;
+ width:3px!important;border-radius:4px!important;background:linear-gradient(#8bffff,#598cff,#bd9aff)!important;
+ box-shadow:0 0 10px #43eaff!important;opacity:.72!important;pointer-events:none!important
+}
+#nav button.active,#nav button:hover,#nav a:hover{
+ border-color:#a0f8ff!important;color:#f0fdff!important;
+ background:linear-gradient(135deg,rgba(15,117,151,.92),rgba(31,54,112,.96) 58%,rgba(69,48,132,.9))!important;
+ box-shadow:inset 0 0 22px #59eaff22,0 0 18px #20dfff42,0 7px 20px #00152caa!important;
+ transform:translateY(-2px)!important
+}
+#nav button.active:after{
+ content:"ACTIVE";position:absolute;right:8px;top:7px;font-size:7px;
+ letter-spacing:1px;color:#a9ffff;text-shadow:0 0 8px #1deaff
+}
+.layout{grid-template-columns: minmax(210px,245px) minmax(0,1fr)!important;align-items:start!important}
+@media(max-width:760px){
+ .layout{display:flex!important;flex-direction:column!important;gap:14px!important}
+ #nav{position:relative!important;top:auto!important;width:100%!important;grid-template-columns:repeat(2,minmax(0,1fr))!important}
+ .content{width:100%!important}
+ #nrdRobotDock{width:76px!important;height:124px!important;right:5px!important;bottom:5px!important}
+ #nrdRobot{width:76px!important;height:124px!important}
+ #nrdRobot .label{font-size:6px!important;letter-spacing:.4px!important}
+ #nav button,#nav a{min-height:58px!important;padding:10px 9px 10px 13px!important;font-size:13px!important}
+ #nav button.active:after{font-size:6px!important;right:5px!important;top:5px!important}
+}
+@media(max-width:380px){
+ #nav{gap:7px!important;padding:10px!important}
+ #nav button,#nav a{font-size:12px!important;min-height:54px!important}
+}
+</style>
+
 </body></html>
