@@ -18,6 +18,34 @@
 .footer{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:10px -12px 0;padding:12px 18px;text-align:center;border-top:1px solid #288de5;background:linear-gradient(90deg,#04142d,#071b39,#10102e);color:#e0eaff;font-size:11px;box-shadow:0 -5px 20px #007dff33}.footer b{color:#9ff5ff;border:1px solid #6c69ff;border-radius:20px;padding:6px 22px;font-style:italic}.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);display:none;z-index:100;background:#d9fff7;color:#09201d;padding:10px 16px;border-radius:99px;font-weight:800}
 @media(min-width:1450px){.layout{min-height:calc(100vh - 145px)}#nrdMinamiPanel{min-height:calc(100vh - 170px)}}@media(max-width:900px){.top{grid-template-columns:1fr auto}.slogan{grid-column:1/-1;grid-row:2;width:100%}.layout{grid-template-columns:1fr;min-height:0}#nrdMinamiPanel{grid-row:1;min-height:560px}.workspace{grid-row:2}.hero{min-height:175px}#nav{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:560px){.wrap{padding:6px}.top{padding:7px;gap:7px}.brand h1{font-size:17px}.logo{width:38px;height:40px;font-size:36px}.studio-status{font-size:9px;padding:5px 7px}.top-tools{gap:4px}.top-tools button{width:30px;height:30px;font-size:15px}.layout{gap:8px}#nrdMinamiPanel{min-height:480px}.aira-copy{max-width:140px!important}.hero{padding:15px 12px;min-height:155px}.hero h2{font-size:24px}.hero .eyebrow,.hero h2,.hero p,.hero .actions{margin-left:26%;max-width:72%}.hero p{font-size:10px}#nav{gap:6px;padding:6px}#nav button{min-height:74px;padding:7px;gap:6px}#nav button b{font-size:11px}#nav button small{font-size:8px}.nav-icon{flex-basis:28px;width:28px;font-size:24px}#nav button:after{font-size:20px}.grid,.cards{grid-template-columns:1fr}.footer{margin-left:-6px;margin-right:-6px;justify-content:center}}@media(prefers-reduced-motion:reduce){#nrdRobot{animation:none}*{transition:none!important}}
 </style>
+
+<style id="nrd-reference-polish-v6">
+/* Final layout alignment and dashboard visibility */
+#nrdMinamiPanel{grid-column:1;grid-row:1;min-height:720px}
+#nrdMinamiPanel #nrdRobot{height:96%;width:100%;bottom:0}
+#nrdMinamiPanel #nrdRobotTalk{z-index:6}
+.workspace{grid-column:2;grid-row:1}
+.hero{isolation:isolate}
+.hero:after{content:"NamiRayDigitals";position:absolute;right:18px;bottom:10px;color:#b8eaff;font-size:10px;letter-spacing:.24em;opacity:.55;text-shadow:0 0 9px #42cfff}
+#nav button{position:relative;overflow:hidden}
+#nav button:before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(115deg,transparent 20%,#7deaff0c 48%,transparent 72%)}
+#nav button.active{background:linear-gradient(115deg,#0b4772,#102b59 70%,#211b59);border-color:#8df8ff}
+body:not(.nrd-module-open) .section#dashboard{display:block}
+body.nrd-module-open .section#dashboard{display:block}
+#nrdMinamiPanel .aira-copy{max-width:205px}
+#nrdMinamiPanel .aira-copy strong{letter-spacing:.08em}
+.footer{min-height:54px}
+@media(max-width:900px){
+ .layout{display:flex;flex-direction:column}
+ #nrdMinamiPanel{order:0;min-height:540px;width:100%}
+ .workspace{order:1;width:100%}
+}
+@media(max-width:560px){
+ #nrdMinamiPanel{min-height:470px}
+ #nrdMinamiPanel #nrdRobotTalk{top:31%;width:46%;font-size:10px}
+ .hero:after{font-size:8px;right:8px}
+}
+</style>
 </head>
 <body>
 <div id="nrdAccessGate" role="dialog" aria-modal="true" aria-labelledby="nrdGateTitle">
