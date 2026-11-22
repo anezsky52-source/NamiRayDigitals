@@ -196,11 +196,89 @@ input:focus,select:focus,textarea:focus{
 }
 </style>
 
+<style id="nrd-clean-holographic-layout">
+:root{--nrd-cyan:#6df4ff;--nrd-blue:#318bff;--nrd-violet:#a88cff;--nrd-glass:rgba(5,24,47,.88)}
+body{background:radial-gradient(ellipse at 50% -12%,#075a83 0,transparent 42%),radial-gradient(ellipse at 90% 45%,#251b57 0,transparent 35%),#030916!important}
+.wrap{max-width:1320px!important}
+.top{padding:12px 16px;border:1px solid #47dfff66;border-radius:18px;background:linear-gradient(110deg,#061c32ee,#0b1530ee);box-shadow:0 0 26px #00baff20,inset 0 1px #dfffff20}
+.hero{position:relative;isolation:isolate;overflow:hidden;padding:clamp(24px,4vw,44px)!important;border:1px solid #65eaff88!important;border-radius:28px!important;background:radial-gradient(ellipse at 88% 8%,#1d9cc444,transparent 42%),linear-gradient(120deg,#062c49f5,#101c40f5 64%,#21183ff5)!important;box-shadow:inset 0 1px #e8ffff2b,0 0 36px #079bdf25,0 24px 60px #0007!important}
+.hero:after{z-index:-1;background:radial-gradient(circle,#5ceaff22,transparent 68%)!important}
+.layout{display:grid!important;grid-template-columns:245px minmax(0,1fr)!important;gap:18px!important;margin-top:18px!important}
+.nav,.panel{border:1px solid #42d8ff66!important;background:linear-gradient(145deg,rgba(5,29,52,.96),rgba(8,18,42,.97) 62%,rgba(22,20,55,.96))!important;box-shadow:inset 0 1px #e3ffff20,0 0 24px #00aaff17,0 16px 38px #0006!important;backdrop-filter:blur(16px)!important}
+.nav{padding:12px!important;border-radius:20px!important;position:sticky!important;top:12px!important}
+.nav button,.nav a{box-sizing:border-box!important;display:block!important;width:100%!important;min-height:48px!important;margin:4px 0!important;padding:11px 12px!important;border:1px solid #3ccfff36!important;border-radius:12px!important;background:linear-gradient(105deg,#0b3555bb,#101d3fdd)!important;color:#c5edff!important;text-align:left!important;text-decoration:none!important;transition:.2s ease!important}
+.nav button.active,.nav button:hover,.nav a:hover{border-color:#8af5ff!important;background:linear-gradient(105deg,#075b7c,#26346d)!important;color:#fff!important;box-shadow:0 0 16px #19cfff42,inset 0 0 14px #20cfff1c!important;transform:translateX(2px)}
+.panel{border-radius:19px!important;padding:clamp(17px,2.2vw,26px)!important}
+.mini,.scene,.output{border-color:#35cfff55!important;background:linear-gradient(145deg,#0a2742,#101b38)!important}
+.btn{border-color:#39cfff77!important;background:linear-gradient(135deg,#0b3556,#142b54)!important}
+.btn.primary{background:linear-gradient(110deg,#75f4ff,#29baff 52%,#8794ff)!important;color:#041326!important;box-shadow:0 0 20px #14cfff55!important}
+input,select,textarea{border-color:#279ddc88!important;background:#061426!important}
+#nrdAiraPanel{display:grid;grid-template-columns:minmax(0,1fr) 190px;align-items:center;gap:18px;margin:18px 0;padding:16px 20px;border:1px solid #55e5ff66;border-radius:22px;background:radial-gradient(ellipse at 85% 40%,#159ddc2a,transparent 40%),linear-gradient(120deg,#061b31f2,#0b1734f5 70%,#17183df2);box-shadow:inset 0 1px #eaffff24,0 0 28px #0aaaff18}
+#nrdAiraPanel .aira-copy strong{display:block;color:#a8f8ff;font-size:12px;letter-spacing:.18em}
+#nrdAiraPanel .aira-copy h3{margin:6px 0;color:#effaff;font-size:19px}
+#nrdAiraPanel .aira-copy p{margin:0;color:#a9c4df;font-size:13px}
+#nrdRobotDock{position:relative!important;inset:auto!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:4px!important;width:100%!important;height:auto!important;min-height:0!important;margin:0!important;padding:0!important;z-index:2!important;overflow:visible!important;pointer-events:auto!important;perspective:900px!important}
+#nrdRobotTalk{position:relative!important;inset:auto!important;display:block!important;order:2!important;width:100%!important;max-width:190px!important;margin:0!important;padding:8px 10px!important;border:1px solid #5beaff66!important;border-radius:12px!important;background:#071a30eF!important;color:#dffaff!important;font:11px/1.4 system-ui!important;box-shadow:0 0 16px #16cfff22!important}
+#nrdRobotTalk b{font-size:9px!important;color:#a8f8ff!important}
+#nrdRobotTalk button{font-size:10px!important;padding:4px 9px!important}
+#nrdRobotSound{display:none!important}
+#nrdRobot{position:relative!important;inset:auto!important;display:block!important;order:1!important;width:150px!important;height:260px!important;max-width:150px!important;max-height:260px!important;margin:0 auto!important;transform:none!important;animation:nrdAndroidFloat 5s ease-in-out infinite!important;pointer-events:auto!important;filter:drop-shadow(0 0 16px #23cfff66)!important}
+#nrdRobot .nrdAiraArt{display:block!important;width:100%!important;height:100%!important}
+#nrdRobot .label{font-size:7px!important}
+#nrdAccessGate{z-index:99999!important}
+#nrdAccessGate .gate-card{position:relative!important;overflow:hidden!important;border-color:#58eaff88!important;background:linear-gradient(145deg,#06223cf5,#101832f7)!important;box-shadow:0 0 38px #079bdf2b,0 24px 80px #0009!important}
+#nrdGateAira{display:block;width:86px;height:132px;margin:0 auto 8px;filter:drop-shadow(0 0 12px #22dfff77)}
+.footer{color:#91a9c7!important}
+@keyframes nrdAndroidFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+@media(max-width:760px){
+ .layout{display:flex!important;flex-direction:column!important;gap:14px!important}
+ .nav{position:relative!important;top:auto!important;width:100%!important;display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:7px!important}
+ .nav button,.nav a{min-height:52px!important;margin:0!important;font-size:13px!important;padding:10px!important}
+ #nrdAiraPanel{grid-template-columns:minmax(0,1fr) 112px!important;gap:8px!important;padding:12px!important}
+ #nrdAiraPanel .aira-copy h3{font-size:16px}
+ #nrdAiraPanel .aira-copy p{font-size:11px}
+ #nrdRobot{width:104px!important;height:174px!important;max-width:104px!important;max-height:174px!important}
+ #nrdRobotTalk{font-size:10px!important;padding:6px 7px!important}
+ #nrdRobotTalk button{display:none!important}
+}
+@media(max-width:390px){#nrdAiraPanel{grid-template-columns:minmax(0,1fr) 88px!important}#nrdRobot{width:82px!important;height:138px!important;max-width:82px!important;max-height:138px!important}.nav{gap:6px!important}.nav button,.nav a{font-size:12px!important}}
+@media(prefers-reduced-motion:reduce){#nrdRobot{animation:none!important}}
+</style>
 </head>
 <body>
 <div id="nrdAccessGate" role="dialog" aria-modal="true" aria-labelledby="nrdGateTitle">
   <form class="gate-card" id="nrdGateForm">
-    <div class="gate-logo">NR</div>
+    <div class="gate-logo">NR</div><svg id="nrdGateAira" viewBox="0 0 240 390" role="img" aria-label="Ilustrasi android wanita holografik berambut panjang">
+<defs>
+ <linearGradient id="airaMetal" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f7ffff"/><stop offset=".22" stop-color="#9cecff"/><stop offset=".52" stop-color="#387db9"/><stop offset=".8" stop-color="#12365f"/><stop offset="1" stop-color="#07172f"/></linearGradient>
+ <linearGradient id="airaHair" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#071b49"/><stop offset=".24" stop-color="#1764a7"/><stop offset=".45" stop-color="#d9fbff"/><stop offset=".62" stop-color="#4db5e5"/><stop offset="1" stop-color="#101d4c"/></linearGradient>
+ <radialGradient id="airaFace" cx=".35" cy=".2" r=".9"><stop stop-color="#fff7fb"/><stop offset=".48" stop-color="#d9f4f8"/><stop offset="1" stop-color="#6096b6"/></radialGradient>
+ <radialGradient id="airaGlow"><stop stop-color="#fff"/><stop offset=".25" stop-color="#a8ffff"/><stop offset=".7" stop-color="#2edaff"/><stop offset="1" stop-color="#1876d4"/></radialGradient>
+ <filter id="airaBlur"><feGaussianBlur stdDeviation="5"/></filter>
+ </defs>
+ <ellipse cx="120" cy="374" rx="75" ry="10" fill="#2ce5ff" opacity=".32" filter="url(#airaBlur)"/>
+ <path d="M63 118 Q28 140 30 245 L48 300 Q57 316 72 288 L80 175Z" fill="url(#airaHair)" stroke="#8df3ff" stroke-width="2"/>
+ <path d="M177 118 Q212 140 210 245 L192 300 Q183 316 168 288 L160 175Z" fill="url(#airaHair)" stroke="#8df3ff" stroke-width="2"/>
+ <path d="M50 78 Q48 13 120 12 Q192 13 190 83 L181 158 Q168 183 154 143 L86 143 Q70 183 58 158Z" fill="url(#airaHair)" stroke="#9df5ff" stroke-width="2"/>
+ <path d="M73 58 Q83 25 120 27 Q158 25 169 58 L164 126 Q157 154 120 158 Q83 154 76 126Z" fill="url(#airaFace)" stroke="#e0ffff" stroke-width="2"/>
+ <path d="M74 70 Q89 38 119 43 Q145 38 166 70 Q145 58 132 63 Q106 52 74 70Z" fill="url(#airaHair)"/>
+ <path d="M77 68 Q67 105 80 144 Q60 126 57 89Z M163 68 Q174 105 160 144 Q180 126 183 89Z" fill="url(#airaHair)"/>
+ <path d="M89 94 Q101 85 111 94" fill="none" stroke="#245d85" stroke-width="3" stroke-linecap="round"/>
+ <path d="M129 94 Q140 85 151 94" fill="none" stroke="#245d85" stroke-width="3" stroke-linecap="round"/>
+ <ellipse cx="101" cy="105" rx="8" ry="5" fill="url(#airaGlow)"/><ellipse cx="139" cy="105" rx="8" ry="5" fill="url(#airaGlow)"/>
+ <path d="M120 104 L115 124 Q120 128 125 124" fill="none" stroke="#77a9bf" stroke-width="2" stroke-linecap="round"/>
+ <path d="M109 137 Q120 143 131 137" fill="none" stroke="#b65f9c" stroke-width="3" stroke-linecap="round"/>
+ <path d="M94 157 L94 180 Q120 198 146 180 L146 157" fill="url(#airaMetal)" stroke="#b4faff" stroke-width="2"/>
+ <path d="M82 178 Q48 185 40 222 L30 303 Q30 328 55 329 L185 329 Q210 328 210 303 L200 222 Q192 185 158 178 L145 190 Q120 211 95 190Z" fill="url(#airaMetal)" stroke="#a8f6ff" stroke-width="2"/>
+ <path d="M92 187 Q120 218 148 187" fill="none" stroke="#f4ffff" stroke-width="4" opacity=".75"/>
+ <path d="M94 210 Q120 197 146 210 L156 277 Q120 293 84 277Z" fill="#0c3159" stroke="#8ceeff" stroke-width="2"/>
+ <circle cx="120" cy="245" r="22" fill="#1b9bd0" opacity=".35" filter="url(#airaBlur)"/><circle cx="120" cy="245" r="13" fill="url(#airaGlow)" stroke="#e5ffff" stroke-width="2"/>
+ <path d="M43 207 Q25 228 27 279 L38 307 Q49 316 55 298 L63 232Z M197 207 Q215 228 213 279 L202 307 Q191 316 185 298 L177 232Z" fill="url(#airaMetal)" stroke="#9af4ff" stroke-width="2"/>
+ <path d="M75 329 L165 329 L155 356 Q120 370 85 356Z" fill="url(#airaMetal)" stroke="#8ef0ff" stroke-width="2"/>
+ <path d="M90 357 L112 357 L108 379 L86 379Z M128 357 L150 357 L154 379 L132 379Z" fill="url(#airaMetal)" stroke="#8ef0ff" stroke-width="2"/>
+ <path d="M80 36 Q120 -3 160 36" fill="none" stroke="#a7faff" stroke-width="2" opacity=".8"/>
+ <circle cx="120" cy="19" r="5" fill="url(#airaGlow)"/>
+</svg>
     <h2 id="nrdGateTitle">Studio Access</h2>
     <p>Masukkan password untuk membuka NamiRayDigitals Custom Studio.</p>
     <input id="nrdGatePassword" type="password" value="" placeholder="" autocomplete="new-password" name="studio_access_entry" autocapitalize="off" spellcheck="false" aria-label="Password akses Studio" readonly required>
@@ -212,6 +290,41 @@ input:focus,select:focus,textarea:focus{
 <div class="wrap">
 <header class="top"><div class="brand"><div class="logo">NR</div><div><h1>NamiRayDigitals</h1><p>CUSTOM STUDIO</p></div></div><span class="pill">CREATE · GENERATE · INSPIRE</span></header>
 <section class="hero"><div class="eyebrow">YOUR CREATIVE PRODUCTION WORKSPACE</div><h2>Turn imagination<br>into a production plan.</h2><p>Rancang cerita, karakter, dunia visual, storyboard, dan prompt produksi dalam satu studio. Simpan proyek di perangkatmu dan ekspor kapan saja.</p><div class="actions"><button class="btn primary" onclick="go('idea')">＋ Mulai proyek</button><button class="btn ghost" onclick="go('archive')">Buka arsip proyek</button></div></section>
+<section id="nrdAiraPanel" aria-label="AIRA AI assistant"><div class="aira-copy"><strong>NAMIRAYDIGITALS · HOLOGRAPHIC AI</strong><h3>AIRA — Creative Studio Assistant</h3><p>Asisten kreatifmu siap menemani proses ide, karakter, environment, dan storyboard.</p></div></section><div id="nrdRobotDock"><div id="nrdRobotTalk" role="status" aria-live="polite"><b>NAMIRAYDIGITALS AI</b>Halo! Aku asisten robot kamu. Tekan menu, nanti aku jelaskan dengan suara. <br><button type="button" id="nrdRobotRepeat">Dengarkan lagi</button></div>
+<div id="nrdRobot" role="button" tabindex="0" aria-label="AIRA, asisten hologram wanita NamiRayDigitals">
+<svg class="nrdAiraArt" viewBox="0 0 240 390" role="img" aria-label="Ilustrasi android wanita holografik berambut panjang">
+<defs>
+ <linearGradient id="airaMetal" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f7ffff"/><stop offset=".22" stop-color="#9cecff"/><stop offset=".52" stop-color="#387db9"/><stop offset=".8" stop-color="#12365f"/><stop offset="1" stop-color="#07172f"/></linearGradient>
+ <linearGradient id="airaHair" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#071b49"/><stop offset=".24" stop-color="#1764a7"/><stop offset=".45" stop-color="#d9fbff"/><stop offset=".62" stop-color="#4db5e5"/><stop offset="1" stop-color="#101d4c"/></linearGradient>
+ <radialGradient id="airaFace" cx=".35" cy=".2" r=".9"><stop stop-color="#fff7fb"/><stop offset=".48" stop-color="#d9f4f8"/><stop offset="1" stop-color="#6096b6"/></radialGradient>
+ <radialGradient id="airaGlow"><stop stop-color="#fff"/><stop offset=".25" stop-color="#a8ffff"/><stop offset=".7" stop-color="#2edaff"/><stop offset="1" stop-color="#1876d4"/></radialGradient>
+ <filter id="airaBlur"><feGaussianBlur stdDeviation="5"/></filter>
+ </defs>
+ <ellipse cx="120" cy="374" rx="75" ry="10" fill="#2ce5ff" opacity=".32" filter="url(#airaBlur)"/>
+ <path d="M63 118 Q28 140 30 245 L48 300 Q57 316 72 288 L80 175Z" fill="url(#airaHair)" stroke="#8df3ff" stroke-width="2"/>
+ <path d="M177 118 Q212 140 210 245 L192 300 Q183 316 168 288 L160 175Z" fill="url(#airaHair)" stroke="#8df3ff" stroke-width="2"/>
+ <path d="M50 78 Q48 13 120 12 Q192 13 190 83 L181 158 Q168 183 154 143 L86 143 Q70 183 58 158Z" fill="url(#airaHair)" stroke="#9df5ff" stroke-width="2"/>
+ <path d="M73 58 Q83 25 120 27 Q158 25 169 58 L164 126 Q157 154 120 158 Q83 154 76 126Z" fill="url(#airaFace)" stroke="#e0ffff" stroke-width="2"/>
+ <path d="M74 70 Q89 38 119 43 Q145 38 166 70 Q145 58 132 63 Q106 52 74 70Z" fill="url(#airaHair)"/>
+ <path d="M77 68 Q67 105 80 144 Q60 126 57 89Z M163 68 Q174 105 160 144 Q180 126 183 89Z" fill="url(#airaHair)"/>
+ <path d="M89 94 Q101 85 111 94" fill="none" stroke="#245d85" stroke-width="3" stroke-linecap="round"/>
+ <path d="M129 94 Q140 85 151 94" fill="none" stroke="#245d85" stroke-width="3" stroke-linecap="round"/>
+ <ellipse cx="101" cy="105" rx="8" ry="5" fill="url(#airaGlow)"/><ellipse cx="139" cy="105" rx="8" ry="5" fill="url(#airaGlow)"/>
+ <path d="M120 104 L115 124 Q120 128 125 124" fill="none" stroke="#77a9bf" stroke-width="2" stroke-linecap="round"/>
+ <path d="M109 137 Q120 143 131 137" fill="none" stroke="#b65f9c" stroke-width="3" stroke-linecap="round"/>
+ <path d="M94 157 L94 180 Q120 198 146 180 L146 157" fill="url(#airaMetal)" stroke="#b4faff" stroke-width="2"/>
+ <path d="M82 178 Q48 185 40 222 L30 303 Q30 328 55 329 L185 329 Q210 328 210 303 L200 222 Q192 185 158 178 L145 190 Q120 211 95 190Z" fill="url(#airaMetal)" stroke="#a8f6ff" stroke-width="2"/>
+ <path d="M92 187 Q120 218 148 187" fill="none" stroke="#f4ffff" stroke-width="4" opacity=".75"/>
+ <path d="M94 210 Q120 197 146 210 L156 277 Q120 293 84 277Z" fill="#0c3159" stroke="#8ceeff" stroke-width="2"/>
+ <circle cx="120" cy="245" r="22" fill="#1b9bd0" opacity=".35" filter="url(#airaBlur)"/><circle cx="120" cy="245" r="13" fill="url(#airaGlow)" stroke="#e5ffff" stroke-width="2"/>
+ <path d="M43 207 Q25 228 27 279 L38 307 Q49 316 55 298 L63 232Z M197 207 Q215 228 213 279 L202 307 Q191 316 185 298 L177 232Z" fill="url(#airaMetal)" stroke="#9af4ff" stroke-width="2"/>
+ <path d="M75 329 L165 329 L155 356 Q120 370 85 356Z" fill="url(#airaMetal)" stroke="#8ef0ff" stroke-width="2"/>
+ <path d="M90 357 L112 357 L108 379 L86 379Z M128 357 L150 357 L154 379 L132 379Z" fill="url(#airaMetal)" stroke="#8ef0ff" stroke-width="2"/>
+ <path d="M80 36 Q120 -3 160 36" fill="none" stroke="#a7faff" stroke-width="2" opacity=".8"/>
+ <circle cx="120" cy="19" r="5" fill="url(#airaGlow)"/>
+</svg><div class="label">AIRA · NAMIRAYDIGITALS AI</div></div></div>
+<button id="nrdRobotSound" type="button" aria-pressed="true">🔊 Suara robot: aktif</button>
+
 <div class="layout"><nav class="nav" id="nav"><button class="active" data-go="dashboard">◈ Dashboard</button><button data-go="idea">✦ Idea Studio</button><button data-go="character">♙ Character DNA</button><button data-go="world">◎ Environment Lab</button><button data-go="storyboard">▤ Storyboard</button><button data-go="prompts">⌘ Prompt Lab</button><button data-go="agent">✧ Creative Suite Agent</button><a class="btn" href="./custom-studio/lipsync/" style="display:block;text-align:left;margin:4px 0;padding:11px;color:var(--cyan);text-decoration:none">♫ AI LipSync Studio</a><a class="btn" href="./custom-studio/ai-generator/" style="display:block;text-align:left;margin:4px 0;padding:11px;color:var(--cyan);text-decoration:none">✦ AI Image & Video Generator</a><a class="btn" href="./custom-studio/creative-suite-agent/" style="display:block;text-align:left;margin:4px 0;padding:11px;color:var(--cyan);text-decoration:none">✧ Creative Suite Agent</a><button data-go="social">♡ Social Media Kit</button><button data-go="archive">▣ Project Archive</button></nav>
 <main class="content">
 <section class="section active" id="dashboard"><div class="panel"><h3>Studio Dashboard</h3><p class="sub">Semua alat kreatif dalam satu ruang kerja.</p><div class="cards"><div class="mini"><b id="count">0</b><span>Proyek tersimpan</span></div><div class="mini"><b>8</b><span>Modul kreatif</span></div><div class="mini"><b>∞</b><span>Ide yang bisa dikembangkan</span></div></div></div><div class="panel"><h3>Mulai dari ide sederhana</h3><p class="sub">Isi konsep cerita. Studio akan menyusun kerangka produksi dan prompt dasar secara lokal tanpa API key.</p><button class="btn primary" onclick="go('idea')">Buka Idea Studio →</button></div><div class="panel"><h3>Catatan penggunaan</h3><p class="muted small">Versi ini adalah studio perencanaan dan penyusun prompt lokal. Tombol generate menyusun teks terstruktur di browser; bukan layanan pembuat gambar/video AI otomatis. Proyek disimpan di localStorage browser perangkat ini.</p></div></section>
@@ -339,40 +452,6 @@ input,select,textarea,.output{border-color:#279ddc88!important;background:linear
  #nrdRobotTalk{right:8px!important;bottom:122px!important;width:min(290px,calc(100vw - 16px))!important;max-width:calc(100vw - 16px)!important;left:auto!important;margin:0!important;padding:12px!important}
 }
 </style>
-<div id="nrdRobotDock"><div id="nrdRobotTalk" role="status" aria-live="polite"><b>NAMIRAYDIGITALS AI</b>Halo! Aku asisten robot kamu. Tekan menu, nanti aku jelaskan dengan suara. <br><button type="button" id="nrdRobotRepeat">Dengarkan lagi</button></div>
-<div id="nrdRobot" role="button" tabindex="0" aria-label="AIRA, asisten hologram wanita NamiRayDigitals">
-<svg class="nrdAiraArt" viewBox="0 0 240 390" role="img" aria-label="Ilustrasi android wanita holografik berambut panjang">
-<defs>
- <linearGradient id="airaMetal" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f7ffff"/><stop offset=".22" stop-color="#9cecff"/><stop offset=".52" stop-color="#387db9"/><stop offset=".8" stop-color="#12365f"/><stop offset="1" stop-color="#07172f"/></linearGradient>
- <linearGradient id="airaHair" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#071b49"/><stop offset=".24" stop-color="#1764a7"/><stop offset=".45" stop-color="#d9fbff"/><stop offset=".62" stop-color="#4db5e5"/><stop offset="1" stop-color="#101d4c"/></linearGradient>
- <radialGradient id="airaFace" cx=".35" cy=".2" r=".9"><stop stop-color="#fff7fb"/><stop offset=".48" stop-color="#d9f4f8"/><stop offset="1" stop-color="#6096b6"/></radialGradient>
- <radialGradient id="airaGlow"><stop stop-color="#fff"/><stop offset=".25" stop-color="#a8ffff"/><stop offset=".7" stop-color="#2edaff"/><stop offset="1" stop-color="#1876d4"/></radialGradient>
- <filter id="airaBlur"><feGaussianBlur stdDeviation="5"/></filter>
- </defs>
- <ellipse cx="120" cy="374" rx="75" ry="10" fill="#2ce5ff" opacity=".32" filter="url(#airaBlur)"/>
- <path d="M63 118 Q28 140 30 245 L48 300 Q57 316 72 288 L80 175Z" fill="url(#airaHair)" stroke="#8df3ff" stroke-width="2"/>
- <path d="M177 118 Q212 140 210 245 L192 300 Q183 316 168 288 L160 175Z" fill="url(#airaHair)" stroke="#8df3ff" stroke-width="2"/>
- <path d="M50 78 Q48 13 120 12 Q192 13 190 83 L181 158 Q168 183 154 143 L86 143 Q70 183 58 158Z" fill="url(#airaHair)" stroke="#9df5ff" stroke-width="2"/>
- <path d="M73 58 Q83 25 120 27 Q158 25 169 58 L164 126 Q157 154 120 158 Q83 154 76 126Z" fill="url(#airaFace)" stroke="#e0ffff" stroke-width="2"/>
- <path d="M74 70 Q89 38 119 43 Q145 38 166 70 Q145 58 132 63 Q106 52 74 70Z" fill="url(#airaHair)"/>
- <path d="M77 68 Q67 105 80 144 Q60 126 57 89Z M163 68 Q174 105 160 144 Q180 126 183 89Z" fill="url(#airaHair)"/>
- <path d="M89 94 Q101 85 111 94" fill="none" stroke="#245d85" stroke-width="3" stroke-linecap="round"/>
- <path d="M129 94 Q140 85 151 94" fill="none" stroke="#245d85" stroke-width="3" stroke-linecap="round"/>
- <ellipse cx="101" cy="105" rx="8" ry="5" fill="url(#airaGlow)"/><ellipse cx="139" cy="105" rx="8" ry="5" fill="url(#airaGlow)"/>
- <path d="M120 104 L115 124 Q120 128 125 124" fill="none" stroke="#77a9bf" stroke-width="2" stroke-linecap="round"/>
- <path d="M109 137 Q120 143 131 137" fill="none" stroke="#b65f9c" stroke-width="3" stroke-linecap="round"/>
- <path d="M94 157 L94 180 Q120 198 146 180 L146 157" fill="url(#airaMetal)" stroke="#b4faff" stroke-width="2"/>
- <path d="M82 178 Q48 185 40 222 L30 303 Q30 328 55 329 L185 329 Q210 328 210 303 L200 222 Q192 185 158 178 L145 190 Q120 211 95 190Z" fill="url(#airaMetal)" stroke="#a8f6ff" stroke-width="2"/>
- <path d="M92 187 Q120 218 148 187" fill="none" stroke="#f4ffff" stroke-width="4" opacity=".75"/>
- <path d="M94 210 Q120 197 146 210 L156 277 Q120 293 84 277Z" fill="#0c3159" stroke="#8ceeff" stroke-width="2"/>
- <circle cx="120" cy="245" r="22" fill="#1b9bd0" opacity=".35" filter="url(#airaBlur)"/><circle cx="120" cy="245" r="13" fill="url(#airaGlow)" stroke="#e5ffff" stroke-width="2"/>
- <path d="M43 207 Q25 228 27 279 L38 307 Q49 316 55 298 L63 232Z M197 207 Q215 228 213 279 L202 307 Q191 316 185 298 L177 232Z" fill="url(#airaMetal)" stroke="#9af4ff" stroke-width="2"/>
- <path d="M75 329 L165 329 L155 356 Q120 370 85 356Z" fill="url(#airaMetal)" stroke="#8ef0ff" stroke-width="2"/>
- <path d="M90 357 L112 357 L108 379 L86 379Z M128 357 L150 357 L154 379 L132 379Z" fill="url(#airaMetal)" stroke="#8ef0ff" stroke-width="2"/>
- <path d="M80 36 Q120 -3 160 36" fill="none" stroke="#a7faff" stroke-width="2" opacity=".8"/>
- <circle cx="120" cy="19" r="5" fill="url(#airaGlow)"/>
-</svg><div class="label">AIRA · NAMIRAYDIGITALS AI</div></div></div>
-<button id="nrdRobotSound" type="button" aria-pressed="true">🔊 Suara robot: aktif</button>
 <script>
 (()=>{
  if(window.__NRD_ROBOT_V09__)return;
