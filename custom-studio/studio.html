@@ -127,6 +127,14 @@ body:not(.nrd-module-open) .section#dashboard{display:block}body.nrd-module-open
   .studio-status{font-size:9px!important}
   .footer{gap:6px!important}
 }
+
+/* ACCESS PASSWORD VISIBILITY FIX */
+#nrdAccessGate{position:fixed!important;inset:0!important;z-index:999999!important;display:flex!important;align-items:center!important;justify-content:center!important;padding:18px!important;background:radial-gradient(ellipse at 50% 35%,#123d70f5,#020817fa 72%)!important;backdrop-filter:blur(12px)!important}
+#nrdAccessGate[hidden]{display:none!important}
+#nrdAccessGate .gate-card{display:flex!important;width:min(420px,94vw)!important;max-height:92vh!important;overflow:auto!important;flex-direction:column!important;align-items:center!important;gap:12px!important;padding:24px!important;border:1px solid #36dfff!important;border-radius:22px!important;background:linear-gradient(145deg,#071d40,#080e28)!important;box-shadow:0 0 35px #078bff88!important;color:#f4f8ff!important;text-align:center!important}
+#nrdGatePassword{display:block!important;visibility:visible!important;opacity:1!important;width:100%!important;min-height:48px!important;padding:12px 14px!important;border:1px solid #36dfff!important;border-radius:10px!important;background:#03132c!important;color:#fff!important;font-size:16px!important;letter-spacing:.08em!important}
+#nrdGatePassword::placeholder{color:#a9c9e8!important;opacity:1!important;letter-spacing:normal!important}
+#nrdGateForm button{display:block!important;width:100%!important;min-height:48px!important;border:1px solid #9c6aff!important;border-radius:12px!important;background:linear-gradient(90deg,#087cc5,#6539b8)!important;color:#fff!important;font-weight:800!important}
 </style>
 </head>
 <body>
@@ -239,20 +247,11 @@ const NRD_STUDIO_PASSWORD = "Bandung1989";
   const form=document.getElementById('nrdGateForm');
   const field=document.getElementById('nrdGatePassword');
   field.value='';
-  field.placeholder='';
-  field.setAttribute('autocomplete','new-password');
+  field.placeholder='Masukkan password Studio';
+  field.setAttribute('autocomplete','current-password');
   field.setAttribute('name','studio_access_entry');
-  field.readOnly=true;
-  window.addEventListener('pageshow',function(){
-    field.value='';
-    field.placeholder='';
-    field.readOnly=true;
-  });
-  field.addEventListener('focus',function(){
-    field.readOnly=false;
-    field.value='';
-    field.placeholder='';
-  },{once:true});
+  field.readOnly=false;
+  field.removeAttribute('readonly');
   const error=document.getElementById('nrdGateError');
   if(sessionStorage.getItem('nrd_studio_access')==='ok'){gate.hidden=true;gate.setAttribute('hidden','');return;}
   form.addEventListener('submit',function(event){
