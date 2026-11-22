@@ -697,4 +697,23 @@ body #nrdRobot .label{display:none!important}
  body #nrdRobot .nrdAiraArt{width:44px!important;height:72px!important}
 }
 </style>
+
+<style id="NRD_HIDE_FLOATING_ASSISTANT_20261122">
+/* Stop the floating assistant from covering any part of the page.
+   Robot will be reintroduced inside a dedicated, non-overlay panel later. */
+body #nrdRobotDock,
+body #nrdRobot,
+body #nrdRobotTalk,
+body #nrdRobotSound{
+ display:none!important;
+ visibility:hidden!important;
+ opacity:0!important;
+ pointer-events:none!important;
+ width:0!important;
+ height:0!important;
+ max-width:0!important;
+ max-height:0!important;
+ overflow:hidden!important;
+}
+</style>
 </body></html>
