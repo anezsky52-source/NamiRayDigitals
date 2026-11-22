@@ -153,8 +153,8 @@ input,select,textarea,.output{border-color:#279ddc88!important;background:linear
 <div class="wrap">
 <header class="top"><div class="brand"><div class="logo">NR</div><div><h1>NamiRayDigitals</h1><p>CUSTOM STUDIO</p></div></div><span class="pill">CREATE · GENERATE · INSPIRE</span></header>
 <section class="hero"><div class="eyebrow">YOUR CREATIVE PRODUCTION WORKSPACE</div><h2>Turn imagination<br>into a production plan.</h2><p>Rancang cerita, karakter, dunia visual, storyboard, dan prompt produksi dalam satu studio. Simpan proyek di perangkatmu dan ekspor kapan saja.</p><div class="actions"><button class="btn primary" onclick="go('idea')">＋ Mulai proyek</button><button class="btn ghost" onclick="go('archive')">Buka arsip proyek</button></div></section>
-<section id="nrdAiraPanel" aria-label="AIRA AI assistant"><div class="aira-copy"><strong>NAMIRAYDIGITALS · HOLOGRAPHIC AI</strong><h3>AIRA — Creative Studio Assistant</h3><p>Asisten kreatifmu siap menemani proses ide, karakter, environment, dan storyboard. Tidak menghalangi area kerja.</p></div><div id="nrdRobotDock"><div id="nrdRobotTalk" role="status" aria-live="polite"><b>NAMIRAYDIGITALS AI</b>Halo! Aku asisten robot kamu. Tekan menu, nanti aku jelaskan dengan suara. <br><button type="button" id="nrdRobotRepeat">Dengarkan lagi</button></div>
-<div id="nrdRobot" role="button" tabindex="0" aria-label="AIRA, asisten hologram wanita NamiRayDigitals">
+<section id="nrdAiraPanel" aria-label="MINAMI AI assistant"><div class="aira-copy"><strong>NAMIRAYDIGITALS · HOLOGRAPHIC AI</strong><h3>MINAMI — Creative Studio Assistant</h3><p>Asisten kreatifmu siap menemani proses ide, karakter, environment, dan storyboard. Tidak menghalangi area kerja.</p></div><div id="nrdRobotDock"><div id="nrdRobotTalk" role="status" aria-live="polite"><b>NAMIRAYDIGITALS AI</b>Halo! Aku asisten robot kamu. Tekan menu, nanti aku jelaskan dengan suara. <br><button type="button" id="nrdRobotRepeat">Dengarkan lagi</button></div>
+<div id="nrdRobot" role="button" tabindex="0" aria-label="MINAMI, asisten hologram wanita NamiRayDigitals">
 <svg class="nrdAiraArt" viewBox="0 0 240 390" role="img" aria-label="Ilustrasi android wanita holografik berambut panjang">
 <defs>
  <linearGradient id="airaMetal" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f7ffff"/><stop offset=".22" stop-color="#9cecff"/><stop offset=".52" stop-color="#387db9"/><stop offset=".8" stop-color="#12365f"/><stop offset="1" stop-color="#07172f"/></linearGradient>
@@ -185,7 +185,7 @@ input,select,textarea,.output{border-color:#279ddc88!important;background:linear
  <path d="M90 357 L112 357 L108 379 L86 379Z M128 357 L150 357 L154 379 L132 379Z" fill="url(#airaMetal)" stroke="#8ef0ff" stroke-width="2"/>
  <path d="M80 36 Q120 -3 160 36" fill="none" stroke="#a7faff" stroke-width="2" opacity=".8"/>
  <circle cx="120" cy="19" r="5" fill="url(#airaGlow)"/>
-</svg><div class="label">AIRA · NAMIRAYDIGITALS AI</div></div></div>
+</svg><div class="label">MINAMI · NAMIRAYDIGITALS AI</div></div></div>
 
 </section>
 <div class="layout"><nav class="nav" id="nav"><button class="active" data-go="dashboard">◈ Dashboard</button><button data-go="idea">✦ Idea Studio</button><button data-go="character">♙ Character DNA</button><button data-go="world">◎ Environment Lab</button><button data-go="storyboard">▤ Storyboard</button><button data-go="prompts">⌘ Prompt Lab</button><button data-go="agent">✧ Creative Suite Agent</button><a class="btn" href="./custom-studio/lipsync/" style="display:block;text-align:left;margin:4px 0;padding:11px;color:var(--cyan);text-decoration:none">♫ AI LipSync Studio</a><a class="btn" href="./custom-studio/ai-generator/" style="display:block;text-align:left;margin:4px 0;padding:11px;color:var(--cyan);text-decoration:none">✦ AI Image & Video Generator</a><a class="btn" href="./custom-studio/creative-suite-agent/" style="display:block;text-align:left;margin:4px 0;padding:11px;color:var(--cyan);text-decoration:none">✧ Creative Suite Agent</a><button data-go="social">♡ Social Media Kit</button><button data-go="archive">▣ Project Archive</button></nav>
@@ -352,5 +352,108 @@ const NRD_STUDIO_PASSWORD = "Bandung1989";
 
 
 
+
+
+<style id="nrd-reference-mockup-v3">
+:root{--nrd-cyan:#25d9ff;--nrd-blue:#126dff;--nrd-violet:#b44dff;--nrd-deep:#02091b}
+html,body{min-height:100%;background:#02091b!important}
+body{color:#edf7ff!important;background-image:radial-gradient(ellipse at 15% 15%,#073d7b88,transparent 34%),radial-gradient(ellipse at 85% 35%,#29105b77,transparent 38%),linear-gradient(rgba(47,180,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(47,180,255,.045) 1px,transparent 1px),linear-gradient(140deg,#02091b,#071631 55%,#100a2b)!important;background-size:auto,auto,38px 38px,38px 38px,auto!important;background-attachment:fixed!important}
+.wrap{width:min(100%,1680px)!important;max-width:1680px!important;padding:12px 18px 18px!important}
+.top{min-height:72px;margin:0 0 12px!important;padding:8px 16px!important;border:1px solid #208bff!important;border-radius:12px!important;background:linear-gradient(100deg,#06142dF2,#0b1741F2 60%,#170d39F2)!important;box-shadow:0 0 24px #087dff66,inset 0 0 18px #54dfff18!important;position:relative}
+.logo{width:52px!important;height:52px!important;border-radius:10px!important;font-size:29px!important;color:#fff!important;background:linear-gradient(140deg,#00dfff,#315eff 55%,#c34dff)!important;box-shadow:0 0 22px #20cfffaa!important}
+.brand h1{font-size:clamp(17px,2vw,27px)!important;letter-spacing:-.04em!important;text-shadow:0 0 12px #5bcfff88}
+.brand p{font-size:10px!important;letter-spacing:.18em!important}
+.top .pill{display:block!important;margin-left:auto;padding:9px 24px!important;border:2px solid #9d50ff!important;border-radius:30px!important;background:linear-gradient(90deg,#0b285a,#35105a)!important;color:#b8f4ff!important;font-size:clamp(11px,1.4vw,18px)!important;font-weight:900!important;font-style:italic!important;letter-spacing:.04em!important;box-shadow:0 0 18px #a63cff99!important}
+.hero{display:none!important}
+.layout{display:grid!important;grid-template-columns:minmax(320px,41%) minmax(0,59%)!important;grid-template-rows:auto auto minmax(0,1fr)!important;gap:12px 16px!important;align-items:stretch!important;margin-top:0!important}
+#nrdAiraPanel{grid-column:1!important;grid-row:1 / span 3!important;position:relative!important;display:block!important;min-width:0!important;min-height:760px!important;height:100%!important;margin:0!important;padding:18px!important;border:2px solid #168eff!important;border-radius:20px!important;overflow:hidden!important;background:radial-gradient(ellipse at 43% 43%,#0759a5aa,transparent 50%),radial-gradient(ellipse at 5% 80%,#087dff55,transparent 42%),linear-gradient(160deg,#061a40,#030d25 72%,#11103b)!important;box-shadow:0 0 26px #007dff88,inset 0 0 35px #32cfff24!important}
+#nrdAiraPanel:before{content:"";position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,transparent 0 4px,#7cecff08 5px 6px),linear-gradient(120deg,transparent 30%,#6eeeff14 50%,transparent 70%);z-index:0}
+#nrdAiraPanel .aira-copy{position:absolute!important;z-index:3!important;right:12px!important;top:30%!important;width:43%!important;padding:15px!important;border:1px solid #20cfff!important;border-radius:16px!important;background:linear-gradient(145deg,#061a3df5,#071c42f5)!important;box-shadow:0 0 20px #007dff77!important}
+#nrdAiraPanel .aira-copy strong{font-size:10px!important;letter-spacing:.12em!important;color:#8df3ff!important}
+#nrdAiraPanel .aira-copy h3{font-size:clamp(17px,2vw,24px)!important;line-height:1.15!important;color:#fff!important}
+#nrdAiraPanel .aira-copy p{font-size:clamp(11px,1.15vw,14px)!important;line-height:1.55!important;color:#d8eaff!important}
+#nrdRobotDock{position:absolute!important;left:0!important;bottom:12px!important;width:100%!important;height:76%!important;display:flex!important;align-items:flex-end!important;justify-content:flex-start!important;flex-direction:column!important;gap:8px!important;padding:0 0 0 2%!important;z-index:2!important;pointer-events:none!important}
+#nrdRobotTalk{position:absolute!important;top:7%!important;right:4%!important;width:43%!important;max-width:270px!important;padding:12px!important;border:1px solid #1bcfff!important;border-radius:15px!important;background:linear-gradient(145deg,#061a3df5,#071d45f5)!important;color:#e5f7ff!important;font-size:clamp(10px,1.1vw,13px)!important;line-height:1.45!important;box-shadow:0 0 22px #008cff77!important;pointer-events:auto!important}
+#nrdRobotTalk b{display:block!important;color:#8df4ff!important;letter-spacing:.12em!important;font-size:10px!important}
+#nrdRobotTalk button{border:1px solid #31cfff!important;border-radius:20px!important;background:#0b2d59!important;color:#c9f8ff!important;padding:7px 10px!important}
+#nrdRobot{position:absolute!important;left:0!important;bottom:0!important;width:min(72%,510px)!important;height:min(88%,680px)!important;max-width:none!important;max-height:none!important;margin:0!important;transform:none!important;transform-origin:bottom left!important;filter:drop-shadow(0 0 25px #1ac8ff99)!important;pointer-events:auto!important}
+#nrdRobot .nrdAiraArt{width:100%!important;height:100%!important;overflow:visible!important}
+#nrdRobot .label{position:absolute!important;bottom:0!important;left:8%!important;color:#d9faff!important;text-shadow:0 0 12px #14cfff!important;font-size:10px!important;letter-spacing:1px!important}
+#nrdReferenceBanner{grid-column:2!important;grid-row:1!important;min-height:170px!important;display:flex!important;align-items:center!important;justify-content:flex-end!important;position:relative!important;overflow:hidden!important;padding:20px 28px!important;border:2px solid #168dff!important;border-radius:18px!important;background:radial-gradient(ellipse at 23% 55%,#75cfff44,transparent 34%),linear-gradient(110deg,#081a42,#133a7b 48%,#100d3e)!important;box-shadow:0 0 26px #078dff88,inset 0 0 28px #65dfff2b!important;text-align:right!important}
+#nrdReferenceBanner:before{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 22%,#70eaff19 48%,transparent 74%);animation:nrdBannerSweep 8s linear infinite;pointer-events:none}
+#nrdReferenceBanner:after{content:"🎞️";position:absolute;left:6%;top:18%;font-size:clamp(42px,6vw,86px);filter:drop-shadow(0 0 18px #49cfff)}
+#nrdReferenceBanner h2{position:relative;z-index:1;margin:0;color:#fff;font-size:clamp(25px,3.3vw,48px);line-height:1.02;font-style:italic;text-shadow:0 0 18px #55cfff}
+#nrdReferenceBanner p{position:relative;z-index:1;margin:9px 0 0;color:#d8eaff;font-size:clamp(10px,1.2vw,14px)}
+@keyframes nrdBannerSweep{from{transform:translateX(-100%)}to{transform:translateX(100%)}}
+#nav{grid-column:2!important;grid-row:2!important;position:relative!important;top:auto!important;display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important;padding:0!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;overflow:visible!important}
+#nav:before{display:none!important}
+#nav button,#nav a{display:flex!important;align-items:center!important;min-width:0!important;min-height:91px!important;margin:0!important;padding:12px 14px!important;border:2px solid #168dff!important;border-radius:14px!important;background:linear-gradient(110deg,#061c42,#0b2a5d 58%,#151344)!important;color:#f3fbff!important;text-align:left!important;text-decoration:none!important;font-size:clamp(12px,1.3vw,18px)!important;font-weight:700!important;line-height:1.3!important;box-shadow:0 0 16px #087dff88,inset 0 0 17px #52dfff1c!important;transition:transform .2s,border-color .2s,box-shadow .2s!important}
+#nav button:before,#nav a:before{display:none!important}
+#nav button:after{content:"›";margin-left:auto;font-size:28px;color:#fff;text-shadow:0 0 12px #48cfff}
+#nav button:hover,#nav a:hover,#nav button.active{transform:translateY(-2px)!important;border-color:#a5f8ff!important;background:linear-gradient(110deg,#0b4d85,#163e88 55%,#252064)!important;box-shadow:0 0 24px #11cfffbb,inset 0 0 18px #8ceeff2a!important}
+#nav a{border-color:#a84dff!important;background:linear-gradient(110deg,#1a1045,#25165d)!important}
+.content{grid-column:2!important;grid-row:3!important;min-width:0!important;width:100%!important}
+.section#dashboard>.panel{display:none!important}
+.panel{border:1px solid #218fff!important;border-radius:17px!important;background:linear-gradient(145deg,#071b3c,#0c1b40 60%,#15133d)!important;box-shadow:0 0 18px #067cff44,inset 0 1px #dfffff1c!important}
+.panel h3{color:#f1fbff!important}
+input,select,textarea,.output{border:1px solid #258dd5!important;background:#06152f!important;color:#f2faff!important}
+.btn{border:1px solid #2aafff!important;background:linear-gradient(110deg,#0b3d69,#182b62)!important;color:#f4fbff!important}
+.btn.primary{background:linear-gradient(110deg,#52e9ff,#4b8dff 65%,#aa70ff)!important;color:#03142d!important}
+.footer{margin-top:12px!important;border-top:1px solid #178bff77!important;background:#030d22!important;color:#b8dfff!important}
+@media(max-width:760px){
+ .wrap{padding:8px!important}
+ .top{min-height:58px!important;padding:7px 9px!important;gap:8px!important}
+ .logo{width:39px!important;height:39px!important;font-size:22px!important}
+ .brand h1{font-size:15px!important}.brand p{font-size:8px!important}
+ .top .pill{padding:6px 8px!important;font-size:8px!important;letter-spacing:0!important}
+ .layout{grid-template-columns:minmax(0,1fr)!important;grid-template-rows:auto auto auto auto!important;gap:9px!important}
+ #nrdAiraPanel{grid-column:1!important;grid-row:1!important;min-height:430px!important;height:430px!important;padding:9px!important}
+ #nrdAiraPanel .aira-copy{top:25%!important;right:8px!important;width:45%!important;padding:9px!important}
+ #nrdAiraPanel .aira-copy h3{font-size:15px!important}
+ #nrdAiraPanel .aira-copy p{font-size:10px!important}
+ #nrdRobotDock{height:82%!important;bottom:4px!important}
+ #nrdRobot{width:69%!important;height:82%!important;max-width:300px!important}
+ #nrdRobotTalk{top:4%!important;right:8px!important;width:45%!important;padding:8px!important;font-size:9px!important}
+ #nrdReferenceBanner{grid-column:1!important;grid-row:2!important;min-height:115px!important;padding:12px!important}
+ #nrdReferenceBanner:after{left:4%;font-size:40px}
+ #nrdReferenceBanner h2{font-size:23px!important}
+ #nrdReferenceBanner p{font-size:9px!important}
+ #nav{grid-column:1!important;grid-row:3!important;gap:7px!important}
+ #nav button,#nav a{min-height:76px!important;padding:8px!important;border-width:1px!important;border-radius:11px!important;font-size:11px!important}
+ #nav button:after{font-size:20px}
+ .content{grid-column:1!important;grid-row:4!important}
+ .panel{padding:13px!important}
+}
+@media(max-width:380px){
+ #nrdAiraPanel{height:390px!important;min-height:390px!important}
+ #nrdRobot{width:66%!important;height:76%!important}
+ #nrdAiraPanel .aira-copy{top:29%!important}
+ #nav button,#nav a{font-size:10px!important}
+}
+</style>
+<script id="nrd-reference-mockup-v3">
+(()=> {
+ const panel=document.getElementById('nrdAiraPanel');
+ const layout=document.querySelector('.layout');
+ const nav=document.getElementById('nav');
+ const main=document.querySelector('main.content');
+ if(!panel||!layout||!nav||!main)return;
+ // Put the assistant into the same two-column dashboard grid without touching module internals.
+ if(panel.parentElement!==layout)layout.insertBefore(panel,layout.firstChild);
+ if(!document.getElementById('nrdReferenceBanner')){
+  const banner=document.createElement('section');banner.id='nrdReferenceBanner';
+  banner.innerHTML='<div><h2>NamiRayDigitals<br>Custom Studio</h2><p>Platform Kreatif AI Generasi Berikutnya</p></div>';
+  layout.insertBefore(banner,nav);
+ }
+ const label=document.querySelector('#nrdRobot .label');if(label)label.textContent='MINAMI · NAMIRAYDIGITALS AI';
+ const robot=document.getElementById('nrdRobot');if(robot)robot.setAttribute('aria-label','MINAMI, asisten hologram wanita NamiRayDigitals');
+ const talk=document.getElementById('nrdRobotTalk');
+ if(talk&&!talk.dataset.nrdGreeting){talk.dataset.nrdGreeting='1';talk.innerHTML='<b>NAMIRAYDIGITALS AI</b>Selamat datang di NamiRayDigitals Custom Studio! Saya MINAMI, asisten kreatif AI Anda. Silakan pilih menu untuk memulai perjalanan kreatif Anda. 💙<br><button type="button" id="nrdRobotRepeat">Dengarkan lagi</button>';}
+ const repeat=document.getElementById('nrdRobotRepeat');
+ if(repeat)repeat.addEventListener('click',()=>{if(window.speechSynthesis&&window.SpeechSynthesisUtterance){const u=new SpeechSynthesisUtterance('Selamat datang di NamiRayDigitals Custom Studio. Saya Minami, asisten kreatif AI Anda.');u.lang='id-ID';window.speechSynthesis.cancel();window.speechSynthesis.speak(u);}});
+ const footer=document.querySelector('.footer');
+ if(footer){footer.innerHTML='© 2026 NamiRayDigitals. All Rights Reserved. &nbsp; · &nbsp; <b>100% Gratis</b> &nbsp; · &nbsp; Open Source &nbsp; · &nbsp; For Creators';}
+})();
+</script>
 
 </body></html>
