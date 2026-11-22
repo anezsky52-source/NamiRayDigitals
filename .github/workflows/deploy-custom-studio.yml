@@ -1,5 +1,6 @@
 name: Deploy NamiRayDigitals Custom Studio
 # Fresh deployment run: avoid duplicate artifacts from a failed-job rerun.
+# Publish the current Custom Studio asset bundle.
 
 on:
   push:
