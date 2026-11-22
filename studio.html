@@ -107,6 +107,39 @@ input,select,textarea,.output{border-color:#279ddc88!important;background:linear
 @media(max-width:390px){.wrap{padding:10px!important}#nrdAiraPanel{grid-template-columns:minmax(0,1fr) 92px!important;padding:10px!important}#nrdRobot{width:82px!important;height:136px!important;max-width:82px!important;max-height:136px!important}.nav{gap:6px!important}.nav button,.nav a{font-size:12px!important;min-height:50px!important}}
 @media(prefers-reduced-motion:reduce){#nrdRobot,.hero:before{animation:none!important}}
 </style>
+
+<style id="nrd-studio-minami-refresh">
+:root{--hc:#75f5ff;--hv:#a68cff;--glass:rgba(4,20,40,.9);--edge:rgba(93,226,255,.48)}
+body{min-height:100vh;background-color:#020713!important}
+.wrap{width:min(100%,1500px)!important;max-width:1500px!important;padding:clamp(12px,2vw,28px)!important}
+.top{position:relative;z-index:5;min-height:72px;padding:14px 20px!important;border:1px solid #4edfff66!important;border-radius:20px!important;background:linear-gradient(110deg,#061a30f2,#101b3df2 70%,#211638ed)!important;box-shadow:0 0 30px #12cfff24,inset 0 1px #fff3!important}
+.brand h1{font-size:clamp(15px,2vw,20px)!important;letter-spacing:.1em!important}
+.hero{min-height:230px!important;padding:clamp(22px,4vw,42px)!important;border:1px solid #63eaff99!important;background:radial-gradient(ellipse at 82% 22%,#0eb8e344,transparent 40%),linear-gradient(115deg,#06243cf5,#101a3cf5 62%,#201638f5)!important}
+.hero h2{max-width:850px;font-size:clamp(30px,5vw,56px)!important;text-shadow:0 0 28px #50dfff44}
+.layout{grid-template-columns:245px minmax(0,1fr)!important;gap:20px!important;align-items:start}
+#nav{position:sticky!important;top:14px!important;display:flex!important;flex-direction:column!important;gap:7px!important;padding:13px!important;border:1px solid #4bdfff66!important;background:linear-gradient(180deg,#071b32f5,#0a1127f5)!important;box-shadow:0 0 26px #008dff18!important}
+#nav button,#nav a{width:100%;min-height:45px!important;text-align:left!important;padding:11px 13px!important;border:1px solid #2b6c8b66!important;border-radius:12px!important;background:linear-gradient(110deg,#0b2942,#101a36)!important;color:#dffaff!important;font-weight:650!important}
+#nav button.active{background:linear-gradient(100deg,#0d6682,#26305e)!important;border-color:#8af7ff!important;box-shadow:0 0 19px #15d8ff42,inset 0 0 18px #5df0ff19!important}
+.content{min-width:0!important;width:100%!important}
+.panel{border:1px solid #42cfff55!important;border-radius:20px!important;background:linear-gradient(145deg,rgba(7,29,51,.96),rgba(12,18,42,.97))!important;box-shadow:0 12px 34px #0004,inset 0 1px #dfffff12!important}
+.mini,.scene{border:1px solid #2ebeea66!important;border-radius:16px!important;background:linear-gradient(145deg,#0a2944,#101a38)!important}
+input,select,textarea,.output{border:1px solid #319ac477!important;border-radius:12px!important;color:#edfbff!important}
+.btn{border-radius:12px!important}
+#nrdAiraPanel{grid-template-columns:minmax(0,1fr) minmax(190px,270px)!important;min-height:250px!important;padding:18px 22px!important;border-radius:22px!important;background:radial-gradient(ellipse at 80% 35%,#13bce52c,transparent 45%),linear-gradient(110deg,#061b32,#0d1735 65%,#1b163c)!important}
+#nrdAiraPanel .aira-copy h3{font-size:clamp(19px,2vw,25px)!important}
+#nrdRobotDock{min-width:0!important}
+#nrdRobot{width:160px!important;height:255px!important;max-width:160px!important;max-height:255px!important}
+#nrdRobotTalk{max-width:260px!important;font-size:12px!important}
+#nrdAccessGate{padding:16px!important;background:radial-gradient(ellipse at 50% 12%,#087eaa55,transparent 45%),radial-gradient(ellipse at 90% 85%,#37216a55,transparent 38%),#020713!important}
+#nrdAccessGate .gate-card{width:min(100%,470px)!important;padding:24px!important;border:1px solid #57e8ff88!important;border-radius:26px!important;background:linear-gradient(145deg,#071d35f5,#111633f5)!important;box-shadow:0 0 45px #00baff26,0 24px 90px #000a!important}
+#nrdGateAira{width:112px!important;height:172px!important;filter:drop-shadow(0 0 18px #24dfff88)!important}
+#nrdAccessGate h2{letter-spacing:.02em!important}
+#nrdAccessGate .gate-brand{color:#9bd7eb!important}
+.footer{color:#8aa9c3!important}
+@media(max-width:900px){.layout{grid-template-columns:1fr!important}#nav{position:relative!important;top:auto!important;display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:7px!important}#nav button,#nav a{min-width:0!important;font-size:12px!important;padding:10px!important}.content{width:100%!important}#nrdAiraPanel{grid-template-columns:minmax(0,1fr) 150px!important}}
+@media(max-width:560px){.wrap{padding:10px!important}.top{align-items:flex-start!important;gap:8px!important;padding:11px!important}.brand{gap:9px!important}.logo{width:40px!important;height:40px!important}.brand h1{font-size:13px!important}.brand p{font-size:9px!important}.hero{min-height:0!important;padding:22px 17px!important}.layout{gap:12px!important;margin-top:13px!important}#nav{grid-template-columns:repeat(2,minmax(0,1fr))!important;padding:9px!important}#nav button,#nav a{font-size:11px!important;line-height:1.25!important;min-height:43px!important}#nrdAiraPanel{grid-template-columns:minmax(0,1fr) 112px!important;gap:6px!important;padding:12px!important;min-height:180px!important}#nrdRobot{width:108px!important;height:174px!important;max-width:108px!important;max-height:174px!important}#nrdRobotTalk{font-size:10px!important;padding:8px!important}.panel{padding:14px!important}.cards{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+@media(max-width:360px){#nrdAiraPanel{grid-template-columns:minmax(0,1fr) 90px!important}#nrdRobot{width:88px!important;height:148px!important;max-width:88px!important;max-height:148px!important}#nav button,#nav a{font-size:10px!important}}
+</style>
 </head>
 <body>
 <div id="nrdAccessGate" role="dialog" aria-modal="true" aria-labelledby="nrdGateTitle">
@@ -353,4 +386,19 @@ const NRD_STUDIO_PASSWORD = "Bandung1989";
 
 
 
+
+<script id="nrd-minami-name-fix">
+(()=> {
+ const replaceText=()=>{
+  const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);
+  let n;while((n=walker.nextNode())){if(/AIRA/i.test(n.nodeValue))n.nodeValue=n.nodeValue.replace(/AIRA/gi,'MINAMI');}
+  document.querySelectorAll('[aria-label],[title]').forEach(el=>{
+   for(const a of ['aria-label','title']){const v=el.getAttribute(a);if(v&&/AIRA/i.test(v))el.setAttribute(a,v.replace(/AIRA/gi,'MINAMI'));}
+  });
+ };
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',replaceText,{once:true});else replaceText();
+ const broken=[...document.querySelectorAll('#nav a')].find(a=>/Creative Suite Agent/i.test(a.textContent));
+ if(broken){broken.removeAttribute('href');broken.setAttribute('data-go','agent');broken.setAttribute('role','button');broken.addEventListener('click',()=>{if(typeof go==='function')go('agent');});}
+})();
+</script>
 </body></html>
