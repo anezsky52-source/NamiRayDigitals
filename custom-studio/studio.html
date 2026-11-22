@@ -65,6 +65,34 @@ body:not(.nrd-module-open) .section#dashboard{display:block}body.nrd-module-open
 @media(max-width:760px){.wrap{padding:6px}.top{grid-template-columns:1fr auto;padding:8px}.brand h1{font-size:20px}.logo{width:42px;height:42px;font-size:40px}.studio-status{font-size:10px;padding:6px 8px}.top-tools{gap:4px}.top-tools button{width:34px;height:34px}.layout{display:flex;flex-direction:column;min-height:0;gap:9px}#nrdMinamiPanel{order:0;min-height:520px;width:100%}.workspace{order:1;width:100%}.content{order:2}.hero{min-height:170px}.hero h2{font-size:27px}.nav{gap:7px}#nav>button{min-height:82px}.footer{flex-wrap:wrap;justify-content:center}}
 @media(max-width:480px){.brand h1{font-size:17px}.brand p{font-size:9px}.slogan{font-size:13px;padding:8px}.top-tools button{width:30px;height:30px;font-size:16px}.studio-status{font-size:9px}.layout{gap:7px}#nrdMinamiPanel{min-height:450px}.aira-copy{max-width:155px!important}.aira-copy p{font-size:9px!important}#nrdRobotTalk{top:34%;width:46%;right:7px;padding:10px;font-size:10px}.hero{padding:14px 9px;min-height:150px}.hero:before{font-size:54px;left:3%}.hero .eyebrow,.hero h2,.hero p{margin-left:28%;max-width:70%}.hero h2{font-size:21px}.hero p{font-size:10px}#nav{grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}#nav>button{min-height:83px;padding:7px;gap:5px}#nav button b{font-size:11px}#nav button small{font-size:8px}.nav-icon{flex-basis:27px;width:27px;height:32px;font-size:23px}#nav>button:after{font-size:20px}#nav>button.archive-card{width:95%;min-height:65px}.grid,.cards{grid-template-columns:1fr}.footer{font-size:10px;padding:9px}}
 @media(prefers-reduced-motion:reduce){#nrdRobot{animation:none}*{transition:none!important}}
+
+/* PATCH: modal akses dan layout mobile yang benar */
+#nrdAccessGate{position:fixed!important;inset:0!important;z-index:99999!important;display:flex;align-items:center;justify-content:center;padding:20px;background:radial-gradient(ellipse at 50% 35%,#123d70ee,#020817f7 72%);backdrop-filter:blur(12px)}
+#nrdAccessGate[style*="display: none"]{display:none!important}
+#nrdAccessGate .gate-card{width:min(420px,94vw);max-height:92dvh;overflow:auto;display:flex;flex-direction:column;align-items:center;gap:12px;padding:24px;border:1px solid #36dfff;border-radius:22px;background:linear-gradient(145deg,#071d40f5,#080e28f7);box-shadow:0 0 35px #078bff88,inset 0 0 24px #37dfff18;color:#f4f8ff;text-align:center}
+#nrdGateMinami{width:112px;height:150px;filter:drop-shadow(0 0 15px #29dfff)}
+#nrdGateTitle{margin:0;color:#aaf8ff}
+#nrdAccessGate p{margin:0;color:#d6eaff;font-size:14px}
+#nrdGatePassword{width:100%;min-height:44px;border:1px solid #299fe8;border-radius:10px;background:#03132c;color:white;padding:10px}
+#nrdGateForm button{width:100%;min-height:44px;border:1px solid #9c6aff;border-radius:12px;background:linear-gradient(90deg,#087cc5,#6539b8);color:#fff;font-weight:800}
+#nrdGateError{color:#ff9da8;font-size:12px}
+#nrdAccessGate .gate-brand{font-size:11px;color:#8defff;letter-spacing:.08em}
+@media(max-width:900px){
+ .layout{display:flex!important;flex-direction:column!important;min-height:0!important;gap:10px!important}
+ #nrdMinamiPanel{order:0!important;width:100%!important;min-height:390px!important;height:390px!important;flex:none!important}
+ .workspace{order:1!important;width:100%!important;min-width:0!important}
+ .content{order:2!important;width:100%!important;min-width:0!important}
+ .hero{min-height:150px!important}
+ #nav{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+ #nrdRobot{height:88%!important;width:100%!important}
+ #nrdRobotTalk{top:28%!important;right:12px!important;width:min(44%,280px)!important}
+}
+@media(max-width:480px){
+ #nrdMinamiPanel{min-height:340px!important;height:340px!important}
+ #nrdRobotTalk{top:25%!important;width:48%!important;padding:9px!important;font-size:10px!important}
+ .aira-copy{top:12px!important;left:10px!important;max-width:155px!important;padding:8px!important}
+ #nav>button{min-height:76px!important}
+}
 </style>
 </head>
 <body>
