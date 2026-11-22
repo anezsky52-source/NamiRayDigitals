@@ -74,11 +74,37 @@ body:not(.nrd-module-open) .section#dashboard{display:block}body.nrd-module-open
 @media(max-width:900px){#nrdRobot{right:0!important;left:auto!important;width:60%!important;height:100%!important;bottom:0!important}#nrdRobot .nrdMinamiArt{object-fit:contain!important;object-position:center bottom!important}}
 @media(max-width:480px){#nrdMinamiPanel{height:300px!important;min-height:300px!important}#nrdRobot{width:64%!important;height:100%!important}}
 </style>
+
+<style id="nrd-minami-mobile-and-login-v2">
+/* Same MINAMI design on login and main studio; robust mobile visibility */
+#nrdMinamiPanel{position:relative!important;min-height:620px!important;overflow:hidden!important}
+#nrdRobotDock{position:absolute!important;inset:0!important;display:block!important;z-index:2!important}
+#nrdRobot{position:absolute!important;display:block!important;visibility:visible!important;opacity:1!important;left:0!important;right:0!important;bottom:0!important;width:100%!important;height:100%!important;z-index:3!important;overflow:visible!important;pointer-events:auto}
+#nrdRobot>svg.nrdMinamiArt{display:block!important;position:absolute!important;left:0!important;right:0!important;bottom:0!important;width:100%!important;height:100%!important;max-width:100%!important;max-height:100%!important;object-fit:contain!important;object-position:center bottom!important;visibility:visible!important;opacity:1!important;z-index:3!important;filter:drop-shadow(0 0 22px #28dfffcc)!important}
+#nrdRobot .label{z-index:4!important}
+#nrdRobotTalk{z-index:6!important}
+#nrdMinamiPanel .aira-copy{z-index:7!important}
+#nrdGateMinami{display:block!important;width:min(72vw,310px)!important;height:auto!important;max-height:38vh!important;margin:8px auto 12px!important;object-fit:contain!important;filter:drop-shadow(0 0 22px #28dfffcc)!important}
+#nrdAccessGate .gate-card{position:relative}
+@media(max-width:900px){
+ #nrdMinamiPanel{height:420px!important;min-height:420px!important}
+ #nrdRobot{width:100%!important;height:100%!important}
+ #nrdRobot>svg.nrdMinamiArt{width:100%!important;height:100%!important;object-position:center bottom!important}
+ #nrdRobotTalk{top:auto!important;right:10px!important;left:auto!important;bottom:12px!important;width:min(48%,280px)!important}
+ #nrdMinamiPanel .aira-copy{top:12px!important;left:12px!important;max-width:46%!important}
+}
+@media(max-width:480px){
+ #nrdMinamiPanel{height:420px!important;min-height:420px!important}
+ #nrdRobot>svg.nrdMinamiArt{width:100%!important;height:100%!important}
+ #nrdGateMinami{width:min(68vw,260px)!important;max-height:32vh!important}
+}
+</style>
+
 </head>
 <body>
 <div id="nrdAccessGate" role="dialog" aria-modal="true" aria-labelledby="nrdGateTitle">
   <form class="gate-card" id="nrdGateForm">
-    <div class="gate-logo">NR</div><svg id="nrdGateMinami" viewBox="0 0 240 390" role="img" aria-label="Ilustrasi android wanita holografik berambut panjang">
+    <div class="gate-logo">NR</div><svg id="nrdGateMinami" class="nrdMinamiArt" viewBox="0 0 240 390" role="img" aria-label="MINAMI, robot wanita holografik NamiRayDigitals" aria-label="Ilustrasi android wanita holografik berambut panjang">
 <defs>
  <linearGradient id="gate_airaMetal" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f7ffff"/><stop offset=".22" stop-color="#9cecff"/><stop offset=".52" stop-color="#387db9"/><stop offset=".8" stop-color="#12365f"/><stop offset="1" stop-color="#07172f"/></linearGradient>
  <linearGradient id="gate_airaHair" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#071b49"/><stop offset=".24" stop-color="#1764a7"/><stop offset=".45" stop-color="#d9fbff"/><stop offset=".62" stop-color="#4db5e5"/><stop offset="1" stop-color="#101d4c"/></linearGradient>
