@@ -107,6 +107,74 @@ input,select,textarea,.output{border-color:#279ddc88!important;background:linear
 @media(max-width:390px){.wrap{padding:10px!important}#nrdAiraPanel{grid-template-columns:minmax(0,1fr) 92px!important;padding:10px!important}#nrdRobot{width:82px!important;height:136px!important;max-width:82px!important;max-height:136px!important}.nav{gap:6px!important}.nav button,.nav a{font-size:12px!important;min-height:50px!important}}
 @media(prefers-reduced-motion:reduce){#nrdRobot,.hero:before{animation:none!important}}
 </style>
+<style id="nrd-reference-layout-v4">
+:root{--ref-cyan:#25dcff;--ref-blue:#1688ff;--ref-violet:#b84dff}
+html,body{min-height:100%;background:#02091b!important}
+body{color:#edf8ff!important;background-image:radial-gradient(ellipse at 18% 14%,#06488766,transparent 34%),radial-gradient(ellipse at 88% 34%,#35106455,transparent 38%),linear-gradient(rgba(49,180,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(49,180,255,.045) 1px,transparent 1px),linear-gradient(140deg,#02091b,#071631 55%,#100a2b)!important;background-size:auto,auto,38px 38px,38px 38px,auto!important;background-attachment:fixed!important}
+.wrap{display:grid!important;grid-template-columns:minmax(310px,40%) minmax(0,60%)!important;grid-template-rows:auto auto minmax(0,1fr) auto!important;gap:13px 16px!important;width:min(100%,1680px)!important;max-width:1680px!important;padding:12px 18px 18px!important;align-items:stretch!important}
+.top{grid-column:1/-1!important;grid-row:1!important;min-height:70px!important;margin:0!important;padding:8px 16px!important;border:1px solid #208bff!important;border-radius:12px!important;background:linear-gradient(100deg,#06142df2,#0b1741f2 60%,#170d39f2)!important;box-shadow:0 0 24px #087dff66,inset 0 0 18px #54dfff18!important}
+.logo{width:50px!important;height:50px!important;border-radius:10px!important;font-size:28px!important;color:white!important;background:linear-gradient(140deg,#00dfff,#315eff 55%,#c34dff)!important;box-shadow:0 0 22px #20cfffaa!important}
+.brand h1{font-size:clamp(17px,2vw,27px)!important;letter-spacing:-.04em!important;text-shadow:0 0 12px #5bcfff88}
+.brand p{font-size:10px!important;letter-spacing:.18em!important}
+.top .pill{margin-left:auto!important;padding:9px 24px!important;border:2px solid #9d50ff!important;border-radius:30px!important;background:linear-gradient(90deg,#0b285a,#35105a)!important;color:#b8f4ff!important;font-size:clamp(11px,1.4vw,18px)!important;font-weight:900!important;font-style:italic!important;box-shadow:0 0 18px #a63cff99!important}
+.hero{display:none!important}
+#nrdAiraPanel{grid-column:1!important;grid-row:2/4!important;position:relative!important;display:block!important;min-width:0!important;min-height:730px!important;height:100%!important;margin:0!important;padding:18px!important;border:2px solid #168eff!important;border-radius:20px!important;overflow:hidden!important;background:radial-gradient(ellipse at 43% 43%,#0759a5aa,transparent 50%),radial-gradient(ellipse at 5% 80%,#087dff55,transparent 42%),linear-gradient(160deg,#061a40,#030d25 72%,#11103b)!important;box-shadow:0 0 26px #007dff88,inset 0 0 35px #32cfff24!important}
+#nrdAiraPanel:before{content:"";position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,transparent 0 4px,#7cecff08 5px 6px),linear-gradient(120deg,transparent 30%,#6eeeff14 50%,transparent 70%);z-index:0}
+#nrdAiraPanel .aira-copy{position:absolute!important;z-index:3!important;right:12px!important;top:28%!important;width:43%!important;padding:15px!important;border:1px solid #20cfff!important;border-radius:16px!important;background:linear-gradient(145deg,#061a3df5,#071c42f5)!important;box-shadow:0 0 20px #007dff77!important}
+#nrdAiraPanel .aira-copy strong{font-size:10px!important;letter-spacing:.12em!important;color:#8df3ff!important}
+#nrdAiraPanel .aira-copy h3{font-size:clamp(17px,2vw,24px)!important;line-height:1.15!important;color:#fff!important}
+#nrdAiraPanel .aira-copy p{font-size:clamp(11px,1.15vw,14px)!important;line-height:1.55!important;color:#d8eaff!important}
+#nrdRobotDock{position:absolute!important;left:0!important;bottom:12px!important;width:100%!important;height:76%!important;display:block!important;padding:0!important;z-index:2!important}
+#nrdRobotTalk{position:absolute!important;top:7%!important;right:4%!important;width:43%!important;max-width:270px!important;padding:12px!important;border:1px solid #1bcfff!important;border-radius:15px!important;background:linear-gradient(145deg,#061a3df5,#071d45f5)!important;color:#e5f7ff!important;font-size:clamp(10px,1.1vw,13px)!important;line-height:1.45!important;box-shadow:0 0 22px #008cff77!important}
+#nrdRobotTalk b{display:block!important;color:#8df4ff!important;letter-spacing:.12em!important;font-size:10px!important}
+#nrdRobotTalk button{border:1px solid #31cfff!important;border-radius:20px!important;background:#0b2d59!important;color:#c9f8ff!important;padding:7px 10px!important}
+#nrdRobot{position:absolute!important;left:0!important;bottom:0!important;width:min(72%,510px)!important;height:min(88%,680px)!important;max-width:none!important;max-height:none!important;margin:0!important;transform:none!important;filter:drop-shadow(0 0 25px #1ac8ff99)!important}
+#nrdRobot .nrdAiraArt{width:100%!important;height:100%!important;overflow:visible!important}
+#nrdRobot .label{position:absolute!important;bottom:0!important;left:8%!important;color:#d9faff!important;text-shadow:0 0 12px #14cfff!important;font-size:10px!important;letter-spacing:1px!important}
+.layout{display:contents!important}
+#nav{grid-column:2!important;grid-row:2!important;position:relative!important;top:auto!important;display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important;align-content:start!important;min-width:0!important;padding:0!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;overflow:visible!important}
+#nav:before{content:"NamiRayDigitals Custom Studio  |  Platform Kreatif AI Generasi Berikutnya";grid-column:1/-1!important;display:flex!important;align-items:center!important;justify-content:flex-end!important;min-height:165px!important;padding:24px 28px!important;border:2px solid #168dff!important;border-radius:18px!important;background:radial-gradient(ellipse at 20% 55%,#75cfff44,transparent 34%),linear-gradient(110deg,#081a42,#133a7b 48%,#100d3e)!important;color:#fff!important;font-size:clamp(23px,3vw,42px)!important;font-weight:900!important;font-style:italic!important;text-align:right!important;line-height:1.1!important;text-shadow:0 0 18px #55cfff!important;box-shadow:0 0 26px #078dff88,inset 0 0 28px #65dfff2b!important}
+#nav button,#nav a{display:flex!important;align-items:center!important;min-width:0!important;min-height:91px!important;margin:0!important;padding:12px 14px!important;border:2px solid #168dff!important;border-radius:14px!important;background:linear-gradient(110deg,#061c42,#0b2a5d 58%,#151344)!important;color:#f3fbff!important;text-align:left!important;text-decoration:none!important;font-size:clamp(12px,1.3vw,18px)!important;font-weight:700!important;line-height:1.3!important;box-shadow:0 0 16px #087dff88,inset 0 0 17px #52dfff1c!important;transition:transform .2s,border-color .2s,box-shadow .2s!important}
+#nav button:after{content:"›";margin-left:auto;font-size:28px;color:#fff;text-shadow:0 0 12px #48cfff}
+#nav button:hover,#nav a:hover,#nav button.active{transform:translateY(-2px)!important;border-color:#a5f8ff!important;background:linear-gradient(110deg,#0b4d85,#163e88 55%,#252064)!important;box-shadow:0 0 24px #11cfffbb,inset 0 0 18px #8ceeff2a!important}
+#nav a{border-color:#a84dff!important;background:linear-gradient(110deg,#1a1045,#25165d)!important}
+.content{grid-column:2!important;grid-row:3!important;min-width:0!important;width:100%!important}
+#dashboard>.panel{border:1px solid #218fff!important;border-radius:17px!important;background:linear-gradient(145deg,#071b3c,#0c1b40 60%,#15133d)!important;box-shadow:0 0 18px #067cff44,inset 0 1px #dfffff1c!important}
+.panel{border:1px solid #218fff!important;border-radius:17px!important;background:linear-gradient(145deg,#071b3c,#0c1b40 60%,#15133d)!important;box-shadow:0 0 18px #067cff44,inset 0 1px #dfffff1c!important}
+.panel h3{color:#f1fbff!important}
+input,select,textarea,.output{border:1px solid #258dd5!important;background:#06152f!important;color:#f2faff!important}
+.btn{border:1px solid #2aafff!important;background:linear-gradient(110deg,#0b3d69,#182b62)!important;color:#f4fbff!important}
+.btn.primary{background:linear-gradient(110deg,#52e9ff,#4b8dff 65%,#aa70ff)!important;color:#03142d!important}
+.footer{grid-column:1/-1!important;grid-row:4!important;margin-top:0!important;padding:14px!important;border-top:1px solid #178bff77!important;background:#030d22!important;color:#b8dfff!important}
+.toast{z-index:9999!important}
+@media(max-width:760px){
+ .wrap{grid-template-columns:minmax(0,1fr)!important;grid-template-rows:auto auto auto auto!important;gap:9px!important;padding:8px!important}
+ .top{grid-column:1!important;grid-row:1!important;min-height:58px!important;padding:7px 9px!important;gap:8px!important}
+ .logo{width:39px!important;height:39px!important;font-size:22px!important}
+ .brand h1{font-size:15px!important}.brand p{font-size:8px!important}
+ .top .pill{padding:6px 8px!important;font-size:8px!important;letter-spacing:0!important}
+ #nrdAiraPanel{grid-column:1!important;grid-row:2!important;min-height:420px!important;height:420px!important;padding:9px!important}
+ #nrdAiraPanel .aira-copy{top:26%!important;right:8px!important;width:45%!important;padding:9px!important}
+ #nrdAiraPanel .aira-copy h3{font-size:15px!important}
+ #nrdAiraPanel .aira-copy p{font-size:10px!important}
+ #nrdRobotDock{height:82%!important;bottom:4px!important}
+ #nrdRobot{width:69%!important;height:82%!important;max-width:300px!important}
+ #nrdRobotTalk{top:4%!important;right:8px!important;width:45%!important;padding:8px!important;font-size:9px!important}
+ #nav{grid-column:1!important;grid-row:3!important;gap:7px!important}
+ #nav:before{min-height:108px!important;padding:12px!important;font-size:22px!important;text-align:center!important;justify-content:center!important}
+ #nav button,#nav a{min-height:76px!important;padding:8px!important;border-width:1px!important;border-radius:11px!important;font-size:11px!important}
+ #nav button:after{font-size:20px}
+ .content{grid-column:1!important;grid-row:4!important}
+ .footer{grid-column:1!important;grid-row:5!important}
+ .panel{padding:13px!important}
+}
+@media(max-width:380px){
+ #nrdAiraPanel{height:390px!important;min-height:390px!important}
+ #nrdRobot{width:66%!important;height:76%!important}
+ #nrdAiraPanel .aira-copy{top:29%!important}
+ #nav button,#nav a{font-size:10px!important}
+}
+</style>
 </head>
 <body>
 <div id="nrdAccessGate" role="dialog" aria-modal="true" aria-labelledby="nrdGateTitle">
@@ -354,73 +422,6 @@ const NRD_STUDIO_PASSWORD = "Bandung1989";
 
 
 
-<style id="nrd-reference-layout-v4">
-:root{--ref-cyan:#25dcff;--ref-blue:#1688ff;--ref-violet:#b84dff}
-html,body{min-height:100%;background:#02091b!important}
-body{color:#edf8ff!important;background-image:radial-gradient(ellipse at 18% 14%,#06488766,transparent 34%),radial-gradient(ellipse at 88% 34%,#35106455,transparent 38%),linear-gradient(rgba(49,180,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(49,180,255,.045) 1px,transparent 1px),linear-gradient(140deg,#02091b,#071631 55%,#100a2b)!important;background-size:auto,auto,38px 38px,38px 38px,auto!important;background-attachment:fixed!important}
-.wrap{display:grid!important;grid-template-columns:minmax(310px,40%) minmax(0,60%)!important;grid-template-rows:auto auto minmax(0,1fr) auto!important;gap:13px 16px!important;width:min(100%,1680px)!important;max-width:1680px!important;padding:12px 18px 18px!important;align-items:stretch!important}
-.top{grid-column:1/-1!important;grid-row:1!important;min-height:70px!important;margin:0!important;padding:8px 16px!important;border:1px solid #208bff!important;border-radius:12px!important;background:linear-gradient(100deg,#06142df2,#0b1741f2 60%,#170d39f2)!important;box-shadow:0 0 24px #087dff66,inset 0 0 18px #54dfff18!important}
-.logo{width:50px!important;height:50px!important;border-radius:10px!important;font-size:28px!important;color:white!important;background:linear-gradient(140deg,#00dfff,#315eff 55%,#c34dff)!important;box-shadow:0 0 22px #20cfffaa!important}
-.brand h1{font-size:clamp(17px,2vw,27px)!important;letter-spacing:-.04em!important;text-shadow:0 0 12px #5bcfff88}
-.brand p{font-size:10px!important;letter-spacing:.18em!important}
-.top .pill{margin-left:auto!important;padding:9px 24px!important;border:2px solid #9d50ff!important;border-radius:30px!important;background:linear-gradient(90deg,#0b285a,#35105a)!important;color:#b8f4ff!important;font-size:clamp(11px,1.4vw,18px)!important;font-weight:900!important;font-style:italic!important;box-shadow:0 0 18px #a63cff99!important}
-.hero{display:none!important}
-#nrdAiraPanel{grid-column:1!important;grid-row:2/4!important;position:relative!important;display:block!important;min-width:0!important;min-height:730px!important;height:100%!important;margin:0!important;padding:18px!important;border:2px solid #168eff!important;border-radius:20px!important;overflow:hidden!important;background:radial-gradient(ellipse at 43% 43%,#0759a5aa,transparent 50%),radial-gradient(ellipse at 5% 80%,#087dff55,transparent 42%),linear-gradient(160deg,#061a40,#030d25 72%,#11103b)!important;box-shadow:0 0 26px #007dff88,inset 0 0 35px #32cfff24!important}
-#nrdAiraPanel:before{content:"";position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,transparent 0 4px,#7cecff08 5px 6px),linear-gradient(120deg,transparent 30%,#6eeeff14 50%,transparent 70%);z-index:0}
-#nrdAiraPanel .aira-copy{position:absolute!important;z-index:3!important;right:12px!important;top:28%!important;width:43%!important;padding:15px!important;border:1px solid #20cfff!important;border-radius:16px!important;background:linear-gradient(145deg,#061a3df5,#071c42f5)!important;box-shadow:0 0 20px #007dff77!important}
-#nrdAiraPanel .aira-copy strong{font-size:10px!important;letter-spacing:.12em!important;color:#8df3ff!important}
-#nrdAiraPanel .aira-copy h3{font-size:clamp(17px,2vw,24px)!important;line-height:1.15!important;color:#fff!important}
-#nrdAiraPanel .aira-copy p{font-size:clamp(11px,1.15vw,14px)!important;line-height:1.55!important;color:#d8eaff!important}
-#nrdRobotDock{position:absolute!important;left:0!important;bottom:12px!important;width:100%!important;height:76%!important;display:block!important;padding:0!important;z-index:2!important}
-#nrdRobotTalk{position:absolute!important;top:7%!important;right:4%!important;width:43%!important;max-width:270px!important;padding:12px!important;border:1px solid #1bcfff!important;border-radius:15px!important;background:linear-gradient(145deg,#061a3df5,#071d45f5)!important;color:#e5f7ff!important;font-size:clamp(10px,1.1vw,13px)!important;line-height:1.45!important;box-shadow:0 0 22px #008cff77!important}
-#nrdRobotTalk b{display:block!important;color:#8df4ff!important;letter-spacing:.12em!important;font-size:10px!important}
-#nrdRobotTalk button{border:1px solid #31cfff!important;border-radius:20px!important;background:#0b2d59!important;color:#c9f8ff!important;padding:7px 10px!important}
-#nrdRobot{position:absolute!important;left:0!important;bottom:0!important;width:min(72%,510px)!important;height:min(88%,680px)!important;max-width:none!important;max-height:none!important;margin:0!important;transform:none!important;filter:drop-shadow(0 0 25px #1ac8ff99)!important}
-#nrdRobot .nrdAiraArt{width:100%!important;height:100%!important;overflow:visible!important}
-#nrdRobot .label{position:absolute!important;bottom:0!important;left:8%!important;color:#d9faff!important;text-shadow:0 0 12px #14cfff!important;font-size:10px!important;letter-spacing:1px!important}
-.layout{display:contents!important}
-#nav{grid-column:2!important;grid-row:2!important;position:relative!important;top:auto!important;display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important;align-content:start!important;min-width:0!important;padding:0!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;overflow:visible!important}
-#nav:before{content:"NamiRayDigitals Custom Studio  |  Platform Kreatif AI Generasi Berikutnya";grid-column:1/-1!important;display:flex!important;align-items:center!important;justify-content:flex-end!important;min-height:165px!important;padding:24px 28px!important;border:2px solid #168dff!important;border-radius:18px!important;background:radial-gradient(ellipse at 20% 55%,#75cfff44,transparent 34%),linear-gradient(110deg,#081a42,#133a7b 48%,#100d3e)!important;color:#fff!important;font-size:clamp(23px,3vw,42px)!important;font-weight:900!important;font-style:italic!important;text-align:right!important;line-height:1.1!important;text-shadow:0 0 18px #55cfff!important;box-shadow:0 0 26px #078dff88,inset 0 0 28px #65dfff2b!important}
-#nav button,#nav a{display:flex!important;align-items:center!important;min-width:0!important;min-height:91px!important;margin:0!important;padding:12px 14px!important;border:2px solid #168dff!important;border-radius:14px!important;background:linear-gradient(110deg,#061c42,#0b2a5d 58%,#151344)!important;color:#f3fbff!important;text-align:left!important;text-decoration:none!important;font-size:clamp(12px,1.3vw,18px)!important;font-weight:700!important;line-height:1.3!important;box-shadow:0 0 16px #087dff88,inset 0 0 17px #52dfff1c!important;transition:transform .2s,border-color .2s,box-shadow .2s!important}
-#nav button:after{content:"›";margin-left:auto;font-size:28px;color:#fff;text-shadow:0 0 12px #48cfff}
-#nav button:hover,#nav a:hover,#nav button.active{transform:translateY(-2px)!important;border-color:#a5f8ff!important;background:linear-gradient(110deg,#0b4d85,#163e88 55%,#252064)!important;box-shadow:0 0 24px #11cfffbb,inset 0 0 18px #8ceeff2a!important}
-#nav a{border-color:#a84dff!important;background:linear-gradient(110deg,#1a1045,#25165d)!important}
-.content{grid-column:2!important;grid-row:3!important;min-width:0!important;width:100%!important}
-#dashboard>.panel{border:1px solid #218fff!important;border-radius:17px!important;background:linear-gradient(145deg,#071b3c,#0c1b40 60%,#15133d)!important;box-shadow:0 0 18px #067cff44,inset 0 1px #dfffff1c!important}
-.panel{border:1px solid #218fff!important;border-radius:17px!important;background:linear-gradient(145deg,#071b3c,#0c1b40 60%,#15133d)!important;box-shadow:0 0 18px #067cff44,inset 0 1px #dfffff1c!important}
-.panel h3{color:#f1fbff!important}
-input,select,textarea,.output{border:1px solid #258dd5!important;background:#06152f!important;color:#f2faff!important}
-.btn{border:1px solid #2aafff!important;background:linear-gradient(110deg,#0b3d69,#182b62)!important;color:#f4fbff!important}
-.btn.primary{background:linear-gradient(110deg,#52e9ff,#4b8dff 65%,#aa70ff)!important;color:#03142d!important}
-.footer{grid-column:1/-1!important;grid-row:4!important;margin-top:0!important;padding:14px!important;border-top:1px solid #178bff77!important;background:#030d22!important;color:#b8dfff!important}
-.toast{z-index:9999!important}
-@media(max-width:760px){
- .wrap{grid-template-columns:minmax(0,1fr)!important;grid-template-rows:auto auto auto auto!important;gap:9px!important;padding:8px!important}
- .top{grid-column:1!important;grid-row:1!important;min-height:58px!important;padding:7px 9px!important;gap:8px!important}
- .logo{width:39px!important;height:39px!important;font-size:22px!important}
- .brand h1{font-size:15px!important}.brand p{font-size:8px!important}
- .top .pill{padding:6px 8px!important;font-size:8px!important;letter-spacing:0!important}
- #nrdAiraPanel{grid-column:1!important;grid-row:2!important;min-height:420px!important;height:420px!important;padding:9px!important}
- #nrdAiraPanel .aira-copy{top:26%!important;right:8px!important;width:45%!important;padding:9px!important}
- #nrdAiraPanel .aira-copy h3{font-size:15px!important}
- #nrdAiraPanel .aira-copy p{font-size:10px!important}
- #nrdRobotDock{height:82%!important;bottom:4px!important}
- #nrdRobot{width:69%!important;height:82%!important;max-width:300px!important}
- #nrdRobotTalk{top:4%!important;right:8px!important;width:45%!important;padding:8px!important;font-size:9px!important}
- #nav{grid-column:1!important;grid-row:3!important;gap:7px!important}
- #nav:before{min-height:108px!important;padding:12px!important;font-size:22px!important;text-align:center!important;justify-content:center!important}
- #nav button,#nav a{min-height:76px!important;padding:8px!important;border-width:1px!important;border-radius:11px!important;font-size:11px!important}
- #nav button:after{font-size:20px}
- .content{grid-column:1!important;grid-row:4!important}
- .footer{grid-column:1!important;grid-row:5!important}
- .panel{padding:13px!important}
-}
-@media(max-width:380px){
- #nrdAiraPanel{height:390px!important;min-height:390px!important}
- #nrdRobot{width:66%!important;height:76%!important}
- #nrdAiraPanel .aira-copy{top:29%!important}
- #nav button,#nav a{font-size:10px!important}
-}
-</style>
+
 
 </body></html>
