@@ -19,6 +19,56 @@
 #nrdAccessGate .gate-error{min-height:22px;margin:10px 0 0;color:#ff9aab;font-size:13px}
 #nrdAccessGate .gate-brand{margin-top:20px;color:#7286a5;font-size:12px;letter-spacing:.08em}
 
+
+/* NamiRayDigitals — elegant feminine holographic android assistant */
+#nrdRobot .hair{
+ background:linear-gradient(105deg,#071b45 0%,#1767a5 18%,#8cecff 31%,#f4ffff 42%,#4bbbe8 57%,#164b91 76%,#071b45 100%)!important;
+ box-shadow:0 0 22px #31dfffaa,inset 0 0 16px #efffff99!important;
+ clip-path:polygon(8% 0,92% 0,100% 34%,94% 67%,84% 100%,72% 77%,62% 100%,50% 78%,38% 100%,27% 76%,14% 100%,5% 67%,0 32%)!important;
+}
+#nrdRobot .hair:before,#nrdRobot .hair:after{
+ content:"";position:absolute;top:42px;width:17px;height:82px;border-radius:0 0 15px 15px;
+ background:linear-gradient(90deg,#071b45,#3a9bd0 45%,#d9ffff 70%,#17619e);
+ box-shadow:0 0 12px #31dfff88;
+}
+#nrdRobot .hair:before{left:4px;transform:rotate(5deg)}
+#nrdRobot .hair:after{right:4px;transform:rotate(-5deg)}
+#nrdRobot .head{
+ background:radial-gradient(ellipse at 35% 22%,#fff8f7 0%,#f4dfe4 23%,#9ccbdc 49%,#275579 76%,#081b37 100%)!important;
+ border-color:#d7fbff!important;border-radius:45% 45% 48% 48%!important;
+ box-shadow:inset 4px 5px 10px #fff9,inset -6px -8px 13px #06234b,0 0 0 3px #ff9edb33,0 0 26px #27dfffaa!important;
+}
+#nrdRobot .head:before{
+ content:"";position:absolute;left:18px;right:18px;top:49px;height:9px;border-radius:50%;
+ background:linear-gradient(90deg,transparent,#f5a9c9aa,#fff3,transparent);filter:blur(3px);
+}
+#nrdRobot .eye{
+ height:7px!important;width:12px!important;border-radius:90% 90% 65% 65%!important;
+ background:radial-gradient(circle at 35% 30%,#fff 0 12%,#c9ffff 22%,#36e3ff 58%,#0872c5 100%)!important;
+ box-shadow:0 0 7px 3px #30dcff,0 0 17px #168dff!important;
+}
+#nrdRobot .eye:after{content:"";position:absolute;left:-2px;right:-2px;top:-3px;height:3px;border-radius:50%;background:#e4fbff;box-shadow:0 0 4px #fff}
+#nrdRobot .mouth{
+ width:15px!important;height:5px!important;left:27px!important;bottom:11px!important;
+ border-radius:3px 3px 9px 9px!important;background:linear-gradient(90deg,#bd568e,#ffb5d0,#bd568e)!important;
+ box-shadow:0 0 8px #ff9acb!important;
+}
+#nrdRobot .body{
+ background:linear-gradient(105deg,#092c55,#b9f4ff 17%,#4e9ec6 36%,#173c67 70%,#06172e)!important;
+ box-shadow:inset 5px 5px 12px #f4ffffbb,inset -8px -9px 13px #001b3e,0 0 24px #159dffbb!important;
+}
+#nrdRobot .core{background:radial-gradient(circle at 30% 25%,#fff,#ffc5e6 22%,#32e4ff 56%,#0870c8)!important;box-shadow:0 0 9px 4px #35dfff,0 0 20px #ff9bd8!important}
+#nrdRobot .label{color:#d6fbff!important;text-shadow:0 0 8px #16cfff,0 0 14px #ff8bd2!important;letter-spacing:1.4px!important}
+#nrdRobotTalk{border:1px solid #72eaff!important;background:linear-gradient(145deg,#082b49f5,#111634f5)!important;box-shadow:0 0 25px #16cfff44,0 0 12px #ff83cb22,0 10px 32px #0009!important}
+#nrdRobotTalk b{color:#a8f8ff!important}
+#nav{position:relative;overflow:hidden}
+#nav:before{content:"";position:absolute;inset:0;pointer-events:none;border-radius:inherit;background:linear-gradient(125deg,#3deaff0d,transparent 38%,#8b83ff0d);box-shadow:inset 0 0 28px #19cfff12}
+#nav button,#nav a{position:relative!important;overflow:hidden!important;border:1px solid #38d9ff35!important;border-radius:11px!important;margin:5px 0!important;background:linear-gradient(110deg,#0a3454c9,#111d40d9)!important;box-shadow:inset 0 1px #d8ffff22,0 0 13px #00aaff12!important;transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease!important}
+#nav button:before,#nav a:before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(105deg,transparent 20%,#8ff8ff16 48%,transparent 75%);transform:translateX(-110%);transition:transform .45s ease}
+#nav button:hover:before,#nav a:hover:before{transform:translateX(110%)}
+#nav button:hover,#nav a:hover,#nav button.active{border-color:#79f4ff!important;box-shadow:0 0 16px #17cfff55,inset 0 0 16px #23cfff22!important;transform:translateX(3px)}
+@media(max-width:760px){#nav button:hover,#nav a:hover,#nav button.active{transform:none!important}}
+
 </style></head>
 <body>
 <div id="nrdAccessGate" role="dialog" aria-modal="true" aria-labelledby="nrdGateTitle">
