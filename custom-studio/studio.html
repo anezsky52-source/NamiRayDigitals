@@ -93,6 +93,40 @@ body:not(.nrd-module-open) .section#dashboard{display:block}body.nrd-module-open
  .aira-copy{top:12px!important;left:10px!important;max-width:155px!important;padding:8px!important}
  #nav>button{min-height:76px!important}
 }
+
+/* MOBILE + ACCESS-GATE FIX v2 */
+#nrdAccessGate[hidden]{display:none!important}
+@media(max-width:900px){
+  .wrap{padding:5px!important}
+  .layout{display:flex!important;flex-direction:column!important;gap:8px!important}
+  #nrdMinamiPanel{order:0!important;position:relative!important;min-height:210px!important;height:210px!important;width:100%!important;flex:none!important}
+  #nrdRobotDock{inset:0!important}
+  #nrdRobot{left:auto!important;right:0!important;bottom:0!important;width:52%!important;height:100%!important}
+  #nrdRobotTalk{top:auto!important;right:auto!important;left:10px!important;bottom:12px!important;width:47%!important;font-size:10px!important;padding:9px!important}
+  .aira-copy{top:9px!important;left:10px!important;max-width:48%!important;padding:8px!important}
+  .aira-copy strong{font-size:10px!important}
+  .aira-copy p{font-size:9px!important}
+  .workspace{order:1!important;width:100%!important}
+  .content{order:2!important;width:100%!important}
+  #nav{grid-template-columns:1fr!important;gap:8px!important}
+  #nav>button{min-height:68px!important;padding:10px 13px!important}
+  #nav button b{font-size:13px!important}
+  #nav button small{font-size:10px!important}
+  .hero{min-height:150px!important;padding:18px!important}
+  .hero h2{font-size:clamp(22px,6vw,30px)!important}
+  .hero p{font-size:12px!important}
+  .grid{grid-template-columns:1fr!important}
+}
+@media(max-width:480px){
+  #nrdMinamiPanel{height:190px!important;min-height:190px!important}
+  #nrdRobotTalk{bottom:8px!important;width:48%!important}
+  .aira-copy{max-width:49%!important}
+  .top{grid-template-columns:1fr auto!important}
+  .slogan{grid-column:1/-1!important;grid-row:2!important}
+  .top-tools{gap:3px!important}
+  .studio-status{font-size:9px!important}
+  .footer{gap:6px!important}
+}
 </style>
 </head>
 <body>
@@ -220,12 +254,12 @@ const NRD_STUDIO_PASSWORD = "Bandung1989";
     field.placeholder='';
   },{once:true});
   const error=document.getElementById('nrdGateError');
-  if(sessionStorage.getItem('nrd_studio_access')==='ok'){gate.style.display='none';return;}
+  if(sessionStorage.getItem('nrd_studio_access')==='ok'){gate.hidden=true;gate.setAttribute('hidden','');return;}
   form.addEventListener('submit',function(event){
     event.preventDefault();
     if(field.value===NRD_STUDIO_PASSWORD){
       sessionStorage.setItem('nrd_studio_access','ok');
-      gate.style.display='none';
+      gate.hidden=true;gate.setAttribute('hidden','');
     }else{
       error.textContent='Password salah. Silakan coba lagi.';
       field.value='';
