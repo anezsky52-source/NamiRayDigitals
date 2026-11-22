@@ -19,7 +19,13 @@
 #nrdAccessGate .gate-error{min-height:22px;margin:10px 0 0;color:#ff9aab;font-size:13px}
 #nrdAccessGate .gate-brand{margin-top:20px;color:#7286a5;font-size:12px;letter-spacing:.08em}
 
-</style></head>
+</style>
+<style id="nrd-login-minami-image">
+#nrdAccessGate .gate-card{position:relative;overflow:hidden}
+#nrdAccessGate .gate-card:before{content:"";display:block;width:132px;height:198px;margin:0 auto 8px;background:url("./assets/minami-character.webp") center bottom/contain no-repeat;filter:drop-shadow(0 0 14px #28cfff);}
+#nrdAccessGate .gate-logo{display:none}
+</style>
+</head>
 <body>
 <div id="nrdAccessGate" role="dialog" aria-modal="true" aria-labelledby="nrdGateTitle">
   <form class="gate-card" id="nrdGateForm">
