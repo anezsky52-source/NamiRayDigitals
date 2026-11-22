@@ -120,6 +120,22 @@ input,select,textarea,.output{border-color:#279ddc88!important;background:linear
 @media(max-width:390px){.wrap{padding:10px!important}#nrdAiraPanel{grid-template-columns:minmax(0,1fr) 92px!important;padding:10px!important}#nrdRobot{width:82px!important;height:136px!important;max-width:82px!important;max-height:136px!important}.nav{gap:6px!important}.nav button,.nav a{font-size:12px!important;min-height:50px!important}}
 @media(prefers-reduced-motion:reduce){#nrdRobot,.hero:before{animation:none!important}}
 </style>
+<style id="nrd-aira-premium-tune">
+#nrdAiraPanel{grid-template-columns:minmax(0,1fr) minmax(180px,260px)!important;gap:22px!important;padding:22px!important;background:radial-gradient(ellipse at 78% 32%,#25cfff30,transparent 38%),radial-gradient(ellipse at 12% 100%,#7458ff20,transparent 42%),linear-gradient(125deg,#061529 0%,#0b1d38 52%,#121735 100%)!important;border:1px solid #64eaff77!important;box-shadow:inset 0 1px #ffffff24,0 14px 40px #0006,0 0 30px #13bfff1c!important}
+#nrdAiraPanel .aira-copy h3{font-size:clamp(19px,2.5vw,27px)!important;letter-spacing:-.025em!important}
+#nrdAiraPanel .aira-copy p{max-width:48ch!important;line-height:1.7!important}
+#nrdRobotDock{padding:8px!important;border:1px solid #62eaff33!important;border-radius:20px!important;background:linear-gradient(145deg,#0a2944aa,#121a39aa)!important;box-shadow:inset 0 1px #ffffff18,0 0 24px #19caff18!important}
+#nrdRobot{filter:drop-shadow(0 0 18px #38dfff88)!important}
+#nrdRobot.nrd-mode-change{animation:nrdAiraPremiumReact .72s ease!important}
+@keyframes nrdAiraPremiumReact{0%{transform:translateY(0) scale(1)}35%{transform:translateY(-8px) scale(1.035)}70%{transform:translateY(1px) scale(.99)}100%{transform:translateY(0) scale(1)}}
+#nrdRobot[data-mode="character"]{filter:drop-shadow(0 0 20px #ff8bd6)!important}
+#nrdRobot[data-mode="world"]{filter:drop-shadow(0 0 20px #9b9aff)!important}
+#nrdRobot[data-mode="storyboard"]{filter:drop-shadow(0 0 20px #71ffd8)!important}
+#nrdRobot[data-mode="agent"]{filter:drop-shadow(0 0 24px #c49aff)!important}
+#nrdRobot[data-mode="prompts"]{filter:drop-shadow(0 0 20px #ffe39b)!important}
+#nrdRobot[data-mode="idea"]{filter:drop-shadow(0 0 20px #69edff)!important}
+@media(max-width:760px){#nrdAiraPanel{grid-template-columns:minmax(0,1fr) 116px!important;gap:9px!important;padding:12px!important}#nrdRobotDock{padding:6px!important}#nrdRobot{width:108px!important;height:180px!important;max-width:108px!important;max-height:180px!important}}
+</style>
 </head>
 <body>
 <div id="nrdAccessGate" role="dialog" aria-modal="true" aria-labelledby="nrdGateTitle">
@@ -272,8 +288,8 @@ const NRD_STUDIO_PASSWORD = "Bandung1989";
  storyboard:'Ini Storyboard Builder. Mari susun adegan satu per satu, lengkap dengan aksi, kamera, dialog, dan transisi.',
  prompts:'Ini Prompt Lab. Kita siapkan prompt gambar dan video yang siap kamu salin ke generator.',
  social:'Ini Social Media Kit. Aku bisa membantu membuat caption dan hashtag untuk karya kamu.',
- archive:'Ini Project Archive. Semua proyek yang kamu simpan di browser bisa dibuka dan dikelola di sini.'
-  agent:'Creative Suite Agent aktif! Aku akan membantumu mengatur alur kerja kreatif, menghubungkan ide, karakter, visual, dan produksi dalam satu ruang.'
+ archive:'Ini Project Archive. Semua proyek yang kamu simpan di browser bisa dibuka dan dikelola di sini.',
+ agent:'Creative Suite Agent aktif! Aku akan membantumu mengatur alur kerja kreatif, menghubungkan ide, karakter, visual, dan produksi dalam satu ruang.'
  };
  function display(t){
   lastText=t;talk.replaceChildren();
