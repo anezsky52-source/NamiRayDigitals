@@ -136,6 +136,25 @@ input,select,textarea,.output{border-color:#279ddc88!important;background:linear
 #nrdRobot[data-mode="idea"]{filter:drop-shadow(0 0 20px #69edff)!important}
 @media(max-width:760px){#nrdAiraPanel{grid-template-columns:minmax(0,1fr) 116px!important;gap:9px!important;padding:12px!important}#nrdRobotDock{padding:6px!important}#nrdRobot{width:108px!important;height:180px!important;max-width:108px!important;max-height:180px!important}}
 </style>
+<style id="nrd-minami-mobile-layout">
+@media(max-width:760px){
+ #nrdAiraPanel{grid-template-columns:minmax(0,1fr)!important;align-items:stretch!important;gap:14px!important;padding:18px 14px!important}
+ #nrdAiraPanel .aira-copy{min-width:0!important;width:100%!important}
+ #nrdAiraPanel .aira-copy strong{font-size:10px!important;letter-spacing:.14em!important}
+ #nrdAiraPanel .aira-copy h3{font-size:clamp(20px,5.4vw,26px)!important;line-height:1.2!important}
+ #nrdAiraPanel .aira-copy p{font-size:14px!important;line-height:1.65!important}
+ #nrdRobotDock{width:100%!important;max-width:100%!important;display:grid!important;grid-template-columns:minmax(0,1fr) 150px!important;grid-template-rows:auto auto 1fr!important;align-items:center!important;gap:8px!important;padding:12px!important}
+ #nrdRobotTalk{grid-column:1!important;grid-row:1/4!important;font-size:13px!important;line-height:1.5!important}
+ #nrdAiraMode,#nrdRobotSound{grid-column:2!important;max-width:100%!important}
+ #nrdRobot{grid-column:2!important;grid-row:3!important;width:138px!important;height:220px!important;max-width:138px!important;max-height:220px!important;margin:0 auto!important}
+ #nrdRobot .label{font-size:8px!important;letter-spacing:.06em!important}
+}
+@media(max-width:420px){
+ #nrdRobotDock{grid-template-columns:minmax(0,1fr) 116px!important;padding:9px!important}
+ #nrdRobot{width:108px!important;height:176px!important;max-width:108px!important;max-height:176px!important}
+ #nrdRobotTalk{font-size:12px!important}
+}
+</style>
 </head>
 <body>
 <div id="nrdAccessGate" role="dialog" aria-modal="true" aria-labelledby="nrdGateTitle">
@@ -182,8 +201,8 @@ input,select,textarea,.output{border-color:#279ddc88!important;background:linear
 <div class="wrap">
 <header class="top"><div class="brand"><div class="logo">NR</div><div><h1>NamiRayDigitals</h1><p>CUSTOM STUDIO</p></div></div><span class="pill">CREATE · GENERATE · INSPIRE</span></header>
 <section class="hero"><div class="eyebrow">YOUR CREATIVE PRODUCTION WORKSPACE</div><h2>Turn imagination<br>into a production plan.</h2><p>Rancang cerita, karakter, dunia visual, storyboard, dan prompt produksi dalam satu studio. Simpan proyek di perangkatmu dan ekspor kapan saja.</p><div class="actions"><button class="btn primary" onclick="go('idea')">＋ Mulai proyek</button><button class="btn ghost" onclick="go('archive')">Buka arsip proyek</button></div></section>
-<section id="nrdAiraPanel" aria-label="AIRA AI assistant"><div class="aira-copy"><strong>NAMIRAYDIGITALS · HOLOGRAPHIC AI</strong><h3>AIRA — Creative Studio Assistant</h3><p>Asisten kreatifmu siap menemani proses ide, karakter, environment, dan storyboard. Tidak menghalangi area kerja.</p></div><div id="nrdRobotDock"><div id="nrdRobotTalk" role="status" aria-live="polite"><b>NAMIRAYDIGITALS AI</b>Halo! Aku asisten robot kamu. Tekan menu, nanti aku jelaskan dengan suara. <br><button type="button" id="nrdRobotRepeat">Dengarkan lagi</button></div><div id="nrdAiraMode" class="aira-mode">MODE AKTIF · DASHBOARD</div><div id="nrdRobotSound" aria-live="polite">🔊 AIRA siap mendengarkan pilihan menu</div>
-<div id="nrdRobot" role="button" tabindex="0" aria-label="AIRA, asisten hologram wanita NamiRayDigitals">
+<section id="nrdAiraPanel" aria-label="Minami AI assistant"><div class="aira-copy"><strong>NAMIRAYDIGITALS · HOLOGRAPHIC AI</strong><h3>MINAMI — Creative Studio Assistant</h3><p>Asisten kreatifmu siap menemani proses ide, karakter, environment, dan storyboard. Tidak menghalangi area kerja.</p></div><div id="nrdRobotDock"><div id="nrdRobotTalk" role="status" aria-live="polite"><b>NAMIRAYDIGITALS AI</b>Halo! Aku asisten robot kamu. Tekan menu, nanti aku jelaskan dengan suara. <br><button type="button" id="nrdRobotRepeat">Dengarkan lagi</button></div><div id="nrdAiraMode" class="aira-mode">MODE AKTIF · DASHBOARD</div><div id="nrdRobotSound" aria-live="polite">🔊 MINAMI siap mendengarkan pilihan menu</div>
+<div id="nrdRobot" role="button" tabindex="0" aria-label="Minami, asisten hologram wanita NamiRayDigitals">
 <svg class="nrdAiraArt" viewBox="0 0 240 390" role="img" aria-label="Ilustrasi android wanita holografik berambut panjang">
 <defs>
  <linearGradient id="airaMetal" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f7ffff"/><stop offset=".22" stop-color="#9cecff"/><stop offset=".52" stop-color="#387db9"/><stop offset=".8" stop-color="#12365f"/><stop offset="1" stop-color="#07172f"/></linearGradient>
@@ -214,7 +233,7 @@ input,select,textarea,.output{border-color:#279ddc88!important;background:linear
  <path d="M90 357 L112 357 L108 379 L86 379Z M128 357 L150 357 L154 379 L132 379Z" fill="url(#airaMetal)" stroke="#8ef0ff" stroke-width="2"/>
  <path d="M80 36 Q120 -3 160 36" fill="none" stroke="#a7faff" stroke-width="2" opacity=".8"/>
  <circle cx="120" cy="19" r="5" fill="url(#airaGlow)"/>
-</svg><div class="label">AIRA · NAMIRAYDIGITALS AI</div></div></div>
+</svg><div class="label">MINAMI · NAMIRAYDIGITALS AI</div></div></div>
 
 </section>
 <div class="layout"><nav class="nav" id="nav"><button class="active" data-go="dashboard">◈ Dashboard</button><button data-go="idea">✦ Idea Studio</button><button data-go="character">♙ Character DNA</button><button data-go="world">◎ Environment Lab</button><button data-go="storyboard">▤ Storyboard</button><button data-go="prompts">⌘ Prompt Lab</button><button data-go="agent">✧ Creative Suite Agent</button><a class="btn" href="/NamiRayDigitals/custom-studio/lipsync/" style="display:block;text-align:left;margin:4px 0;padding:11px;color:var(--cyan);text-decoration:none">♫ AI LipSync Studio</a><a class="btn" href="/NamiRayDigitals/custom-studio/ai-generator/" style="display:block;text-align:left;margin:4px 0;padding:11px;color:var(--cyan);text-decoration:none">✦ AI Image & Video Generator</a><a class="btn" href="/NamiRayDigitals/custom-studio/creative-suite-agent/" style="display:block;text-align:left;margin:4px 0;padding:11px;color:var(--cyan);text-decoration:none">✧ Creative Suite Agent</a><button data-go="social">♡ Social Media Kit</button><button data-go="archive">▣ Project Archive</button></nav>
@@ -297,7 +316,7 @@ const NRD_STUDIO_PASSWORD = "Bandung1989";
   talk.append(b,document.createElement('br'),document.createTextNode(t+' '),document.createElement('br'));
   const test=document.createElement('button');test.type='button';test.textContent='🔊 TES SUARA ROBOT';
   test.style.cssText='display:inline-block;margin:7px 5px 0 0;padding:9px 12px;font-size:12px;font-weight:700;background:#087eb5;color:#fff;border:1px solid #8ff6ff;border-radius:18px;cursor:pointer;pointer-events:auto';
-  test.onclick=()=>speak('Halo! Aku robot perempuan NamiRayDigitals. Sekarang aku sedang menguji suara. Apakah kamu bisa mendengarku?');
+  test.onclick=()=>speak('Halo! Aku Minami, asisten kreatif NamiRayDigitals. Sekarang aku sedang menguji suara. Apakah kamu bisa mendengarku?');
   const again=document.createElement('button');again.type='button';again.textContent='Dengarkan lagi';
   again.style.cssText='display:inline-block;margin-top:7px;padding:9px 12px;font-size:12px;border-radius:18px;cursor:pointer;pointer-events:auto';
   again.onclick=()=>speak(lastText);talk.append(test,again);
@@ -367,7 +386,7 @@ const NRD_STUDIO_PASSWORD = "Bandung1989";
  }
  sound.textContent='🔊 Tes suara robot';
  sound.setAttribute('aria-label','Tes suara robot');
- sound.onclick=()=>{enabled=true;speak('Halo! Aku robot perempuan NamiRayDigitals. Senang sekali bisa menemanimu. Mari kita mulai berkarya bersama!');};
+ sound.onclick=()=>{enabled=true;speak('Halo! Aku Minami, asisten kreatif NamiRayDigitals. Senang sekali bisa menemanimu. Mari kita mulai berkarya bersama!');};
  const nav=$('nav');
  if(nav)nav.addEventListener('click',e=>{
   const el=e.target.closest('button[data-go],a');if(!el)return;
@@ -376,9 +395,9 @@ const NRD_STUDIO_PASSWORD = "Bandung1989";
   const mode=$('nrdAiraMode');if(mode)mode.textContent='MODE AKTIF · '+label.toUpperCase();
   speak(menuText[key]||('Kamu membuka '+label+'. Aku siap membantumu menggunakan bagian ini.'));
  },true);
- robot.onclick=()=>speak('Hai! Aku AIRA, asisten kreatif NamiRayDigitals. Pilih salah satu menu untuk melihat bagaimana aku membantu di bagian itu.');
+ robot.onclick=()=>speak('Hai! Aku Minami, asisten kreatif NamiRayDigitals. Pilih salah satu menu untuk melihat bagaimana aku membantu di bagian itu.');
  robot.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();speak('Hai! Aku robot kecil NamiRayDigitals. Senang menemanimu berkarya!');}};
- display('Halo! Aku asisten robot perempuan NamiRayDigitals. Tekan tombol Tes Suara robot untuk mendengarkan suaraku.');
+ display('Halo! Aku Minami, asisten kreatif NamiRayDigitals. Pilih menu untuk melihat bagaimana aku membantumu.');
 })();
 </script>
 
