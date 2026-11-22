@@ -135,6 +135,53 @@ input,select,textarea,.output{border-color:#279ddc88!important;background:linear
 .mini,.scene{border-color:#29bfff66!important;background:linear-gradient(145deg,#0b2741,#101a36)!important;box-shadow:inset 0 1px #baf8ff22,0 0 16px #008dff18!important}
 #nrdRobotDock{z-index:99999!important}
 @media(max-width:760px){.nav button{min-height:46px}.nav button:hover,.nav button.active{transform:none}}
+
+/* NamiRayDigitals deployed page: feminine holographic android companion */
+#nrdRobotDock{right:14px!important;bottom:14px!important;gap:12px!important;align-items:flex-end!important}
+#nrdRobot{width:150px!important;height:225px!important;filter:drop-shadow(0 0 22px #23dfffaa)!important;transform-origin:bottom center!important}
+#nrdRobot .head{
+ left:43px!important;top:8px!important;width:66px!important;height:76px!important;
+ border:2px solid #d8fbff!important;border-radius:48% 48% 46% 46%!important;
+ background:radial-gradient(ellipse at 35% 23%,#fff8f8 0%,#f4dfe6 25%,#a8d8e5 55%,#386b8e 82%,#10284a 100%)!important;
+ box-shadow:inset 3px 4px 9px #fff9,inset -5px -7px 10px #06254c,0 0 22px #30dcffbb!important;
+}
+#nrdRobot .head:before{
+ content:""!important;position:absolute!important;z-index:-1!important;
+ left:-13px!important;top:-11px!important;width:88px!important;height:139px!important;
+ border-radius:48% 48% 24% 24%!important;
+ background:linear-gradient(100deg,#071b45 0%,#155c9c 18%,#8eeaff 34%,#f4ffff 45%,#4eb7df 59%,#164b91 80%,#061735 100%)!important;
+ clip-path:polygon(8% 0,92% 0,100% 35%,94% 68%,89% 100%,76% 83%,66% 100%,53% 83%,43% 100%,30% 82%,20% 100%,12% 78%,0 37%)!important;
+ box-shadow:0 0 20px #38dcff99!important;
+}
+#nrdRobot .head:after{
+ content:""!important;position:absolute!important;z-index:-1!important;left:-8px!important;right:-8px!important;top:49px!important;height:95px!important;
+ background:linear-gradient(90deg,#0b2a57,#48a6d0 30%,#d9ffff 50%,#48a6d0 70%,#0b2a57)!important;
+ clip-path:polygon(0 0,100% 0,88% 100%,70% 78%,50% 100%,30% 78%,12% 100%)!important;
+ opacity:.95!important;
+}
+#nrdRobot .eye{top:34px!important;width:11px!important;height:6px!important;border-radius:80% 80% 55% 55%!important;background:#c8ffff!important;box-shadow:0 0 8px 3px #24dfff,0 0 17px #078cff!important}
+#nrdRobot .eye.l{left:13px!important}#nrdRobot .eye.r{right:13px!important}
+#nrdRobot .mouth{left:26px!important;bottom:13px!important;width:13px!important;height:4px!important;background:linear-gradient(90deg,#c35b91,#ffc3da,#c35b91)!important;box-shadow:0 0 8px #ff9cc9!important}
+#nrdRobot .ear{top:29px!important;height:24px!important;background:linear-gradient(#ffd9ec,#35dfff,#0879d9)!important;box-shadow:0 0 10px #2bdfff!important}
+#nrdRobot .neck{top:82px!important;left:66px!important;width:19px!important;height:12px!important}
+#nrdRobot .body{
+ left:35px!important;top:91px!important;width:82px!important;height:76px!important;
+ border:2px solid #b9f8ff!important;border-radius:28px 28px 21px 21px!important;
+ background:linear-gradient(105deg,#08294f,#d5fbff 18%,#5da5c9 39%,#153c68 72%,#06162d)!important;
+ clip-path:polygon(22% 0,78% 0,100% 22%,88% 66%,76% 100%,24% 100%,12% 66%,0 22%)!important;
+ box-shadow:inset 4px 4px 10px #fff9,inset -6px -7px 12px #061b3b,0 0 20px #22cfff99!important;
+}
+#nrdRobot .core{left:31px!important;top:24px!important;width:17px!important;height:17px!important;background:radial-gradient(circle at 30% 25%,#fff,#ffc6e7 23%,#35e6ff 60%,#0872c8)!important;box-shadow:0 0 10px 4px #2bdfff,0 0 18px #ff9bd8!important}
+#nrdRobot .arm{top:100px!important;height:61px!important;width:13px!important;background:linear-gradient(90deg,#10345c,#c6f8ff,#1a5485)!important}
+#nrdRobot .arm.l{left:22px!important}#nrdRobot .arm.r{right:18px!important}
+#nrdRobot .label{left:18px!important;bottom:0!important;width:116px!important;font-size:9px!important;color:#e0fbff!important;text-shadow:0 0 9px #24dfff,0 0 12px #ff8acb!important}
+#nrdRobotTalk{max-width:225px!important;border:1px solid #65eaff!important;background:linear-gradient(145deg,#082b49f5,#111634f5)!important;box-shadow:0 0 22px #16cfff44,0 10px 30px #0009!important}
+@media(max-width:600px){
+ #nrdRobotDock{right:5px!important;bottom:7px!important;gap:6px!important}
+ #nrdRobot{transform:scale(.82)!important;transform-origin:bottom right!important;margin-left:-24px!important;margin-bottom:-5px!important}
+ #nrdRobotTalk{max-width:min(205px,55vw)!important;margin-bottom:48px!important;padding:9px 11px!important}
+}
+
 </style>
 <div id="nrdRobotDock"><div id="nrdRobotTalk" role="status" aria-live="polite"><b>NAMIRAYDIGITALS AI</b>Halo! Aku asisten robot kamu. Tekan menu, nanti aku jelaskan dengan suara. <br><button type="button" id="nrdRobotRepeat">Dengarkan lagi</button></div>
 <div id="nrdRobot" role="button" tabindex="0" aria-label="Robot asisten NamiRayDigitals"><div class="head"><i class="ear l"></i><i class="ear r"></i><i class="eye l"></i><i class="eye r"></i><i class="mouth"></i></div><div class="neck"></div><div class="arm l"></div><div class="arm r"></div><div class="body"><i class="core"></i></div><div class="label">NamiRayDigitals</div></div></div>
