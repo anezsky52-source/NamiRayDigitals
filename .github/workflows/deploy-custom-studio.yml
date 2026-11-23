@@ -5,7 +5,7 @@ on:
     branches: [main]
     paths:
       - "index.html"
-      - "studio.html"
+      - "studio.html"\n      - "workspace.html"
       - "ai-gateway.html"
       - "assets/**"
       - "custom-studio/**"
@@ -40,9 +40,9 @@ jobs:
         run: |
           rm -rf _site
           mkdir -p _site
-          cp -a index.html studio.html ai-gateway.html assets custom-studio _site/
+          cp -a index.html studio.html workspace.html ai-gateway.html assets custom-studio _site/
           test -s _site/index.html
-          test -s _site/studio.html
+          test -s _site/studio.html\n          test -s _site/workspace.html
           test -s _site/ai-gateway.html
           test -s _site/custom-studio/index.html
           test -s _site/custom-studio/project-memory/index.html
