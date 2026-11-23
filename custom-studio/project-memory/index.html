@@ -183,4 +183,34 @@ render();
  $('downloadScript')?.addEventListener('click',()=>{if(!draft)build();if(!draft)return;const url=URL.createObjectURL(new Blob([draft],{type:'text/plain;charset=utf-8'})),a=document.createElement('a');a.href=url;a.download='NamiRayDigitals-Scene-Script.txt';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)});
 })();
 </script>
+<script>
+(()=> {
+ const $=id=>document.getElementById(id), clean=v=>String(v||'').trim();
+ let plan=[];
+ const esc=v=>String(v||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+ function makePlan(){
+  const project=clean($('directorProject').value);
+  if(!project){$('directorOutput').innerHTML='<div class="empty">Nama proyek wajib diisi.</div>';return}
+  const minutes=Math.max(1,Math.min(30,Number($('directorMinutes').value)||10));
+  const seconds=Math.max(5,Math.min(120,Number($('directorSceneSeconds').value)||10));
+  const total=Math.ceil(minutes*60/seconds),genre=clean($('directorGenre').value)||'Drama sinematik';
+  const story=clean($('directorStory').value)||'Konflik utama berkembang menuju keputusan penting dan penyelesaian yang memuaskan.';
+  const cast=clean($('directorCast').value)||'Karakter utama',world=clean($('directorWorld').value)||'Lokasi utama cerita';
+  plan=Array.from({length:total},(_,i)=>({project,number:i+1,title:['Pembuka dan pengenalan dunia','Pemicu konflik','Respons karakter','Konflik berkembang','Titik balik','Klimaks dan konsekuensi'][Math.min(i,5)]+' — Scene '+(i+1),duration:Math.min(seconds,minutes*60-i*seconds),status:'planned',progress:0,notes:'Genre: '+genre+'. Karakter: '+cast+'. Lokasi: '+world+'. Premis: '+story+'. Kembangkan aksi, dialog, kamera, dan continuity untuk scene ini.'}));
+  $('directorSummary').innerHTML='';
+  [['Total scene',total],['Durasi target',minutes+' menit'],['Genre',esc(genre)]].forEach(([k,v])=>{$('directorSummary').insertAdjacentHTML('beforeend','<div class="item"><b>'+v+'</b><p>'+k+'</p></div>')});
+  $('directorOutput').innerHTML=plan.map(x=>'<div class="item"><div class="item-head"><b>Scene '+x.number+' — '+esc(x.title)+'</b><span class="pill">'+x.duration+' detik</span></div><p>'+esc(x.notes)+'</p></div>').join('');
+ }
+ function savePlan(){
+  if(!plan.length){makePlan();if(!plan.length)return}
+  let timeline=[];try{const v=JSON.parse(localStorage.getItem('nrd_production_timeline_v1')||'[]');if(Array.isArray(v))timeline=v}catch{}
+  for(const item of plan){const index=timeline.findIndex(x=>x.project===item.project&&Number(x.number)===item.number);if(index>=0)timeline[index]={...timeline[index],...item,id:timeline[index].id||'director-'+Date.now()+'-'+item.number};else timeline.push({...item,id:'director-'+Date.now()+'-'+item.number})}
+  localStorage.setItem('nrd_production_timeline_v1',JSON.stringify(timeline));
+  $('directorOutput').insertAdjacentHTML('afterbegin','<div class="item"><b>Berhasil dimasukkan ke Production Timeline</b><p>'+plan.length+' scene · '+esc(plan[0].project)+'</p></div>');
+ }
+ $('makePlan')?.addEventListener('click',makePlan);
+ $('savePlan')?.addEventListener('click',savePlan);
+ $('copyPlan')?.addEventListener('click',()=>{if(!plan.length)makePlan();if(plan.length)navigator.clipboard?.writeText(plan.map(x=>'Scene '+x.number+' — '+x.title+' ('+x.duration+' detik)\n'+x.notes).join('\n\n')).then(()=>alert('Rencana disalin.')).catch(()=>alert('Clipboard tidak tersedia.'))});
+})();
+</script>
 </body></html>
