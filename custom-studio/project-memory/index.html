@@ -56,7 +56,7 @@
 <div class="field full"><label>Catatan produksi / kendala</label><textarea id="tNotes" placeholder="Shot penting, efek visual, audio, revisi, atau kebutuhan generator..."></textarea></div>
 </div><div class="toolbar"><button class="btn primary" id="saveTimeline">Simpan scene ke timeline</button><button class="btn" id="clearTimeline">Kosongkan</button></div><div class="status" id="tStatusMsg" aria-live="polite"></div></div>
 <div class="panel"><h3>Ringkasan Produksi</h3><div id="timelineSummary" class="grid"></div><div class="toolbar"><button class="btn" id="sortTimeline">Urutkan scene</button><button class="btn" id="copyTimeline">Salin laporan timeline</button></div><h3>Scene Timeline</h3><div id="timelineList" class="list"></div></div></div></section>
-<section class="view" id="transfer"><div class="panel"><h2>Backup & Restore</h2><p class="muted">Ekspor semua data Character DNA dan Project Memory ke satu berkas JSON. Impor berkas untuk memulihkan atau memindahkan data ke browser lain.</p><div class="toolbar"><button class="btn primary" id="exportAll">Ekspor semua memori JSON</button><label class="btn">Impor JSON<input id="importFile" type="file" accept="application/json" hidden></label></div><div class="note">Penyimpanan versi ini bersifat lokal di browser (localStorage), bukan sinkronisasi cloud. Bersihkan data browser dapat menghapus memori. Ekspor backup secara berkala. Referensi gambar hanya dicatat nama/catatannya, bukan disalin ke file JSON.</div><div class="status" id="transferStatus" aria-live="polite"></div></div></section>
+<section class="view" id="intelligence"><div class="panel"><h2>Production Intelligence</h2><p class="muted">Audit kesiapan proyek berdasarkan data yang tersimpan di browser ini. Pemeriksaan hanya membaca data; tidak mengubah atau menghapus proyek.</p><div class="toolbar"><label class="field" style="min-width:240px;flex:1">Pilih proyek<select id="auditProject"><option value="">Semua proyek</option></select></label><button class="btn primary" id="runAudit">Jalankan audit produksi</button></div><div id="auditSummary" class="grid" style="margin:14px 0"></div><div id="auditResults" class="list"><div class="empty">Jalankan audit untuk melihat kesiapan produksi.</div></div><div class="toolbar"><button class="btn" id="copyAudit">Salin laporan audit</button></div><div class="note">Audit memeriksa kelengkapan DNA karakter dan environment, urutan scene, duplikasi nomor scene, serta catatan continuity. Hasilnya berupa rekomendasi; bukan jaminan generator AI akan mempertahankan hasil secara sempurna.</div></div></section>\n<section class="view" id="transfer"><div class="panel"><h2>Backup & Restore</h2><p class="muted">Ekspor semua data Character DNA dan Project Memory ke satu berkas JSON. Impor berkas untuk memulihkan atau memindahkan data ke browser lain.</p><div class="toolbar"><button class="btn primary" id="exportAll">Ekspor semua memori JSON</button><label class="btn">Impor JSON<input id="importFile" type="file" accept="application/json" hidden></label></div><div class="note">Penyimpanan versi ini bersifat lokal di browser (localStorage), bukan sinkronisasi cloud. Bersihkan data browser dapat menghapus memori. Ekspor backup secara berkala. Referensi gambar hanya dicatat nama/catatannya, bukan disalin ke file JSON.</div><div class="status" id="transferStatus" aria-live="polite"></div></div></section>
 <footer class="foot">NamiRayDigitals Product · Local-first continuity tools · Gratis digunakan</footer></div>
 <script>
 const $=id=>document.getElementById(id),CK='nrd_character_library_v1',PK='nrd_project_memory_v1',EK='nrd_environment_library_v1',SK='nrd_scene_continuity_v1',TK='nrd_production_timeline_v1';let chars=read(CK),projects=read(PK),envs=read(EK),scenes=read(SK),timeline=read(TK),editingChar=null,editingProject=null,editingEnv=null,editingScene=null,editingTimeline=null;
@@ -113,4 +113,52 @@ $('saveChar').onclick=saveChar;$('clearChar').onclick=clearChar;$('saveProject')
 async function exportMemory(){try{const ids=[...new Set([...chars,...envs].flatMap(x=>x.referenceImages||[]))],assets=[];for(const id of ids){const item=await getReference(id);if(item)assets.push({id,name:item.name,type:item.type,data:await fileToDataUrl(item.blob)})}const data={format:'NamiRayDigitalsMemory',version:2,exportedAt:new Date().toISOString(),characters:chars,projects,environments:envs,sceneContinuity:scenes,productionTimeline:timeline,referenceAssets:assets};const url=URL.createObjectURL(new Blob([JSON.stringify(data)],{type:'application/json'})),a=document.createElement('a');a.href=url;a.download='NamiRayDigitals-Project-Memory.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);notify('transferStatus','Backup termasuk gambar referensi berhasil dibuat.')}catch(err){notify('transferStatus','Backup gagal: '+err.message)}}$('exportAll').onclick=exportMemory;
 $('importFile').onchange=async e=>{const f=e.target.files[0];if(!f)return;try{const d=JSON.parse(await f.text());if(d.format!=='NamiRayDigitalsMemory'||!Array.isArray(d.characters)||!Array.isArray(d.projects))throw Error('Format file tidak dikenali');const merge=(a,b)=>[...a.filter(x=>!b.some(y=>y.id===x.id)),...b];chars=merge(chars,d.characters);projects=merge(projects,d.projects);envs=merge(envs,Array.isArray(d.environments)?d.environments:[]);scenes=merge(scenes,Array.isArray(d.sceneContinuity)?d.sceneContinuity:[]);timeline=merge(timeline,Array.isArray(d.productionTimeline)?d.productionTimeline:[]);for(const asset of (Array.isArray(d.referenceAssets)?d.referenceAssets:[])){if(asset.data)await putReference(asset.id,new File([dataUrlToBlob(asset.data)],asset.name||'reference-image',{type:asset.type||'image/png'}))}write();render();notify('transferStatus','Impor berhasil. Data baru digabung berdasarkan ID.')}catch(err){notify('transferStatus','Gagal impor: '+err.message)}e.target.value=''};
 render();
-</script></body></html>
+</script>
+<script>
+(()=> {
+ const $id=id=>document.getElementById(id);
+ const readArray=key=>{try{const v=JSON.parse(localStorage.getItem(key)||'[]');return Array.isArray(v)?v:[]}catch{return []}};
+ const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+ const keys={projects:'nrd_project_memory_v1',characters:'nrd_character_library_v1',environments:'nrd_environment_library_v1',scenes:'nrd_scene_continuity_v1',timeline:'nrd_production_timeline_v1'};
+ const status={ok:0,warn:0,fail:0}, reports=[];
+ function add(level,title,detail){reports.push({level,title,detail});status[level]++}
+ function render(){
+   const p=readArray(keys.projects),c=readArray(keys.characters),e=readArray(keys.environments),s=readArray(keys.scenes),t=readArray(keys.timeline);
+   const select=$id('auditProject'),keep=select.value;select.innerHTML='<option value="">Semua proyek</option>';
+   [...new Set([...p.map(x=>x.name),...t.map(x=>x.project),...s.map(x=>x.project)].filter(Boolean))].sort().forEach(name=>{const o=document.createElement('option');o.value=name;o.textContent=name;select.append(o)});
+   if([...select.options].some(o=>o.value===keep))select.value=keep;
+ }
+ function audit(){
+   reports.length=0;status.ok=status.warn=status.fail=0;
+   const p=readArray(keys.projects),c=readArray(keys.characters),e=readArray(keys.environments),s=readArray(keys.scenes),t=readArray(keys.timeline),chosen=$id('auditProject').value;
+   const projectNames=[...new Set([...p.map(x=>x.name),...t.map(x=>x.project),...s.map(x=>x.project)].filter(Boolean))].filter(n=>!chosen||n===chosen);
+   if(!projectNames.length)add('fail','Belum ada data proyek','Simpan Project Memory atau tambahkan scene ke timeline terlebih dahulu.');
+   for(const name of projectNames){
+     const rows=t.filter(x=>x.project===name).sort((a,b)=>Number(a.number)-Number(b.number));
+     const notes=s.filter(x=>x.project===name);
+     const project=p.find(x=>x.name===name);
+     if(!project)add('warn',name+': Project Memory belum ada','Buat satu catatan Project Memory agar premis dan aturan dunia terdokumentasi.');
+     if(!rows.length)add('warn',name+': timeline kosong','Tambahkan scene dan durasi target ke Production Timeline.');
+     const nums=rows.map(x=>Number(x.number)).filter(Number.isFinite),seen=new Set();
+     nums.forEach(n=>{if(seen.has(n))add('fail',name+': nomor scene duplikat','Scene '+n+' muncul lebih dari sekali di timeline.');seen.add(n)});
+     if(nums.length){const max=Math.max(...nums),missing=[];for(let n=1;n<=max;n++)if(!seen.has(n))missing.push(n);if(missing.length)add('warn',name+': urutan scene berlubang','Nomor scene yang belum ada: '+missing.join(', '));}
+     rows.forEach(row=>{
+       if(!row.title)add('warn',name+' · Scene '+row.number+': judul kosong','Tambahkan tujuan atau judul scene.');
+       if(!Number.isFinite(Number(row.duration))||Number(row.duration)<=0)add('warn',name+' · Scene '+row.number+': durasi belum valid','Isi durasi target lebih dari 0 detik.');
+       if((row.status==='done'||Number(row.progress)>=100)&&!notes.some(x=>Number(x.number)===Number(row.number)))add('warn',name+' · Scene '+row.number+': continuity belum dicatat','Simpan catatan keadaan akhir scene untuk membantu kesinambungan scene berikutnya.');
+     });
+     if(!c.length)add('warn',name+': Character DNA belum tersedia','Tambahkan DNA untuk karakter utama di Character Library.');
+     if(!e.length)add('warn',name+': Environment DNA belum tersedia','Tambahkan DNA lokasi utama di Environment Library.');
+     if(rows.length&&rows.every(x=>x.status==='done'||Number(x.progress)>=100))add('ok',name+': timeline seluruhnya selesai','Semua scene pada timeline berstatus selesai atau progres 100%.');
+   }
+   if(!reports.length)add('ok','Tidak ditemukan masalah pada pemeriksaan dasar','Data proyek, timeline, dan catatan continuity lolos pemeriksaan yang tersedia.');
+   const box=$id('auditResults');box.innerHTML=reports.map(r=>'<div class="item"><div class="item-head"><b>'+esc(r.title)+'</b><span class="pill">'+({ok:'OK',warn:'PERLU DILENGKAPI',fail:'PERLU DIPERBAIKI'}[r.level])+'</span></div><p>'+esc(r.detail)+'</p></div>').join('');
+   $id('auditSummary').innerHTML='<div class="item"><b>'+status.ok+'</b><p>Baik</p></div><div class="item"><b>'+status.warn+'</b><p>Perlu dilengkapi</p></div><div class="item"><b>'+status.fail+'</b><p>Perlu diperbaiki</p></div>';
+   window.nrdLastAudit=reports.map(r=>'['+r.level.toUpperCase()+'] '+r.title+' — '+r.detail).join('\n');
+ }
+ document.querySelector('[data-tab="intelligence"]')?.addEventListener('click',render);
+ $id('runAudit')?.addEventListener('click',audit);
+ $id('copyAudit')?.addEventListener('click',()=>{if(!window.nrdLastAudit){alert('Jalankan audit terlebih dahulu.');return}navigator.clipboard?.writeText(window.nrdLastAudit).then(()=>alert('Laporan audit disalin.')).catch(()=>alert('Clipboard tidak tersedia.'))});
+ render();
+})();
+</script>\n</body></html>
