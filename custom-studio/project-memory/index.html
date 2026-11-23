@@ -17,7 +17,7 @@
 <div class="field"><label>Rambut</label><textarea id="cHair" placeholder="Gaya, panjang, warna, poni..."></textarea></div><div class="field"><label>Kostum tetap</label><textarea id="cCostume" placeholder="Pakaian, warna, bahan, detail..."></textarea></div>
 <div class="field"><label>Aksesori & ciri khas</label><textarea id="cTraits" placeholder="Anting, kalung, senjata, tanda khusus..."></textarea></div><div class="field"><label>Proporsi & postur</label><textarea id="cBody" placeholder="Tinggi relatif, bentuk tubuh, postur..."></textarea></div>
 <div class="field full"><label>Aturan kontinuitas wajib</label><textarea id="cRules" placeholder="Jangan ubah wajah, rambut, kostum, aksesori, warna, proporsi..."></textarea></div>
-<div class="field full"><label>Gambar referensi karakter</label><input id="cImage" type="file" accept="image/png,image/jpeg,image/webp" multiple><div class="muted">Maksimal 8 gambar, 5 MB per gambar. Gambar disimpan lokal di browser ini.</div><div id="cImagePreview" class="list"></div></div><div class="field full"><label>Referensi gambar (nama file / catatan saja)</label><input id="cRef" placeholder="Minami-DNA-front.png — simpan file asli di perangkat"></div>
+<div class="field full"><label>Gambar referensi karakter</label><input id="cImage" type="file" accept="image/png,image/jpeg,image/webp" multiple><div class="muted">Maksimal 8 gambar, 5 MB per gambar. Referensi gambar dicatat sebagai nama file/catatan; file gambar tetap berada di perangkat Anda.</div><div id="cImagePreview" class="list"></div></div><div class="field full"><label>Referensi gambar (nama file / catatan saja)</label><input id="cRef" placeholder="Minami-DNA-front.png — simpan file asli di perangkat"></div>
 </div><div class="toolbar"><button class="btn primary" id="saveChar">Simpan Character DNA</button><button class="btn" id="clearChar">Kosongkan</button></div><div class="status" id="cStatus" aria-live="polite"></div></div>
 <div class="panel"><h3>Saved Character Library</h3><p class="muted">Pilih karakter untuk memuat, menyalin DNA, atau menghapus catatannya.</p><div id="charList" class="list"></div></div></div></section>
 <section class="view" id="projects"><div class="layout"><div class="panel"><h2>Production Memory</h2><p class="muted">Catat aturan dunia cerita, scene terakhir, dan status produksi.</p><div class="grid">
@@ -35,7 +35,7 @@
 <div class="field"><label>Material & tekstur</label><textarea id="eMaterials" placeholder="Kayu, batu, logam, kain..."></textarea></div><div class="field"><label>Palet warna</label><textarea id="ePalette" placeholder="Warna dominan dan aksen..."></textarea></div>
 <div class="field"><label>Pencahayaan</label><textarea id="eLighting" placeholder="Arah cahaya, sumber, intensitas, bayangan..."></textarea></div><div class="field"><label>Cuaca & atmosfer</label><textarea id="eWeather" placeholder="Hujan, kabut, angin, waktu..."></textarea></div>
 <div class="field full"><label>Aturan kontinuitas</label><textarea id="eRules" placeholder="Jangan ubah layout, landmark, palet, arah cahaya tanpa alasan cerita..."></textarea></div>
-<div class="field full"><label>Gambar referensi environment</label><input id="eImage" type="file" accept="image/png,image/jpeg,image/webp" multiple><div class="muted">Maksimal 8 gambar, 5 MB per gambar. Gambar disimpan lokal di browser ini.</div><div id="eImagePreview" class="list"></div></div><div class="field full"><label>Referensi visual (nama file / catatan)</label><input id="eRef" placeholder="Nama file gambar acuan"></div>
+<div class="field full"><label>Gambar referensi environment</label><input id="eImage" type="file" accept="image/png,image/jpeg,image/webp" multiple><div class="muted">Catat referensi visual; file gambar asli tetap disimpan di perangkat Anda.</div><div id="eImagePreview" class="list"></div></div><div class="field full"><label>Referensi visual (nama file / catatan)</label><input id="eRef" placeholder="Nama file gambar acuan"></div>
 </div><div class="toolbar"><button class="btn primary" id="saveEnv">Simpan Environment DNA</button><button class="btn" id="clearEnv">Kosongkan</button></div><div class="status" id="eStatus" aria-live="polite"></div></div><div class="panel"><h3>Saved Environment Library</h3><div id="envList" class="list"></div></div></div></section>
 <section class="view" id="continuity"><div class="layout"><div class="panel"><h2>Scene Continuity Record</h2><p class="muted">Catat keadaan akhir scene agar scene berikutnya dapat melanjutkan detail yang sama.</p><div class="grid">
 <div class="field"><label>Nama proyek *</label><input id="sProject" placeholder="Nama proyek persis seperti di Creative Brief"></div><div class="field"><label>Nomor scene *</label><input id="sNumber" type="number" min="1" step="1" placeholder="1"></div>
@@ -161,4 +161,26 @@ render();
  $id('copyAudit')?.addEventListener('click',()=>{if(!window.nrdLastAudit){alert('Jalankan audit terlebih dahulu.');return}navigator.clipboard?.writeText(window.nrdLastAudit).then(()=>alert('Laporan audit disalin.')).catch(()=>alert('Clipboard tidak tersedia.'))});
  render();
 })();
-</script>\n</body></html>
+</script>\n<script>
+(()=> {
+ const $=id=>document.getElementById(id); let draft='';
+ const clean=v=>String(v||'').trim();
+ const esc=v=>String(v||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+ function build(){
+  const project=clean($('writerProject').value);
+  if(!project){$('writerOutput').innerHTML='<div class="empty">Nama proyek wajib diisi.</div>';return}
+  const genre=clean($('writerGenre').value)||'Drama',a=clean($('writerA').value)||'Karakter A',b=clean($('writerB').value)||'Karakter pendamping';
+  const scene=Math.max(1,Number($('writerScene').value)||1),duration=Math.max(5,Math.min(180,Number($('writerDuration').value)||10));
+  const action=clean($('writerAction').value)||'Karakter menghadapi pilihan penting.',mood=clean($('writerMood').value)||'Sinematik';
+  const continuity=clean($('writerContinuity').value)||'Pertahankan kondisi akhir scene sebelumnya.';
+  const x=Math.max(1,Math.round(duration*.2)),y=Math.max(x+1,Math.round(duration*.75));
+  draft='NamiRayDigitals — SCRIPT DRAFT\nProyek: '+project+'\nGenre: '+genre+'\nScene '+scene+' | Durasi: '+duration+' detik\nKarakter: '+a+' dan '+b+'\nSuasana: '+mood+'\n\nCONTINUITY\n'+continuity+'\n\nAKSI & STRUKTUR\n0–'+x+' detik: Establishing shot; perkenalkan lokasi, suasana, dan posisi karakter.\n'+x+'–'+y+' detik: '+action+' Tampilkan blocking, motivasi, dan reaksi yang jelas.\n'+y+'–'+duration+' detik: Tutup dengan keputusan, reaksi, atau visual hook menuju scene berikutnya.\n\nDIALOG AWAL — DAPAT DIEDIT\n'+a+': “Aku tahu apa yang harus kulakukan.”\n'+b+': “Kalau begitu, kita hadapi bersama.”\n\nARAHAN KAMERA\n- Opening: wide establishing shot untuk memperkenalkan ruang.\n- Aksi: medium shot, close-up ekspresi, jaga screen direction.\n- Penutup: slow push-in atau tracking sesuai emosi.\n\nAUDIO & AKTING\n- Emosi utama: '+mood+'.\n- Dialog natural dengan jeda dan reaksi yang wajar.\n- Musik dan ambience tidak menutupi dialog.\n\nTRANSISI KE SCENE '+(scene+1)+'\nPertahankan wajah, kostum, properti, posisi akhir, arah pandang, lokasi, waktu, dan kondisi cahaya.';
+  $('writerOutput').innerHTML='<div class="item"><div class="item-head"><b>Scene '+scene+' — '+esc(project)+'</b><span class="pill">'+duration+' detik</span></div><pre style="white-space:pre-wrap;font:inherit;overflow-wrap:anywhere"></pre></div>';
+  $('writerOutput').querySelector('pre').textContent=draft;
+ }
+ $('writeScene')?.addEventListener('click',build);
+ $('copyScript')?.addEventListener('click',()=>{if(!draft)build();if(draft)navigator.clipboard?.writeText(draft).then(()=>alert('Draf disalin.')).catch(()=>alert('Clipboard tidak tersedia.'))});
+ $('downloadScript')?.addEventListener('click',()=>{if(!draft)build();if(!draft)return;const url=URL.createObjectURL(new Blob([draft],{type:'text/plain;charset=utf-8'})),a=document.createElement('a');a.href=url;a.download='NamiRayDigitals-Scene-Script.txt';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)});
+})();
+</script>
+</body></html>
