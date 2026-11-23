@@ -69,7 +69,7 @@ jobs:
         run: |
           npm init -y
           npm install --no-save playwright
-          npx playwright install --with-deps chromium
+          npx playwright install chromium
       - name: Start static site and run browser smoke tests
         run: |
           python3 -m http.server 8000 --bind 127.0.0.1 >/tmp/nrd-http.log 2>&1 &
