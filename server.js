@@ -17,18 +17,34 @@ const PROVIDERS = {
 const requestBuckets = new Map();
 const mime = { '.html':'text/html; charset=utf-8', '.css':'text/css; charset=utf-8', '.js':'text/javascript; charset=utf-8', '.svg':'image/svg+xml', '.png':'image/png', '.jpg':'image/jpeg', '.webp':'image/webp', '.ico':'image/x-icon' };
 
+function originAllowed(req) {
+  const origin = req.headers.origin;
+  return !origin || origin === ALLOWED_ORIGIN;
+}
 function send(res, status, data, type='application/json; charset=utf-8') {
   res.writeHead(status, { 'Content-Type': type, 'X-Content-Type-Options': 'nosniff', 'Cache-Control': 'no-store', 'Access-Control-Allow-Origin': ALLOWED_ORIGIN, 'Vary': 'Origin' });
   res.end(type.startsWith('application/json') ? JSON.stringify(data) : data);
 }
 function readBody(req, maxBytes=1_000_000) {
   return new Promise((resolve, reject) => {
-    let raw = '';
+    const chunks = [];
+    let size = 0;
+    let tooLarge = false;
     req.on('data', chunk => {
-      raw += chunk;
-      if (Buffer.byteLength(raw) > maxBytes) { reject(new Error('Ukuran permintaan terlalu besar.')); req.destroy(); }
+      if (tooLarge) return;
+      size += chunk.length;
+      if (size > maxBytes) {
+        tooLarge = true;
+        reject(Object.assign(new Error('Ukuran permintaan terlalu besar.'), { status: 413 }));
+        return;
+      }
+      chunks.push(chunk);
     });
-    req.on('end', () => { try { resolve(JSON.parse(raw || '{}')); } catch { reject(new Error('Format JSON tidak valid.')); } });
+    req.on('end', () => {
+      if (tooLarge) return;
+      try { resolve(JSON.parse(Buffer.concat(chunks).toString('utf8') || '{}')); }
+      catch { reject(Object.assign(new Error('Format JSON tidak valid.'), { status: 400 })); }
+    });
     req.on('error', reject);
   });
 }
@@ -71,10 +87,12 @@ async function generate(provider, model, brief) {
 
 const server = http.createServer(async (req, res) => {
   const pathname = (req.url || '/').split('?')[0];
+  if (!originAllowed(req)) return send(res, 403, { error:'Origin tidak diizinkan.' });
   if (req.method === 'OPTIONS') { res.writeHead(204, { 'Access-Control-Allow-Origin': ALLOWED_ORIGIN, 'Access-Control-Allow-Methods': 'GET, POST, OPTIONS', 'Access-Control-Allow-Headers': 'Content-Type', 'Access-Control-Max-Age': '86400', 'Vary': 'Origin' }); return res.end(); }
   if (req.method === 'GET' && pathname === '/api/health') return send(res, 200, { ok:true, service:'NamiRayDigitals Universal AI Gateway' });
   if (req.method === 'GET' && pathname === '/api/status') return send(res, 200, { aiConfigured:configuredProviders().some(x=>x.configured), providers:configuredProviders() });
   if (req.method === 'POST' && pathname === '/api/generate') {
+    if (!String(req.headers['content-type'] || '').toLowerCase().includes('application/json')) return send(res, 415, { error:'Gunakan Content-Type application/json.' });
     const ip = String(req.headers['x-forwarded-for'] || req.socket.remoteAddress || 'unknown').split(',')[0].trim();
     const now = Date.now();
     const bucket = requestBuckets.get(ip) || { start: now, count: 0 };
