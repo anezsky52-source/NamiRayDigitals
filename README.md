@@ -67,3 +67,19 @@ Deploy ke server yang mendukung Node.js 18+ dan environment variables. Set `OPEN
 5. Tunggu deployment selesai, lalu buka URL publik yang ditampilkan pada dashboard Render. Nama subdomain tidak dijamin sama pada setiap akun.
 
 Catatan: nama subdomain bergantung pada ketersediaan. Paket hosting gratis dapat tidur saat tidak aktif dan bisa memiliki batas penggunaan. Integrasi API menimbulkan biaya sesuai penggunaan akun OpenAI. Sebelum membuka akses luas, tambahkan autentikasi, rate limiting, dan perlindungan biaya; versi ini belum memiliki login pengguna atau penyimpanan proyek cloud.
+
+## NamiRayDigitals Universal AI Gateway 1.0
+
+The Studio includes a new professional multi-provider AI workspace at `/ai-gateway.html`. It can route text-generation requests to OpenAI, Google Gemini, Anthropic Claude, DeepSeek, and xAI Grok. Provider keys are read only from server environment variables; never place real keys in browser code or commit them to GitHub.
+
+### Deploy the gateway backend
+
+1. Create a new Render Web Service from this repository and use the included `render.yaml` Blueprint (Node 18+).
+2. In the Render service Environment settings, add the provider secret keys you actually own: `OPENAI_API_KEY`, `GEMINI_API_KEY`, `ANTHROPIC_API_KEY`, `DEEPSEEK_API_KEY`, and/or `XAI_API_KEY`. Leave unused providers unconfigured.
+3. Keep `ALLOWED_ORIGIN=https://anezsky52-source.github.io` for the current GitHub Pages frontend.
+4. Deploy. Check that `https://YOUR-RENDER-SERVICE.onrender.com/api/health` returns an OK response.
+5. Open the Studio, choose **Universal AI Gateway**, paste the Render service base URL into **Alamat backend gateway**, save it, then select **Periksa koneksi**.
+
+GitHub Pages is a static host and cannot run the Node API itself. The gateway page therefore needs a separately deployed Node backend. Render's free service may sleep when idle. API usage is billed or quota-limited by each provider; the gateway does not make paid API access free. This release handles text responses and prompt workflows, not direct image/video generation. Image/video endpoints must be added separately for providers that support those modalities.
+
+The gateway branch is isolated as `nrd-universal-ai-gateway`; review and merge it into `main` to publish the updated GitHub Pages site. Existing Studio modules and local project storage remain in place.
