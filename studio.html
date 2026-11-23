@@ -102,6 +102,8 @@ body:not(.nrd-module-open) .section#dashboard{display:block}body.nrd-module-open
 
 </head>
 <body>
+<script id="nrd-workspace-entry-guard">(()=>{try{const allowed=sessionStorage.getItem("nrd_studio_access")==="ok";if(!allowed){if(window.top===window.self){location.replace("./workspace.html#studio")}else{window.top.location.replace("./workspace.html#studio")}}}catch(error){location.replace("./workspace.html#studio")}})();</script>
+
 <svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true"><filter id="nrdMinamiSharpen" x="-10%" y="-10%" width="120%" height="120%" color-interpolation-filters="sRGB"><feConvolveMatrix order="3" kernelMatrix="0 -1 0 -1 5 -1 0 -1 0" preserveAlpha="true"/></filter></svg>
 <style>#nrdRobot .nrdMinamiArt{filter:url(#nrdMinamiSharpen) contrast(1.08) saturate(1.06)!important;image-rendering:auto!important;backface-visibility:hidden}</style>
 <div class="wrap">
