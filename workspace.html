@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#070b18">
+<meta name="description" content="NamiRayDigitals Unified Creative Workspace — semua alat kreatif dalam satu ruang kerja.">
+<title>NamiRayDigitals — Unified Creative Workspace</title>
+<style>
+:root{color-scheme:dark;--bg:#070b18;--panel:#10182b;--panel2:#0d1425;--line:#243653;--cyan:#69e7ff;--violet:#9c8cff;--gold:#e9cb84;--text:#edf5ff;--muted:#91a3bd}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 15% 0%,#173a5b55,transparent 42%),radial-gradient(ellipse at 90% 8%,#38265c44,transparent 35%),var(--bg);color:var(--text);font:14px/1.5 Inter,system-ui,-apple-system,"Segoe UI",sans-serif}
+.top{height:70px;display:flex;align-items:center;justify-content:space-between;padding:0 22px;border-bottom:1px solid var(--line);background:#080e1deF;backdrop-filter:blur(18px);position:sticky;top:0;z-index:5}
+.brand{display:flex;align-items:center;gap:12px;color:var(--text);text-decoration:none;font-weight:850;letter-spacing:.04em}.mark{width:39px;height:39px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(135deg,#4de1ff33,#a18cff33);border:1px solid #70e7ff77;color:var(--cyan);font:24px Georgia}.brand small{display:block;font-size:9px;letter-spacing:.2em;color:var(--muted)}
+.top-right{display:flex;align-items:center;gap:10px}.status{font-size:11px;color:#a8f4d2;border:1px solid #3a806a66;border-radius:99px;padding:6px 10px}.top a,.top button{color:var(--text);text-decoration:none;background:#14223a;border:1px solid var(--line);border-radius:10px;padding:9px 12px;font:inherit;cursor:pointer}
+.layout{display:grid;grid-template-columns:245px minmax(0,1fr);min-height:calc(100vh - 70px)}
+.side{padding:22px 14px;border-right:1px solid var(--line);background:#091122aa}.side-title{font-size:10px;letter-spacing:.19em;text-transform:uppercase;color:#6f86a5;font-weight:800;padding:0 11px 12px}
+.nav{display:grid;gap:6px}.nav button{width:100%;display:flex;align-items:center;gap:11px;text-align:left;padding:11px 12px;border-radius:12px;border:1px solid transparent;background:transparent;color:#b5c4d9;cursor:pointer;font:600 13px inherit;transition:.18s}.nav button:hover{background:#13243b;border-color:#29445f;color:white}.nav button.active{background:linear-gradient(100deg,#1a4560aa,#3a2e68aa);border-color:#57dfff88;color:#fff;box-shadow:inset 3px 0 var(--cyan)}.ico{width:25px;height:25px;border-radius:8px;background:#ffffff0b;display:grid;place-items:center;color:var(--cyan);font-size:14px;flex:none}
+.side-note{margin:24px 8px 0;padding:13px;border:1px solid #344c68;border-radius:13px;background:linear-gradient(145deg,#10213a,#17172f);font-size:11px;color:var(--muted)}.side-note b{display:block;color:var(--gold);margin-bottom:5px}
+.main{min-width:0;padding:20px 22px 22px}.heading{display:flex;align-items:end;justify-content:space-between;gap:15px;margin:0 0 15px}.eyebrow{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--cyan);font-weight:800}.heading h1{font-size:22px;line-height:1.2;margin:5px 0 3px}.heading p{margin:0;color:var(--muted);font-size:12px}.actions{display:flex;gap:8px}.actions button{background:#13213a;color:#dceaff;border:1px solid var(--line);border-radius:9px;padding:8px 11px;cursor:pointer}
+.frame-wrap{height:calc(100vh - 165px);min-height:560px;position:relative;border:1px solid #29425f;border-radius:16px;overflow:hidden;background:#0b1120;box-shadow:0 20px 65px #0006}.frame-wrap iframe{width:100%;height:100%;border:0;background:#0b1120}.loading{position:absolute;inset:0;display:grid;place-items:center;background:#0b1120;color:var(--muted);z-index:1;pointer-events:none;transition:opacity .2s}.loading.hide{opacity:0}.spin{width:24px;height:24px;border:2px solid #2d4867;border-top-color:var(--cyan);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 10px}@keyframes spin{to{transform:rotate(360deg)}}
+.mobile-menu{display:none}
+@media(max-width:850px){.layout{grid-template-columns:1fr}.side{padding:10px 12px;border-right:0;border-bottom:1px solid var(--line);overflow-x:auto}.side-title,.side-note{display:none}.nav{display:flex;min-width:max-content}.nav button{width:auto;padding:9px 11px}.nav button span.label{white-space:nowrap}.main{padding:15px 12px}.frame-wrap{height:calc(100vh - 205px);min-height:480px}.heading h1{font-size:19px}}
+@media(max-width:520px){.top{height:60px;padding:0 12px}.brand{font-size:12px}.mark{width:34px;height:34px}.brand small{font-size:8px}.status{display:none}.top a,.top button{padding:7px 9px;font-size:11px}.layout{min-height:calc(100vh - 60px)}.heading{align-items:start}.heading p{max-width:240px}.actions button:last-child{display:none}.frame-wrap{height:calc(100dvh - 198px);min-height:420px;border-radius:11px}}
+</style>
+</head>
+<body>
+<header class="top">
+<a class="brand" href="./index.html"><span class="mark">N</span><span>NamiRayDigitals<small>UNIFIED CREATIVE WORKSPACE</small></span></a>
+<div class="top-right"><span class="status">● Satu ruang kerja · Free-first</span><a href="./index.html">Beranda</a><button id="reload" type="button">↻ Muat ulang</button></div>
+</header>
+<div class="layout">
+<aside class="side">
+<div class="side-title">Creative Workspace</div>
+<nav class="nav" id="nav">
+<button data-key="studio" class="active"><span class="ico">✧</span><span class="label">Custom Studio</span></button>
+<button data-key="production"><span class="ico">▣</span><span class="label">Production Studio 0.3.1</span></button>
+<button data-key="memory"><span class="ico">◈</span><span class="label">Project Memory</span></button>
+<button data-key="agent"><span class="ico">✦</span><span class="label">Creative Suite Agent</span></button>
+<button data-key="generator"><span class="ico">▧</span><span class="label">AI Generator</span></button>
+<button data-key="lipsync"><span class="ico">♫</span><span class="label">AI LipSync</span></button>
+<button data-key="gateway"><span class="ico">⌘</span><span class="label">Universal AI Gateway</span></button>
+<button data-key="academy"><span class="ico">⌂</span><span class="label">Academy / Beranda</span></button>
+</nav>
+<div class="side-note"><b>CREATE · GENERATE · INSPIRE</b>Semua modul berada dalam satu alamat. Data lokal tetap tersimpan di browser yang digunakan.</div>
+</aside>
+<main class="main">
+<div class="heading"><div><div class="eyebrow">NAMIRAYDIGITALS / WORKSPACE</div><h1 id="viewTitle">Custom Studio</h1><p id="viewDesc">Ruang kerja utama untuk produksi kreatif.</p></div><div class="actions"><button id="newTab" type="button">Buka tab baru ↗</button></div></div>
+<div class="frame-wrap"><div class="loading" id="loading"><div><div class="spin"></div>Memuat modul...</div></div><iframe id="module" title="NamiRayDigitals module" allow="clipboard-read; clipboard-write; fullscreen" referrerpolicy="strict-origin-when-cross-origin"></iframe></div>
+</main>
+</div>
+<script>
+const modules={
+ studio:{title:'Custom Studio',desc:'Ruang kerja utama untuk produksi kreatif.',url:'./studio.html'},
+ production:{title:'Production Studio 0.3.1',desc:'Perencanaan produksi dan alur kerja kreatif.',url:'./custom-studio/production/index.html'},
+ memory:{title:'Project Memory & Character Library',desc:'Kelola karakter, environment, continuity, dan timeline proyek.',url:'./custom-studio/project-memory/index.html'},
+ agent:{title:'Creative Suite Agent',desc:'Asisten workflow kreatif dan pengembangan prompt.',url:'./custom-studio/creative-suite-agent/index.html'},
+ generator:{title:'Free AI Generator',desc:'Modul generator visual dan konten; ketersediaan model mengikuti layanan yang digunakan.',url:'./custom-studio/ai-generator/index.html'},
+ lipsync:{title:'AI LipSync Studio',desc:'Ruang kerja sinkronisasi suara dan gerak bibir.',url:'./custom-studio/lipsync/index.html'},
+ gateway:{title:'Universal AI Gateway',desc:'Satu antarmuka untuk menghubungkan provider AI yang didukung.',url:'./ai-gateway.html'},
+ academy:{title:'NamiRayDigitals Academy',desc:'Beranda dan informasi NamiRayDigitals.',url:'./index.html'}
+};
+const frame=document.getElementById('module'),loading=document.getElementById('loading'),title=document.getElementById('viewTitle'),desc=document.getElementById('viewDesc'),buttons=[...document.querySelectorAll('[data-key]')];
+let current='studio';
+function openModule(key,updateHash=true){const m=modules[key]||modules.studio;current=modules[key]?key:'studio';buttons.forEach(b=>b.classList.toggle('active',b.dataset.key===current));title.textContent=m.title;desc.textContent=m.desc;loading.classList.remove('hide');frame.src=m.url;if(updateHash)history.replaceState(null,'','#'+current)}
+buttons.forEach(b=>b.addEventListener('click',()=>openModule(b.dataset.key)));
+frame.addEventListener('load',()=>loading.classList.add('hide'));
+document.getElementById('reload').addEventListener('click',()=>{loading.classList.remove('hide');frame.src=modules[current].url});
+document.getElementById('newTab').addEventListener('click',()=>window.open(modules[current].url,'_blank','noopener'));
+window.addEventListener('hashchange',()=>openModule(location.hash.slice(1),false));
+openModule(location.hash.slice(1)||'studio',false);
+</script>
+</body></html>
