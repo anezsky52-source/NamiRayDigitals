@@ -97,11 +97,12 @@ frame.addEventListener('load',()=>loading.classList.add('hide'));
 document.getElementById('reload').addEventListener('click',()=>{loading.classList.remove('hide');frame.src=modules[current].url});
 document.getElementById('newTab').addEventListener('click',()=>window.open(modules[current].url,'_blank','noopener'));
 window.addEventListener('hashchange',()=>openModule(location.hash.slice(1),false));
-const NRD_WORKSPACE_PASSWORD="Bandung1989";
+const NRD_PASSWORD_SHA256="f218ce36bd84b0608bfdacf951c60272a06dd755001741b9a85f79eb91fe4b2b";
+async function nrdPasswordMatches(value){const bytes=new TextEncoder().encode(value);const digest=await crypto.subtle.digest("SHA-256",bytes);const hex=[...new Uint8Array(digest)].map(v=>v.toString(16).padStart(2,"0")).join("");return hex===NRD_PASSWORD_SHA256;}
 const entry=document.getElementById('nrdWorkspaceGate'),entryForm=document.getElementById('nrdWorkspaceGateForm'),entryField=document.getElementById('nrdWorkspacePassword'),entryError=document.getElementById('nrdWorkspaceGateError'),workspaceLayout=document.getElementById('nrdWorkspaceLayout');
 function enterWorkspace(){entry.style.display='none';workspaceLayout.style.display='grid';openModule(location.hash.slice(1)||'studio',false)}
 if(sessionStorage.getItem('nrd_studio_access')==='ok'){enterWorkspace()}
-entryForm.addEventListener('submit',event=>{event.preventDefault();if(entryField.value===NRD_WORKSPACE_PASSWORD){sessionStorage.setItem('nrd_studio_access','ok');entryError.textContent='';enterWorkspace()}else{entryError.textContent='Password salah. Silakan coba lagi.';entryField.value='';entryField.focus()}});
+entryForm.addEventListener('submit',async event=>{event.preventDefault();const submit=entryForm.querySelector('button[type="submit"]');submit.disabled=true;submit.textContent='MEMERIKSA…';try{if(await nrdPasswordMatches(entryField.value)){sessionStorage.setItem('nrd_studio_access','ok');entryError.textContent='';enterWorkspace()}else{entryError.textContent='Password salah. Silakan coba lagi.';entryField.value='';entryField.focus()}}catch(error){entryError.textContent='Browser tidak mendukung pemeriksaan password. Perbarui browser lalu coba lagi.'}finally{submit.disabled=false;submit.innerHTML='MASUK KE WORKSPACE <span>→</span>'}});
 
 </script>
 </body></html>
