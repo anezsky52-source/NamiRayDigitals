@@ -155,6 +155,8 @@ body:not(.nrd-module-open) .section#dashboard{display:block}body.nrd-module-open
 </style>
 </head>
 <body>
+<script id="nrd-workspace-entry-guard">(()=>{try{if(sessionStorage.getItem("nrd_studio_access")!=="ok"){if(window.top===window.self){location.replace("../../workspace.html#studio")}else{window.top.location.replace("../../workspace.html#studio")}}}catch(error){location.replace("../../workspace.html#studio")}})();</script>
+
 <div id="nrdAccessGate" role="dialog" aria-modal="true" aria-labelledby="nrdGateTitle">
   <form class="gate-card" id="nrdGateForm">
     <div class="gate-logo">NR</div><img id="nrdGateMinami" class="nrdMinamiArt" src="./assets/minami-character.webp" alt="MINAMI, robot wanita holografik NamiRayDigitals" loading="eager" decoding="async">
