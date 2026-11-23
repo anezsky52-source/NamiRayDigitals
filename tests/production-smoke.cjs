@@ -21,14 +21,16 @@ const assert = require('node:assert/strict');
     await page.locator('#writerProject').fill('Smoke Test Film');
     await page.locator('#writerAction').fill('Dua karakter bertemu di gerbang kota.');
     await page.locator('#writeScene').click();
-    await page.locator('#writerOutput').getByText(/Smoke Test Film/).waitFor();
+    await page.locator('#writerOutput pre').waitFor();
+    assert.match(await page.locator('#writerOutput pre').textContent(), /Smoke Test Film/);
 
     await page.locator('[data-tab="director"]').click();
     await page.locator('#directorProject').fill('Smoke Test Film');
     await page.locator('#directorMinutes').fill('1');
     await page.locator('#directorSceneSeconds').fill('10');
     await page.locator('#makePlan').click();
-    await page.locator('#directorOutput').getByText(/Scene 1/).waitFor();
+    await page.locator('#directorOutput .item').first().waitFor();
+    assert.match(await page.locator('#directorOutput').innerText(), /Scene 1/);
     await page.locator('#savePlan').click();
     const timelineAfterPlan = await page.evaluate(() => JSON.parse(localStorage.getItem('nrd_production_timeline_v1') || '[]'));
     assert.equal(timelineAfterPlan.length, 6, 'one-minute plan at 10 seconds per scene should create 6 scenes');
