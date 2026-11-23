@@ -4,6 +4,7 @@ const assert = require('node:assert/strict');
 (async () => {
   const browser = await chromium.launch({ headless: true });
   const page = await browser.newPage({ acceptDownloads: true });
+  await page.addInitScript(() => { sessionStorage.setItem('nrd_studio_access', 'ok'); });
   const errors = [];
   page.on('pageerror', error => errors.push(error.message));
 
