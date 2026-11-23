@@ -28,7 +28,7 @@ jobs:
               if not path.exists():
                   continue
               html = path.read_text(encoding="utf-8")
-              scripts = re.findall(r"<script(?:\\s[^>]*)?>([\\s\\S]*?)</script\\s*>", html, re.I)
+              scripts = re.findall(r"<script(?:\s[^>]*)?>([\s\S]*?)</script\s*>", html, re.I)
               for number, script in enumerate(scripts, 1):
                   if not script.strip():
                       continue
@@ -38,7 +38,7 @@ jobs:
                       result = subprocess.run(["node", "--check", file.name], capture_output=True, text=True)
                   if result.returncode:
                       failed = True
-                      print(f"FAIL {path} inline script {number}\\n{result.stderr}")
+                      print(f"FAIL {path} inline script {number}\n{result.stderr}")
                   else:
                       print(f"PASS {path} inline script {number}")
           sys.exit(1 if failed else 0)
