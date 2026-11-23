@@ -1,11 +1,13 @@
-name: Deploy NamiRayDigitals Custom Studio
-# Fresh deployment run: avoid duplicate artifacts from a failed-job rerun.
-# Publish the current Custom Studio asset bundle.
+name: Deploy NamiRayDigitals Website
 
 on:
   push:
     branches: [main]
     paths:
+      - "index.html"
+      - "studio.html"
+      - "ai-gateway.html"
+      - "assets/**"
       - "custom-studio/**"
       - ".github/workflows/deploy-custom-studio.yml"
   workflow_dispatch:
@@ -28,14 +30,29 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
         with:
           enablement: true
-      - name: Upload Custom Studio site
+
+      - name: Assemble complete website
+        run: |
+          rm -rf _site
+          mkdir -p _site
+          cp -a index.html studio.html ai-gateway.html assets custom-studio _site/
+          test -s _site/index.html
+          test -s _site/studio.html
+          test -s _site/ai-gateway.html
+          test -s _site/custom-studio/index.html
+          test -s _site/custom-studio/project-memory/index.html
+          test -s _site/custom-studio/creative-suite-agent/index.html
+
+      - name: Upload complete website
         uses: actions/upload-pages-artifact@v3
         with:
-          path: custom-studio
+          path: _site
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
