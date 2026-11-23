@@ -14,7 +14,7 @@ const PROVIDERS = {
   deepseek: { key: 'DEEPSEEK_API_KEY', models: ['deepseek-chat', 'deepseek-reasoner'], endpoint: 'https://api.deepseek.com/chat/completions' },
   xai: { key: 'XAI_API_KEY', models: ['grok-3-mini', 'grok-3'], endpoint: 'https://api.x.ai/v1/chat/completions' }
 };
-const mime = { '.html':'text/html; charset=utf-8', '.css':'text/css; charset=utf-8', '.js':'text/javascript; charset=utf-8', '.svg':'image/svg+xml', '.png':'image/png', '.jpg':'image/jpeg', '.webp':'image/webp', '.ico':'image/x-icon' };
+const requestBuckets = new Map();\nconst mime = { '.html':'text/html; charset=utf-8', '.css':'text/css; charset=utf-8', '.js':'text/javascript; charset=utf-8', '.svg':'image/svg+xml', '.png':'image/png', '.jpg':'image/jpeg', '.webp':'image/webp', '.ico':'image/x-icon' };
 
 function send(res, status, data, type='application/json; charset=utf-8') {
   res.writeHead(status, { 'Content-Type': type, 'X-Content-Type-Options': 'nosniff', 'Cache-Control': 'no-store', 'Access-Control-Allow-Origin': ALLOWED_ORIGIN, 'Vary': 'Origin' });
@@ -73,7 +73,7 @@ const server = http.createServer(async (req, res) => {
   if (req.method === 'OPTIONS') { res.writeHead(204, { 'Access-Control-Allow-Origin': ALLOWED_ORIGIN, 'Access-Control-Allow-Methods': 'GET, POST, OPTIONS', 'Access-Control-Allow-Headers': 'Content-Type', 'Access-Control-Max-Age': '86400', 'Vary': 'Origin' }); return res.end(); }
   if (req.method === 'GET' && pathname === '/api/health') return send(res, 200, { ok:true, service:'NamiRayDigitals Universal AI Gateway' });
   if (req.method === 'GET' && pathname === '/api/status') return send(res, 200, { aiConfigured:configuredProviders().some(x=>x.configured), providers:configuredProviders() });
-  if (req.method === 'POST' && pathname === '/api/generate') {
+  if (req.method === 'POST' && pathname === '/api/generate') {\n    const ip = String(req.headers['x-forwarded-for'] || req.socket.remoteAddress || 'unknown').split(',')[0].trim();\n    const now = Date.now();\n    const bucket = requestBuckets.get(ip) || { start: now, count: 0 };\n    if (now - bucket.start > 60_000) { bucket.start = now; bucket.count = 0; }\n    bucket.count += 1; requestBuckets.set(ip, bucket);\n    if (bucket.count > 12) return send(res, 429, { error:'Batas permintaan sementara tercapai. Coba lagi satu menit.' });
     try {
       const body = await readBody(req);
       const provider = String(body.provider || 'openai').toLowerCase();
