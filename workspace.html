@@ -21,13 +21,42 @@
 @media(max-width:850px){.layout{grid-template-columns:1fr}.side{padding:10px 12px;border-right:0;border-bottom:1px solid var(--line);overflow-x:auto}.side-title,.side-note{display:none}.nav{display:flex;min-width:max-content}.nav button{width:auto;padding:9px 11px}.nav button span.label{white-space:nowrap}.main{padding:15px 12px}.frame-wrap{height:calc(100vh - 205px);min-height:480px}.heading h1{font-size:19px}}
 @media(max-width:520px){.top{height:60px;padding:0 12px}.brand{font-size:12px}.mark{width:34px;height:34px}.brand small{font-size:8px}.status{display:none}.top a,.top button{padding:7px 9px;font-size:11px}.layout{min-height:calc(100vh - 60px)}.heading{align-items:start}.heading p{max-width:240px}.actions button:last-child{display:none}.frame-wrap{height:calc(100dvh - 198px);min-height:420px;border-radius:11px}}
 </style>
+<style id="nrd-workspace-entry-style">
+#nrdWorkspaceGate{position:fixed;inset:0;z-index:10000;display:grid;place-items:center;padding:22px;background:radial-gradient(ellipse at 50% 18%,#183b5b 0%,#0a1224 45%,#050914 100%);color:#eef8ff}
+.workspace-gate-card{width:min(100%,430px);padding:28px 30px 24px;border:1px solid #5bdfff66;border-radius:25px;background:linear-gradient(145deg,#10243aee,#101429f5 65%,#201b3aee);box-shadow:0 24px 90px #0009,0 0 45px #36cfff22;text-align:center;backdrop-filter:blur(20px)}
+.workspace-gate-brand{width:44px;height:44px;margin:0 auto 10px;display:grid;place-items:center;border:1px solid #70eaffaa;border-radius:14px;color:#7beaff;font:800 22px Georgia;background:#2ad8ff18}
+.workspace-gate-minami{display:block;width:min(100%,285px);height:230px;object-fit:contain;object-position:center bottom;margin:0 auto 8px;filter:contrast(1.13) saturate(1.08) drop-shadow(0 0 20px #29dfff66);image-rendering:auto}
+.workspace-gate-kicker{font-size:10px;letter-spacing:.2em;color:#75eaff;font-weight:800}
+.workspace-gate-card h1{font-size:27px;letter-spacing:.01em;margin:8px 0;color:#f5fbff}
+.workspace-gate-card p{font-size:13px;color:#b6c8df;margin:0 0 18px}
+#nrdWorkspacePassword{width:100%;height:48px;border-radius:12px;border:1px solid #476786;background:#071225;color:white;padding:0 14px;font:inherit;outline:none}
+#nrdWorkspacePassword:focus{border-color:#70eaff;box-shadow:0 0 0 3px #49dfff22}
+.workspace-gate-card button{width:100%;height:48px;margin-top:12px;border:0;border-radius:12px;background:linear-gradient(100deg,#35d7ed,#718cff 60%,#a47cff);color:#071321;font-weight:900;letter-spacing:.05em;cursor:pointer}
+.workspace-gate-card button span{font-size:18px;margin-left:8px}
+#nrdWorkspaceGateError{min-height:22px;padding-top:9px;color:#ff9baf;font-size:12px}
+.workspace-gate-card small{font-size:9px;letter-spacing:.2em;color:#7186a5}
+@media(max-width:480px){.workspace-gate-card{padding:22px 20px 18px;border-radius:20px}.workspace-gate-minami{height:205px;width:250px}.workspace-gate-card h1{font-size:24px}}
+</style>
 </head>
 <body>
 <header class="top">
 <a class="brand" href="./index.html"><span class="mark">N</span><span>NamiRayDigitals<small>UNIFIED CREATIVE WORKSPACE</small></span></a>
 <div class="top-right"><span class="status">● Satu ruang kerja · Free-first</span><a href="./index.html">Beranda</a><button id="reload" type="button">↻ Muat ulang</button></div>
 </header>
-<div class="layout">
+<div id="nrdWorkspaceGate" role="dialog" aria-modal="true" aria-labelledby="nrdWorkspaceGateTitle">
+  <form id="nrdWorkspaceGateForm" class="workspace-gate-card">
+    <div class="workspace-gate-brand">NR</div>
+    <img class="workspace-gate-minami" src="./assets/minami-character.webp?v=2" alt="MINAMI — NamiRayDigitals AI Creative Assistant" decoding="async">
+    <div class="workspace-gate-kicker">NAMIRAYDIGITALS · SECURE ENTRY</div>
+    <h1 id="nrdWorkspaceGateTitle">Selamat Datang</h1>
+    <p>Masukkan password terlebih dahulu untuk masuk ke Creative Workspace.</p>
+    <input id="nrdWorkspacePassword" type="password" autocomplete="current-password" placeholder="Masukkan password akses" aria-label="Password akses" required>
+    <button type="submit">MASUK KE WORKSPACE <span>→</span></button>
+    <div id="nrdWorkspaceGateError" role="alert" aria-live="polite"></div>
+    <small>CREATE · GENERATE · INSPIRE</small>
+  </form>
+</div>
+<div class="layout" id="nrdWorkspaceLayout" style="display:none">
 <aside class="side">
 <div class="side-title">Creative Workspace</div>
 <nav class="nav" id="nav">
@@ -49,7 +78,7 @@
 </div>
 <script>
 const modules={
- studio:{title:'Custom Studio',desc:'Ruang kerja utama untuk produksi kreatif.',url:'./studio.html'},
+ studio:{title:'Custom Studio',desc:'Ruang kerja utama untuk produksi kreatif.',url:'./studio.html?embedded=1'},
  production:{title:'Production Studio 0.3.1',desc:'Perencanaan produksi dan alur kerja kreatif.',url:'./custom-studio/production/index.html'},
  memory:{title:'Project Memory & Character Library',desc:'Kelola karakter, environment, continuity, dan timeline proyek.',url:'./custom-studio/project-memory/index.html'},
  agent:{title:'Creative Suite Agent',desc:'Asisten workflow kreatif dan pengembangan prompt.',url:'./custom-studio/creative-suite-agent/index.html'},
@@ -66,6 +95,11 @@ frame.addEventListener('load',()=>loading.classList.add('hide'));
 document.getElementById('reload').addEventListener('click',()=>{loading.classList.remove('hide');frame.src=modules[current].url});
 document.getElementById('newTab').addEventListener('click',()=>window.open(modules[current].url,'_blank','noopener'));
 window.addEventListener('hashchange',()=>openModule(location.hash.slice(1),false));
-openModule(location.hash.slice(1)||'studio',false);
+const NRD_WORKSPACE_PASSWORD="Bandung1989";
+const entry=document.getElementById('nrdWorkspaceGate'),entryForm=document.getElementById('nrdWorkspaceGateForm'),entryField=document.getElementById('nrdWorkspacePassword'),entryError=document.getElementById('nrdWorkspaceGateError'),workspaceLayout=document.getElementById('nrdWorkspaceLayout');
+function enterWorkspace(){entry.style.display='none';workspaceLayout.style.display='grid';openModule(location.hash.slice(1)||'studio',false)}
+if(sessionStorage.getItem('nrd_studio_access')==='ok'){enterWorkspace()}
+entryForm.addEventListener('submit',event=>{event.preventDefault();if(entryField.value===NRD_WORKSPACE_PASSWORD){sessionStorage.setItem('nrd_studio_access','ok');entryError.textContent='';enterWorkspace()}else{entryError.textContent='Password salah. Silakan coba lagi.';entryField.value='';entryField.focus()}});
+
 </script>
 </body></html>
