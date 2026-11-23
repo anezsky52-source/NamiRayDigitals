@@ -5,7 +5,7 @@ import { fileURLToPath } from 'node:url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const publicDir = path.join(__dirname, 'public');
-const PORT = Number(process.env.PORT || 3000);
+const PORT = Number(process.env.PORT || 3000);\nconst ALLOWED_ORIGIN = process.env.ALLOWED_ORIGIN || 'https://anezsky52-source.github.io';
 const PROVIDERS = {
   openai: { key: 'OPENAI_API_KEY', models: ['gpt-4.1-mini', 'gpt-4o-mini'], endpoint: 'https://api.openai.com/v1/responses' },
   gemini: { key: 'GEMINI_API_KEY', models: ['gemini-2.5-flash', 'gemini-2.0-flash'], endpoint: 'https://generativelanguage.googleapis.com/v1beta/models/' },
@@ -16,7 +16,7 @@ const PROVIDERS = {
 const mime = { '.html':'text/html; charset=utf-8', '.css':'text/css; charset=utf-8', '.js':'text/javascript; charset=utf-8', '.svg':'image/svg+xml', '.png':'image/png', '.jpg':'image/jpeg', '.webp':'image/webp', '.ico':'image/x-icon' };
 
 function send(res, status, data, type='application/json; charset=utf-8') {
-  res.writeHead(status, { 'Content-Type': type, 'X-Content-Type-Options': 'nosniff', 'Cache-Control': 'no-store' });
+  res.writeHead(status, { 'Content-Type': type, 'X-Content-Type-Options': 'nosniff', 'Cache-Control': 'no-store', 'Access-Control-Allow-Origin': ALLOWED_ORIGIN, 'Vary': 'Origin' });
   res.end(type.startsWith('application/json') ? JSON.stringify(data) : data);
 }
 function readBody(req, maxBytes=1_000_000) {
@@ -68,7 +68,7 @@ async function generate(provider, model, brief) {
 }
 
 const server = http.createServer(async (req, res) => {
-  const pathname = (req.url || '/').split('?')[0];
+  const pathname = (req.url || '/').split('?')[0];\n  if (req.method === 'OPTIONS') { res.writeHead(204, { 'Access-Control-Allow-Origin': ALLOWED_ORIGIN, 'Access-Control-Allow-Methods': 'GET, POST, OPTIONS', 'Access-Control-Allow-Headers': 'Content-Type', 'Access-Control-Max-Age': '86400', 'Vary': 'Origin' }); return res.end(); }
   if (req.method === 'GET' && pathname === '/api/health') return send(res, 200, { ok:true, service:'NamiRayDigitals Universal AI Gateway' });
   if (req.method === 'GET' && pathname === '/api/status') return send(res, 200, { aiConfigured:configuredProviders().some(x=>x.configured), providers:configuredProviders() });
   if (req.method === 'POST' && pathname === '/api/generate') {
