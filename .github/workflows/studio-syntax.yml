@@ -1,4 +1,4 @@
-name: Studio JavaScript syntax check
+name: Studio release checks
 
 on:
   pull_request:
@@ -7,14 +7,14 @@ on:
     branches: [main, nrd-project-memory-library]
 
 jobs:
-  syntax:
+  static-validation:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-      - name: Check inline JavaScript
+      - name: Validate inline JavaScript syntax
         run: |
           python3 - <<'PY'
           import pathlib, re, subprocess, tempfile, sys
@@ -23,12 +23,15 @@ jobs:
               pathlib.Path("custom-studio/creative-suite-agent/index.html"),
               pathlib.Path("studio.html"),
           ]
-          failed = False
+          errors = []
           for path in paths:
               if not path.exists():
+                  errors.append(f"Missing expected page: {path}")
                   continue
               html = path.read_text(encoding="utf-8")
               scripts = re.findall(r"<script(?:\s[^>]*)?>([\s\S]*?)</script\s*>", html, re.I)
+              if not scripts:
+                  errors.append(f"No inline script found: {path}")
               for number, script in enumerate(scripts, 1):
                   if not script.strip():
                       continue
@@ -37,9 +40,28 @@ jobs:
                       file.flush()
                       result = subprocess.run(["node", "--check", file.name], capture_output=True, text=True)
                   if result.returncode:
-                      failed = True
-                      print(f"FAIL {path} inline script {number}\n{result.stderr}")
+                      errors.append(f"{path}, inline script {number}:\n{result.stderr}")
                   else:
-                      print(f"PASS {path} inline script {number}")
-          sys.exit(1 if failed else 0)
+                      print(f"PASS syntax: {path} script {number}")
+          required = {
+              "custom-studio/project-memory/index.html": [
+                  'id="projects"', 'id="characters"', 'id="environments"',
+                  'id="continuity"', 'id="timeline"', 'id="transfer"',
+                  'id="intelligence"', 'id="director"', 'id="scriptwriter"',
+              ],
+              "custom-studio/creative-suite-agent/index.html": [
+                  'id="project"', 'id="idea"',
+              ],
+          }
+          for name, markers in required.items():
+              path = pathlib.Path(name)
+              if path.exists():
+                  html = path.read_text(encoding="utf-8")
+                  for marker in markers:
+                      if marker not in html:
+                          errors.append(f"Missing {marker} in {name}")
+          if errors:
+              print("\n".join(errors))
+              sys.exit(1)
+          print("All static release checks passed.")
           PY
