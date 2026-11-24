@@ -397,46 +397,65 @@ if(window.top===window.self && sessionStorage.getItem('nrd_studio_access')!=='ok
 
 
 
-<script id="nrd-minami-voice-chat-v1">
+<script id="nrd-minami-voice-chat-v2">
 (()=>{
  const $=id=>document.getElementById(id);
  const input=$('nrdMinamiInput'),send=$('nrdMinamiSend'),mic=$('nrdMinamiMic'),log=$('nrdMinamiMessages'),state=$('nrdMinamiState'),panel=$('nrdMinamiPanel');
- if(!input||!send||!mic||!log||window.__NRD_MINAMI_CHAT_V1__)return;
- window.__NRD_MINAMI_CHAT_V1__=true;
+ if(!input||!send||!mic||!log||window.__NRD_MINAMI_CHAT_V2__)return;
+ window.__NRD_MINAMI_CHAT_V2__=true;
+ const get=id=>$(id)?.value?.trim()||'';
  const add=(text,who)=>{const el=document.createElement('span');el.className=who==='user'?'nrd-user-msg':'nrd-assistant-msg';el.textContent=(who==='user'?'Kamu: ':'Minami: ')+text;log.appendChild(el);log.scrollTop=log.scrollHeight;};
- const answer=(raw)=>{
-  const q=raw.toLowerCase();
-  if(/^(hai|halo|hello|hi|assalamualaikum)/.test(q))return 'Halo! Aku Minami, asisten kreatif NamiRayDigitals. Senang bertemu denganmu. Mau membuat proyek apa hari ini?';
-  if(/(siapa kamu|namamu|nama kamu)/.test(q))return 'Namaku Minami. Aku asisten virtual NamiRayDigitals Custom Studio. Aku bisa membantumu menavigasi studio dan menyusun ide produksi.';
-  if(/(ide|cerita|film|proyek)/.test(q))return 'Untuk memulai proyek, buka menu Idea Studio. Masukkan ide cerita, jenis konten, durasi, gaya visual, dan jumlah karakter. Setelah itu gunakan tombol analisis ide.';
-  if(/(karakter|dna|wajah|kostum|konsisten)/.test(q))return 'Buka Character DNA untuk menyimpan identitas karakter. Catat wajah, rambut, kostum, warna, suara, dan ciri khas. Gunakan deskripsi yang sama di setiap scene agar kontinuitas terjaga.';
-  if(/(environment|lingkungan|lokasi|dunia)/.test(q))return 'Gunakan Environment Lab untuk menetapkan lokasi, waktu, cuaca, pencahayaan, palet warna, dan detail latar. Pertahankan environment yang sama pada scene yang saling tersambung.';
-  if(/(storyboard|scene|adegan)/.test(q))return 'Buka Storyboard Builder. Susun adegan secara berurutan, lalu isi aksi, dialog, gerakan kamera, dan transisi. Jaga posisi karakter dan arah gerak antar-scene.';
-  if(/(prompt|gambar|video|generator)/.test(q))return 'Prompt Lab membantu menyusun prompt gambar dan video. Sertakan referensi karakter, aksi yang jelas, kamera, pencahayaan, rasio, durasi, serta negative prompt untuk mengurangi perubahan yang tidak diinginkan.';
-  if(/(suara|bicara|mikrofon|dengar)/.test(q))return 'Kamu bisa mengetik pesan atau menekan tombol mikrofon. Fitur pengenalan suara bergantung pada dukungan browser dan izin mikrofon.';
-  if(/(simpan|arsip|project archive)/.test(q))return 'Untuk menyimpan pekerjaan, buka Project Archive dan gunakan fitur simpan yang tersedia. Data proyek tersimpan secara lokal di browser ini.';
-  if(/(terima kasih|makasih)/.test(q))return 'Sama-sama! Aku siap menemanimu mengembangkan karya di NamiRayDigitals.';
-  return 'Aku menangkap pesanmu. Saat ini aku berjalan dalam mode interaksi dasar di browser, jadi belum terhubung ke model AI percakapan. Aku tetap bisa membantumu menavigasi Idea Studio, Character DNA, Environment Lab, Storyboard, dan Prompt Lab.';
+ const context=()=>({project:get('project')||'Proyek baru',idea:get('ideaText'),genre:get('genre'),style:get('style'),duration:get('duration'),sceneDuration:get('sceneDuration'),ratio:get('ratio'),characters:get('characters')});
+ const localAnswer=(raw)=>{
+  const q=raw.toLowerCase(),c=context(),name=c.project;
+  const projectInfo='PROYEK: '+c.project+'\nIDE: '+(c.idea||'Belum diisi')+'\nGENRE: '+(c.genre||'Otomatis')+'\nVISUAL: '+(c.style||'3D sinematik')+'\nDURASI: '+(c.duration||'Belum ditentukan')+'\nDURASI SCENE: '+(c.sceneDuration||'10 detik')+'\nRASIO: '+(c.ratio||'16:9')+'\nKARAKTER: '+(c.characters||'Belum ditentukan');
+  const consistency='ATURAN KONTINUITAS WAJIB: Pertahankan wajah, usia visual, bentuk tubuh, rambut, kostum, aksesori, warna, dan proporsi karakter persis sama dengan referensi. Jangan menambah karakter atau teks yang tidak diminta. Jaga arah gerak, posisi, properti, pencahayaan, dan geografi lokasi antar-scene.';
+  if(/^(hai|halo|hello|hi|assalamualaikum)/.test(q))return 'Halo! Aku Minami, asisten produksi NamiRayDigitals. Aku bisa menyusun konsep, Character DNA, environment, storyboard, dialog, dan prompt gambar/video. Ceritakan kebutuhanmu—aku akan bantu langsung.';
+  if(/(siapa kamu|namamu|nama kamu)/.test(q))return 'Namaku Minami, asisten kreatif NamiRayDigitals. Aku membantu mengolah brief menjadi materi produksi yang rapi dan menjaga kontinuitas proyek.';
+  if(/(status|proyek saya|proyek ini|ringkas|ringkasan)/.test(q))return 'RINGKASAN STUDIO\n'+projectInfo+'\n\n'+(c.idea?'IDE SUDAH TERISI.':'IDE BELUM DIISI. Silakan isi bagian Idea Studio.')+'\n\nAku membaca data dari formulir Studio yang sedang terbuka.';
+  if(/(character dna|buat karakter|karakter|wajah|kostum|dna)/.test(q))return 'CHARACTER DNA — '+name+'\nNama karakter: [isi nama]\nIdentitas wajah: gunakan foto referensi sebagai acuan utama; pertahankan bentuk wajah, mata, hidung, bibir, dan usia visual.\nRambut: [warna, panjang, gaya tetap]\nKostum: [deskripsikan detail bahan, warna, potongan, aksesori]\nPostur: [tinggi relatif dan proporsi]\nKepribadian: [sifat dan gestur khas]\n\n'+consistency+'\n\nPROMPT SHEET: Create a professional  character turnaround sheet with front, side, back full-body views and three facial expressions, neutral studio background, sharp focus, consistent face and costume, high-detail production reference.';
+  if(/(environment|lingkungan|lokasi|dunia|setting)/.test(q))return 'ENVIRONMENT DNA\nLokasi: [nama lokasi dan arsitektur]\nWaktu: [pagi/siang/senja/malam]\nCuaca: [kondisi cuaca]\nPalet warna: [warna dominan]\nPencahayaan: [arah dan sumber cahaya]\nLandmark tetap: [objek arsitektur yang mudah dikenali]\nAtmosfer: [emosi suasana]\n\nPROMPT: Create a cinematic environment establishing shot with coherent architecture, spatial depth, realistic materials, atmospheric perspective, controlled volumetric lighting, consistent landmarks and color palette. No random layout changes between shots.';
+  if(/(storyboard|scene|adegan|alur)/.test(q)){
+   const n=Math.max(1,Math.min(30,parseInt(get('sceneCount'),10)||6)),idea=c.idea||raw;
+   return 'STORYBOARD PRODUKSI — '+name+'\n'+projectInfo+'\n\n'+Array.from({length:n},(_,i)=>{const phase=i===0?'PEMBUKAAN — establish lokasi, karakter, dan tujuan.':i===n-1?'PENUTUP — payoff emosi, resolusi, dan shot akhir.':i<n*.35?'PENGENALAN — bangun motivasi dan pemicu konflik.':i<n*.7?'KONFLIK — tingkatkan tantangan dan reaksi karakter.':'KLIMAKS — dorong konflik ke titik tertinggi.';return 'SCENE '+String(i+1).padStart(2,'0')+' ('+(c.sceneDuration||'10 detik')+')\nAksi: '+phase+'\nCerita: '+idea+'\nKamera: satu gerakan kamera yang jelas dan halus; mulai medium/wide lalu close-up bila emosional.\nDialog: [dialog natural bahasa Indonesia atau tanpa dialog sesuai kebutuhan].\nAudio: ambience lokasi, foley aksi, musik sesuai emosi.\nTransisi: cut berdasarkan gerakan atau eyeline.\nKontinuitas: '+consistency}).join('\n\n────────────────────────\n\n');
+  }
+  if(/(prompt|gambar|image|video|flow|dola|generator)/.test(q))return 'PROMPT PRODUKSI SIAP SALIN\n'+projectInfo+'\n\nIMAGE PROMPT:\nUse the supplied character reference as the absolute identity reference. '+(c.idea||raw)+'. '+(c.style||'High-end cinematic 3D animation')+'. Composition: clear subject separation, natural anatomy, detailed fabric and skin, sharp facial focus, realistic lighting, cinematic depth of field. Aspect ratio '+(c.ratio||'16:9')+'. '+consistency+'\n\nVIDEO PROMPT:\nDuration '+(c.sceneDuration||'10 seconds')+'. Show one clear continuous action with natural body mechanics, subtle facial expression and eye movement, believable cloth and hair physics. Use a controlled cinematic camera move, maintain screen direction and background geography, no sudden cuts unless requested. '+consistency+'\n\nNEGATIVE PROMPT:\nblurry face, soft focus, face drift, identity change, costume change, extra fingers, extra limbs, deformed hands, flicker, jitter, warped anatomy, duplicate character, random text, watermark, low resolution.';
+  if(/(dialog|naskah|script|percakapan)/.test(q))return 'PANDUAN DIALOG & NASKAH\nTujuan scene: [tujuan emosional]\nKarakter: [nama dan relasi]\nSubteks: [perasaan yang tidak diucapkan]\nDialog: gunakan bahasa Indonesia percakapan yang natural, kalimat pendek sesuai usia dan emosi karakter. Hindari dialog kaku, narasi berlebihan, atau perubahan hubungan karakter tanpa sebab.\n\nKirimkan situasi scene dan nama karakter agar aku susun dialog lengkap.';
+  if(/(simpan|arsip|archive)/.test(q))return 'Untuk menyimpan proyek, gunakan tombol Simpan Proyek di bagian Studio. Data tersimpan di penyimpanan lokal browser ini. Ekspor JSON secara berkala agar ada cadangan saat berganti perangkat atau menghapus data browser.';
+  if(/(suara|mikrofon|voice)/.test(q))return 'Tekan ikon mikrofon dan izinkan akses mikrofon pada browser. Jika pengenalan suara tidak tersedia, ketik pesan. Suara balasan menggunakan mesin suara perangkat atau layanan TTS browser.';
+  if(/(bantuan|bisa apa|fitur|help)/.test(q))return 'Aku bisa membantu: 1) analisis ide dan genre, 2) Character DNA dan konsistensi, 3) Environment DNA, 4) storyboard hingga 30 scene, 5) prompt gambar dan video, 6) dialog bahasa Indonesia, 7) negative prompt dan kontinuitas. Coba tulis: “buat storyboard 6 scene dari ide proyek saya”.';
+  return 'Aku sudah membaca pesanmu. Untuk hasil yang lebih tepat, tulis kebutuhan secara spesifik—misalnya “buat prompt video 10 detik”, “susun Character DNA”, atau “buat storyboard 8 scene”.\n\nCatatan: mode lokal ini membuat bantuan produksi berbasis aturan dan konteks formulir, bukan model LLM. Untuk percakapan AI generatif sungguhan, hubungkan backend aman melalui Universal AI Gateway.';
  };
- const submit=()=>{
-  const text=input.value.trim();if(!text)return;
-  add(text,'user');input.value='';
-  const reply=answer(text);add(reply,'assistant');state.textContent='MINAMI MENJAWAB';
-  if(window.nrdMinamiSpeak)window.nrdMinamiSpeak(reply);
+ async function remoteAnswer(raw){
+  const base=(localStorage.getItem('nrd_gateway_backend')||'').trim().replace(/\/+$/,'');
+  if(!base)return null;
+  const c=context(),brief='Kamu adalah Minami, asisten produksi profesional NamiRayDigitals. Jawab dalam bahasa Indonesia yang natural, langsung, dan praktis. Prioritaskan konsistensi wajah, rambut, kostum, proporsi, suara, lokasi, properti, dan kontinuitas antar-scene. Jangan mengaku melakukan tindakan yang belum dilakukan.\nKonteks proyek aktif:\n'+JSON.stringify(c)+'\n\nPesan pengguna:\n'+raw;
+  const response=await fetch(base+'/api/generate',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({provider:'gemini',model:'gemini-2.5-flash',brief:'Jenis pekerjaan: Minami Studio Assistant\n\n'+brief})});
+  const data=await response.json();if(!response.ok)throw new Error(data.error||'Gateway gagal');return data.text||null;
+ }
+ let busy=false;
+ const submit=async()=>{
+  const text=input.value.trim();if(!text||busy)return;
+  add(text,'user');input.value='';busy=true;send.disabled=true;state.textContent='MINAMI SEDANG MENYUSUN JAWABAN…';
+  let reply;
+  try{reply=await remoteAnswer(text);if(reply)state.textContent='ONLINE · AI GATEWAY';}
+  catch(e){state.textContent='MODE LOKAL · GATEWAY TIDAK TERJANGKAU';}
+  if(!reply){reply=localAnswer(text);if(!localStorage.getItem('nrd_gateway_backend'))state.textContent='ONLINE · MODE PRODUKSI LOKAL';}
+  add(reply,'assistant');if(window.nrdMinamiSpeak)window.nrdMinamiSpeak(reply);
+  busy=false;send.disabled=false;
  };
- send.addEventListener('click',submit);
- input.addEventListener('keydown',e=>{if(e.key==='Enter')submit();});
+ send.addEventListener('click',submit);input.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();submit();}});
  const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
- if(!SR){mic.disabled=true;mic.title='Browser ini belum mendukung pengenalan suara';state.textContent='KETIK PESAN · VOICE INPUT TIDAK DIDUKUNG';}
- else{
-  const recognition=new SR();recognition.lang='id-ID';recognition.interimResults=false;recognition.maxAlternatives=1;
+ if(!SR){mic.disabled=true;mic.title='Browser ini belum mendukung pengenalan suara';}
+ else{const recognition=new SR();recognition.lang='id-ID';recognition.interimResults=false;recognition.maxAlternatives=1;
   recognition.onstart=()=>{panel.classList.add('nrd-listening');state.textContent='MINAMI SEDANG MENDENGARKAN…';mic.textContent='⏺';};
   recognition.onresult=e=>{input.value=e.results[0][0].transcript;submit();};
   recognition.onerror=e=>{state.textContent=e.error==='not-allowed'?'IZIN MIKROFON DITOLAK':'SUARA TIDAK TERDETEKSI · COBA LAGI';};
-  recognition.onend=()=>{panel.classList.remove('nrd-listening');mic.textContent='🎙';if(state.textContent==='MINAMI SEDANG MENDENGARKAN…')state.textContent='ONLINE · MODE INTERAKSI DASAR';};
+  recognition.onend=()=>{panel.classList.remove('nrd-listening');mic.textContent='🎙';if(state.textContent==='MINAMI SEDANG MENDENGARKAN…')state.textContent='ONLINE · MODE PRODUKSI LOKAL';};
   mic.addEventListener('click',()=>{try{recognition.start();}catch(e){state.textContent='MIKROFON SEDANG AKTIF';}});
  }
- add('Hai! Aku Minami. Ketik pesan atau tekan mikrofon untuk mulai.','assistant');
+ const setup=document.createElement('a');setup.href='./ai-gateway.html';setup.textContent='⚙ Hubungkan AI';setup.style.cssText='display:inline-block;margin:6px 0 0 8px;padding:7px 10px;border:1px solid #35cfff;border-radius:12px;color:#b8f6ff;text-decoration:none;font-size:11px';
+ const intro=document.createElement('span');intro.className='nrd-assistant-msg';intro.textContent='Minami: Hai! Aku siap membantu produksi. Aku dapat membaca konteks formulir Studio dan menyusun storyboard, DNA karakter, serta prompt. Mode lokal gratis aktif.';log.appendChild(intro);log.appendChild(setup);
 })();
 </script>
 </body></html>
