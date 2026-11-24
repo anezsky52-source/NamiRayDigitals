@@ -100,6 +100,25 @@ body:not(.nrd-module-open) .section#dashboard{display:block}body.nrd-module-open
 }
 </style>
 
+
+<style id="nrd-minami-interaction-v1">
+#nrdMinamiChat{position:absolute;z-index:12;left:12px;right:12px;bottom:16px;padding:10px;border:1px solid #48dfff;border-radius:15px;background:linear-gradient(145deg,#04162beF,#081b36f2);box-shadow:0 0 18px #079bff66;backdrop-filter:blur(12px)}
+#nrdMinamiMessages{max-height:76px;overflow:auto;margin:0 0 8px;color:#e8f7ff;font-size:11px;line-height:1.4}
+#nrdMinamiMessages .nrd-user-msg{display:block;color:#b6f4ff;text-align:right;margin:3px 0}
+#nrdMinamiMessages .nrd-assistant-msg{display:block;color:#f0f6ff;margin:3px 0}
+.nrd-chat-row{display:flex;gap:6px;align-items:center}
+#nrdMinamiInput{min-width:0;flex:1;height:38px;padding:8px 10px;border:1px solid #367da9;border-radius:10px;background:#061329;color:#fff;font:12px Arial,sans-serif}
+.nrd-chat-row button,.nrd-chat-tools button{height:38px;min-width:39px;border:1px solid #45dfff;border-radius:10px;background:linear-gradient(135deg,#0c5a89,#292d70);color:#fff;font-weight:800;cursor:pointer}
+#nrdMinamiMic{background:linear-gradient(135deg,#164c7d,#3a277b)}
+.nrd-chat-tools{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:7px}
+.nrd-chat-tools button{height:27px;padding:3px 9px;font-size:10px}
+#nrdMinamiState{font-size:8px;letter-spacing:.08em;color:#8eeaff;text-align:right}
+#nrdMinamiPanel.nrd-listening{box-shadow:0 0 0 2px #6cffc8,0 0 30px #42ffc977}
+#nrdRobot.nrd-speaking{filter:drop-shadow(0 0 25px #5af5ff)!important}
+#nrdRobot.nrd-speaking .nrdMinamiArt{animation:nrdVoicePulse .38s ease-in-out infinite alternate}
+@keyframes nrdVoicePulse{from{filter:brightness(1.02) saturate(1.05)}to{filter:brightness(1.18) saturate(1.2)}}
+@media(max-width:480px){#nrdMinamiChat{left:7px;right:7px;bottom:9px;padding:8px}#nrdMinamiMessages{max-height:58px;font-size:10px}#nrdMinamiInput{height:35px;font-size:11px}.nrd-chat-row button{height:35px;min-width:35px}#nrdMinamiState{font-size:7px}}
+</style>
 </head>
 <body>
 <script id="nrd-workspace-entry-guard">(()=>{try{const allowed=sessionStorage.getItem("nrd_studio_access")==="ok";if(!allowed){if(window.top===window.self){location.replace("./workspace.html#studio")}else{window.top.location.replace("./workspace.html#studio")}}}catch(error){location.replace("./workspace.html#studio")}})();</script>
@@ -111,6 +130,11 @@ body:not(.nrd-module-open) .section#dashboard{display:block}body.nrd-module-open
 <div class="layout"><section id="nrdMinamiPanel" aria-label="MINAMI AI assistant"><div class="aira-copy"><strong>● MINAMI · AI CREATIVE ASSISTANT</strong><h3>MINAMI — Creative Studio Assistant</h3><p>Asisten kreatif AI Anda. Pilih menu di sebelah kanan untuk memulai perjalanan kreatif.</p></div><div id="nrdRobotDock"><div id="nrdRobotTalk" role="status" aria-live="polite"><b>MINAMI · AI ASSISTANT</b>Selamat datang di NamiRayDigitals Custom Studio! Saya MINAMI, asisten kreatif AI Anda. Silakan pilih menu di sebelah kanan untuk memulai perjalanan kreatif Anda. 💙 <br><button type="button" id="nrdRobotRepeat">Dengarkan lagi</button></div>
 <div id="nrdRobot" role="button" tabindex="0" aria-label="MINAMI, asisten hologram wanita NamiRayDigitals">
 <img class="nrdMinamiArt" src="./assets/minami-character.webp?v=2" alt="MINAMI, robot wanita holografik NamiRayDigitals" loading="eager" decoding="async"><div class="label">MINAMI · NAMIRAYDIGITALS AI</div></div></div>
+<div id="nrdMinamiChat" aria-label="Percakapan dengan Minami">
+  <div id="nrdMinamiMessages" aria-live="polite"><span class="nrd-assistant-msg">Minami siap mendengarkan. Kamu bisa mengetik atau menekan mikrofon.</span></div>
+  <div class="nrd-chat-row"><input id="nrdMinamiInput" type="text" maxlength="500" placeholder="Tanya Minami..." aria-label="Pesan untuk Minami"><button id="nrdMinamiSend" type="button" aria-label="Kirim pesan">➤</button><button id="nrdMinamiMic" type="button" aria-label="Mulai bicara">🎙</button></div>
+  <div class="nrd-chat-tools"><button id="nrdRobotSound" type="button">🔊 Tes suara</button><span id="nrdMinamiState">ONLINE · MODE INTERAKSI DASAR</span></div>
+</div>
 
 </section><div class="workspace"><section class="hero"><div class="eyebrow">PLATFORM KREATIF AI GENERASI BERIKUTNYA</div><h2>NamiRayDigitals<br>Custom Studio</h2><p>Create • Generate • Inspire — Ruang produksi kreatif AI untuk ide, karakter, dunia, dan storyboard.</p><div class="actions"><button class="btn primary" onclick="go('idea')">＋ Mulai proyek</button><button class="btn ghost" onclick="go('archive')">Buka arsip proyek</button></div></section><nav class="nav" id="nav" aria-label="Menu utama studio">
 <button class="active" data-go="dashboard"><span class="nav-icon">⌂</span><span><b>Dashboard</b><small>Ringkasan proyek dan akses cepat ke semua fitur studio.</small></span></button>
@@ -241,6 +265,7 @@ if(window.top===window.self && sessionStorage.getItem('nrd_studio_access')!=='ok
  sound.textContent='🔊 Tes suara robot';
  sound.setAttribute('aria-label','Tes suara robot');
  sound.onclick=()=>{enabled=true;speak('Halo! Aku robot perempuan NamiRayDigitals. Senang sekali bisa menemanimu. Mari kita mulai berkarya bersama!');};
+ window.nrdMinamiSpeak=speak;
  const nav=$('nav');
  if(nav)nav.addEventListener('click',e=>{
   const el=e.target.closest('button[data-go],a');if(!el)return;
@@ -259,4 +284,47 @@ if(window.top===window.self && sessionStorage.getItem('nrd_studio_access')!=='ok
 
 
 
+
+<script id="nrd-minami-voice-chat-v1">
+(()=>{
+ const $=id=>document.getElementById(id);
+ const input=$('nrdMinamiInput'),send=$('nrdMinamiSend'),mic=$('nrdMinamiMic'),log=$('nrdMinamiMessages'),state=$('nrdMinamiState'),panel=$('nrdMinamiPanel');
+ if(!input||!send||!mic||!log||window.__NRD_MINAMI_CHAT_V1__)return;
+ window.__NRD_MINAMI_CHAT_V1__=true;
+ const add=(text,who)=>{const el=document.createElement('span');el.className=who==='user'?'nrd-user-msg':'nrd-assistant-msg';el.textContent=(who==='user'?'Kamu: ':'Minami: ')+text;log.appendChild(el);log.scrollTop=log.scrollHeight;};
+ const answer=(raw)=>{
+  const q=raw.toLowerCase();
+  if(/^(hai|halo|hello|hi|assalamualaikum)/.test(q))return 'Halo! Aku Minami, asisten kreatif NamiRayDigitals. Senang bertemu denganmu. Mau membuat proyek apa hari ini?';
+  if(/(siapa kamu|namamu|nama kamu)/.test(q))return 'Namaku Minami. Aku asisten virtual NamiRayDigitals Custom Studio. Aku bisa membantumu menavigasi studio dan menyusun ide produksi.';
+  if(/(ide|cerita|film|proyek)/.test(q))return 'Untuk memulai proyek, buka menu Idea Studio. Masukkan ide cerita, jenis konten, durasi, gaya visual, dan jumlah karakter. Setelah itu gunakan tombol analisis ide.';
+  if(/(karakter|dna|wajah|kostum|konsisten)/.test(q))return 'Buka Character DNA untuk menyimpan identitas karakter. Catat wajah, rambut, kostum, warna, suara, dan ciri khas. Gunakan deskripsi yang sama di setiap scene agar kontinuitas terjaga.';
+  if(/(environment|lingkungan|lokasi|dunia)/.test(q))return 'Gunakan Environment Lab untuk menetapkan lokasi, waktu, cuaca, pencahayaan, palet warna, dan detail latar. Pertahankan environment yang sama pada scene yang saling tersambung.';
+  if(/(storyboard|scene|adegan)/.test(q))return 'Buka Storyboard Builder. Susun adegan secara berurutan, lalu isi aksi, dialog, gerakan kamera, dan transisi. Jaga posisi karakter dan arah gerak antar-scene.';
+  if(/(prompt|gambar|video|generator)/.test(q))return 'Prompt Lab membantu menyusun prompt gambar dan video. Sertakan referensi karakter, aksi yang jelas, kamera, pencahayaan, rasio, durasi, serta negative prompt untuk mengurangi perubahan yang tidak diinginkan.';
+  if(/(suara|bicara|mikrofon|dengar)/.test(q))return 'Kamu bisa mengetik pesan atau menekan tombol mikrofon. Fitur pengenalan suara bergantung pada dukungan browser dan izin mikrofon.';
+  if(/(simpan|arsip|project archive)/.test(q))return 'Untuk menyimpan pekerjaan, buka Project Archive dan gunakan fitur simpan yang tersedia. Data proyek tersimpan secara lokal di browser ini.';
+  if(/(terima kasih|makasih)/.test(q))return 'Sama-sama! Aku siap menemanimu mengembangkan karya di NamiRayDigitals.';
+  return 'Aku menangkap pesanmu. Saat ini aku berjalan dalam mode interaksi dasar di browser, jadi belum terhubung ke model AI percakapan. Aku tetap bisa membantumu menavigasi Idea Studio, Character DNA, Environment Lab, Storyboard, dan Prompt Lab.';
+ };
+ const submit=()=>{
+  const text=input.value.trim();if(!text)return;
+  add(text,'user');input.value='';
+  const reply=answer(text);add(reply,'assistant');state.textContent='MINAMI MENJAWAB';
+  if(window.nrdMinamiSpeak)window.nrdMinamiSpeak(reply);
+ };
+ send.addEventListener('click',submit);
+ input.addEventListener('keydown',e=>{if(e.key==='Enter')submit();});
+ const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+ if(!SR){mic.disabled=true;mic.title='Browser ini belum mendukung pengenalan suara';state.textContent='KETIK PESAN · VOICE INPUT TIDAK DIDUKUNG';}
+ else{
+  const recognition=new SR();recognition.lang='id-ID';recognition.interimResults=false;recognition.maxAlternatives=1;
+  recognition.onstart=()=>{panel.classList.add('nrd-listening');state.textContent='MINAMI SEDANG MENDENGARKAN…';mic.textContent='⏺';};
+  recognition.onresult=e=>{input.value=e.results[0][0].transcript;submit();};
+  recognition.onerror=e=>{state.textContent=e.error==='not-allowed'?'IZIN MIKROFON DITOLAK':'SUARA TIDAK TERDETEKSI · COBA LAGI';};
+  recognition.onend=()=>{panel.classList.remove('nrd-listening');mic.textContent='🎙';if(state.textContent==='MINAMI SEDANG MENDENGARKAN…')state.textContent='ONLINE · MODE INTERAKSI DASAR';};
+  mic.addEventListener('click',()=>{try{recognition.start();}catch(e){state.textContent='MIKROFON SEDANG AKTIF';}});
+ }
+ add('Hai! Aku Minami. Ketik pesan atau tekan mikrofon untuk mulai.','assistant');
+})();
+</script>
 </body></html>
