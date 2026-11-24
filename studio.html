@@ -264,21 +264,24 @@ if(window.top===window.self && sessionStorage.getItem('nrd_studio_access')!=='ok
  }
  async function speak(text){
   if(!enabled)return;
-  const token=++requestNo;stopAudio();display(text);
-  sound.textContent='⏳ Menyiapkan suara Minami…';
-  /* Coba audio TTS online terlebih dahulu; pemanggilan play dimulai langsung dari interaksi pengguna. */
+  const token=++requestNo;
+  stopAudio();
+  display(text);
+  sound.textContent='🗣️ Menyiapkan suara Minami…';
+  /* Jalankan Web Speech langsung pada interaksi pengguna agar browser mobile tidak memblokir audio. */
   try{
-   await googleAudio(text,token);
-   if(token===requestNo){robot.classList.remove('nrd-speaking');sound.textContent='🔊 Putar suara Minami';}
+   const nativeSpeech=browserVoice(text,token);
+   await nativeSpeech;
+   if(token===requestNo)sound.textContent='🔊 Suara Minami selesai';
    return;
-  }catch(remoteError){
+  }catch(localError){
    if(token!==requestNo)return;
   }
   try{
-   await browserVoice(text,token);
-   if(token===requestNo)sound.textContent='🔊 Putar suara Minami';
-  }catch(localError){
-   if(token===requestNo){robot.classList.remove('nrd-speaking');sound.textContent='⚠️ Suara belum tersedia. Aktifkan mesin Text-to-Speech Indonesia di pengaturan perangkat, lalu coba lagi.';}
+   await googleAudio(text,token);
+   if(token===requestNo){robot.classList.remove('nrd-speaking');sound.textContent='🔊 Suara Minami selesai';}
+  }catch(remoteError){
+   if(token===requestNo){robot.classList.remove('nrd-speaking');sound.textContent='⚠️ Suara tidak tersedia. Periksa izin suara, koneksi, dan mesin TTS Indonesia perangkat.';}
   }
  }
  sound.textContent='🔊 Tes suara robot';
