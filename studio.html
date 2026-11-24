@@ -249,12 +249,15 @@ if(window.top===window.self && sessionStorage.getItem('nrd_studio_access')!=='ok
    if(!synth||typeof SpeechSynthesisUtterance==='undefined'){reject(Error('TTS browser tidak tersedia'));return;}
    try{
     synth.cancel();synth.resume();
-    const u=new SpeechSynthesisUtterance(text);u.lang='id-ID';u.rate=.9;u.pitch=1.35;u.volume=1;
+    const u=new SpeechSynthesisUtterance(text);u.lang='id-ID';u.rate=.94;u.pitch=1.12;u.volume=1;
+    const voices=synth.getVoices();
+    const idVoice=voices.find(v=>/^id(-|_)/i.test(v.lang))||voices.find(v=>/indones/i.test(v.name));
+    if(idVoice)u.voice=idVoice;
     let started=false,settled=false;
     const done=(ok)=>{if(settled)return;settled=true;clearTimeout(watch);robot.classList.remove('nrd-speaking');ok?resolve():reject(Error('TTS browser gagal'));};
-    u.onstart=()=>{started=true;robot.classList.add('nrd-speaking');sound.textContent='🗣️ Robot sedang berbicara';};
+    u.onstart=()=>{started=true;robot.classList.add('nrd-speaking');sound.textContent='🗣️ Minami sedang berbicara';};
     u.onend=()=>done(true);u.onerror=()=>done(false);
-    const watch=setTimeout(()=>{if(!started)done(false);},2500);
+    const watch=setTimeout(()=>{if(!started)done(false);},5000);
     synth.speak(u);
    }catch(e){reject(e);}
   });
@@ -275,7 +278,7 @@ if(window.top===window.self && sessionStorage.getItem('nrd_studio_access')!=='ok
    await browserVoice(text,token);
    if(token===requestNo)sound.textContent='🔊 Putar suara Minami';
   }catch(localError){
-   if(token===requestNo){robot.classList.remove('nrd-speaking');sound.textContent='⚠️ Suara tidak tersedia — periksa internet dan volume perangkat';}
+   if(token===requestNo){robot.classList.remove('nrd-speaking');sound.textContent='⚠️ Suara belum tersedia. Aktifkan mesin Text-to-Speech Indonesia di pengaturan perangkat, lalu coba lagi.';}
   }
  }
  sound.textContent='🔊 Tes suara robot';
