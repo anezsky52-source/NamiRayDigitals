@@ -159,6 +159,31 @@ body:not(.nrd-module-open) .section#dashboard{display:block}body.nrd-module-open
  #nrdMinamiPanel .aira-copy p{font-size:7px!important;line-height:1.2!important}
 }
 </style>
+
+<style id="nrd-minami-assistant-badge-position-final">
+/* Final mobile/desktop override: compact Minami label below the face */
+#nrdMinamiPanel .aira-copy{
+ position:absolute!important;
+ top:auto!important;
+ bottom:190px!important;
+ left:12px!important;
+ right:auto!important;
+ width:150px!important;
+ max-width:150px!important;
+ padding:7px 9px!important;
+ z-index:7!important;
+}
+#nrdMinamiPanel .aira-copy strong{font-size:9px!important;line-height:1.2!important}
+#nrdMinamiPanel .aira-copy p{font-size:8px!important;line-height:1.25!important}
+@media(max-width:600px){
+ #nrdMinamiPanel .aira-copy{
+  top:auto!important;bottom:172px!important;left:9px!important;right:auto!important;
+  width:122px!important;max-width:122px!important;padding:6px 7px!important;
+ }
+ #nrdMinamiPanel .aira-copy strong{font-size:7px!important;line-height:1.2!important}
+ #nrdMinamiPanel .aira-copy p{font-size:7px!important;line-height:1.2!important}
+}
+</style>
 </head>
 <body>
 <script id="nrd-workspace-entry-guard">(()=>{try{const allowed=sessionStorage.getItem("nrd_studio_access")==="ok";if(!allowed){if(window.top===window.self){location.replace("./workspace.html#studio")}else{window.top.location.replace("./workspace.html#studio")}}}catch(error){location.replace("./workspace.html#studio")}})();</script>
