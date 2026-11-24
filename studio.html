@@ -65,6 +65,25 @@ body:not(.nrd-module-open) .section#dashboard{display:block}body.nrd-module-open
 @media(max-width:760px){.wrap{padding:6px}.top{grid-template-columns:1fr auto;padding:8px}.brand h1{font-size:20px}.logo{width:42px;height:42px;font-size:40px}.studio-status{font-size:10px;padding:6px 8px}.top-tools{gap:4px}.top-tools button{width:34px;height:34px}.layout{display:flex;flex-direction:column;min-height:0;gap:9px}#nrdMinamiPanel{order:0;min-height:520px;width:100%}.workspace{order:1;width:100%}.content{order:2}.hero{min-height:170px}.hero h2{font-size:27px}.nav{gap:7px}#nav>button{min-height:82px}.footer{flex-wrap:wrap;justify-content:center}}
 @media(max-width:480px){.brand h1{font-size:17px}.brand p{font-size:9px}.slogan{font-size:13px;padding:8px}.top-tools button{width:30px;height:30px;font-size:16px}.studio-status{font-size:9px}.layout{gap:7px}#nrdMinamiPanel{min-height:450px}.aira-copy{max-width:155px!important}.aira-copy p{font-size:9px!important}#nrdRobotTalk{top:34%;width:46%;right:7px;padding:10px;font-size:10px}.hero{padding:14px 9px;min-height:150px}.hero:before{font-size:54px;left:3%}.hero .eyebrow,.hero h2,.hero p{margin-left:28%;max-width:70%}.hero h2{font-size:21px}.hero p{font-size:10px}#nav{grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}#nav>button{min-height:83px;padding:7px;gap:5px}#nav button b{font-size:11px}#nav button small{font-size:8px}.nav-icon{flex-basis:27px;width:27px;height:32px;font-size:23px}#nav>button:after{font-size:20px}#nav>button.archive-card{width:95%;min-height:65px}.grid,.cards{grid-template-columns:1fr}.footer{font-size:10px;padding:9px}}
 @media(prefers-reduced-motion:reduce){#nrdRobot{animation:none}*{transition:none!important}}
+/* Mobile layout and Minami chat refinements */
+#nrdRobotTalk{display:none!important}
+#nrdMinamiChat{bottom:12px!important;max-height:166px;display:flex;flex-direction:column;gap:5px}
+#nrdMinamiMessages{max-height:42px!important;min-height:25px;overflow-y:auto}
+#nrdMinamiChat .nrd-chat-row{flex-shrink:0}
+#nrdMinamiChat .nrd-chat-tools{flex-shrink:0;margin-top:2px}
+#nrdRobot .nrdMinamiArt{image-rendering:auto;-webkit-transform:translateZ(0);transform:translateZ(0)}
+@media(max-width:700px){
+ #nrdMinamiPanel{min-height:690px!important;height:690px}
+ #nrdRobot{height:88%;width:100%;bottom:0}
+ #nrdMinamiPanel .aira-copy{top:12px;left:12px;max-width:165px;padding:8px 10px}
+ #nrdMinamiPanel .aira-copy p{font-size:10px}
+ #nrdMinamiChat{left:10px!important;right:10px!important;bottom:10px!important;max-height:142px;padding:8px}
+ #nrdMinamiMessages{max-height:30px!important;min-height:20px;font-size:10px}
+ #nrdMinamiInput{height:34px}
+ #nrdMinamiChat .nrd-chat-row button{height:34px;min-width:36px}
+ #nrdMinamiChat .nrd-chat-tools button{height:25px}
+ #nrdMinamiState{font-size:7px}
+}
 </style>
 <style id="nrd-minami-public-fix">
 /* MINAMI PUBLIC ROBOT VISIBILITY FIX */
@@ -240,27 +259,24 @@ if(window.top===window.self && sessionStorage.getItem('nrd_studio_access')!=='ok
    }catch(e){reject(e);}
   });
  }
- function speak(text){
+ async function speak(text){
   if(!enabled)return;
-  ++requestNo;stopAudio();display(text);
-  if(!synth||typeof SpeechSynthesisUtterance==='undefined'){
-   sound.textContent='⚠️ Mesin suara browser tidak tersedia';
+  const token=++requestNo;stopAudio();display(text);
+  sound.textContent='⏳ Menyiapkan suara Minami…';
+  /* Coba audio TTS online terlebih dahulu; pemanggilan play dimulai langsung dari interaksi pengguna. */
+  try{
+   await googleAudio(text,token);
+   if(token===requestNo){robot.classList.remove('nrd-speaking');sound.textContent='🔊 Putar suara Minami';}
    return;
+  }catch(remoteError){
+   if(token!==requestNo)return;
   }
   try{
-   const u=new SpeechSynthesisUtterance(text);
-   u.lang='id-ID';u.rate=.92;u.pitch=1.22;u.volume=1;
-   const voices=synth.getVoices?synth.getVoices():[];
-   const indo=voices.find(v=>/^id([-_]|$)/i.test(v.lang));
-   if(indo)u.voice=indo;
-   u.onstart=()=>{robot.classList.add('nrd-speaking');sound.textContent='🗣️ Robot sedang berbicara';};
-   u.onend=()=>{robot.classList.remove('nrd-speaking');sound.textContent='🔊 Tes suara robot';};
-   u.onerror=(e)=>{robot.classList.remove('nrd-speaking');sound.textContent='⚠️ TTS gagal: '+(e.error||'coba lagi');};
-   synth.cancel();synth.resume();
-   /* Penting: speak dipanggil langsung di dalam klik pengguna, tanpa menunggu jaringan */
-   synth.speak(u);
-   sound.textContent='⏳ Memulai suara...';
-  }catch(e){sound.textContent='⚠️ '+(e.message||'Suara gagal dimulai');}
+   await browserVoice(text,token);
+   if(token===requestNo)sound.textContent='🔊 Putar suara Minami';
+  }catch(localError){
+   if(token===requestNo){robot.classList.remove('nrd-speaking');sound.textContent='⚠️ Suara tidak tersedia — periksa internet dan volume perangkat';}
+  }
  }
  sound.textContent='🔊 Tes suara robot';
  sound.setAttribute('aria-label','Tes suara robot');
