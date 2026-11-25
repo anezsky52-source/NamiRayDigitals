@@ -23,7 +23,7 @@ export default {
   const url=new URL(request.url);
   if(request.method==="GET"&&url.pathname==="/health")return json({ok:true,service:"NamiRayDigitals AI Gateway",model:env.AI_MODEL||"provider-default"},200,corsOrigin);
   if(request.method!=="POST"||url.pathname!=="/api/chat")return json({error:"Not found"},404,corsOrigin);
-  if(!env.AI_API_KEY)return json({error:"Server belum dikonfigurasi: AI_API_KEY belum diisi."},503,corsOrigin);
+  if(!env.AI && !env.AI_API_KEY)return json({error:"Server belum dikonfigurasi: pasang binding Workers AI (AI) atau secret AI_API_KEY."},503,corsOrigin);
   let body;try{body=await request.json()}catch{return json({error:"JSON request tidak valid."},400,corsOrigin)}
   const message=String(body.message||"").trim();
   if(!message)return json({error:"Pesan kosong."},400,corsOrigin);
@@ -35,6 +35,13 @@ export default {
   const endpoint=(env.AI_BASE_URL||DEFAULT_BASE).trim();
   if(!/^https:\/\//i.test(endpoint))return json({error:"AI_BASE_URL harus menggunakan HTTPS."},500,corsOrigin);
   try{
+   if(env.AI){
+    const model=env.AI_MODEL||"@cf/meta/llama-3.1-8b-instruct";
+    const result=await env.AI.run(model,{messages,temperature:0.7,max_tokens:1800});
+    const reply=result.response||result.result||result.choices?.[0]?.message?.content;
+    if(!reply)return json({error:"Workers AI tidak mengembalikan teks jawaban."},502,corsOrigin);
+    return json({reply,model},200,corsOrigin);
+   }
    const upstream=await fetch(endpoint,{method:"POST",headers:{"Authorization":"Bearer "+env.AI_API_KEY,"Content-Type":"application/json"},body:JSON.stringify({model:env.AI_MODEL||"gpt-4o-mini",messages,temperature:0.7,max_tokens:1800})});
    const data=await upstream.json().catch(()=>({}));
    if(!upstream.ok)return json({error:"Provider AI menolak permintaan.",provider_status:upstream.status,detail:String(data.error?.message||data.message||"Unknown provider error").slice(0,500)},502,corsOrigin);
