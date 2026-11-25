@@ -1,0 +1,19 @@
+name = "namiraydigitals-ai-gateway"
+main = "cloudflare-worker.js"
+compatibility_date = "2026-11-25"
+
+[ai]
+binding = "AI"
+
+[vars]
+ALLOWED_ORIGIN = "https://anezsky52-source.github.io"
+AI_MODEL = "@cf/google/gemma-4-26b-a4b-it"
+IMAGE_MODEL = "@cf/black-forest-labs/flux-2-klein-4b"
+
+# Optional secrets (set with: wrangler secret put AI_API_KEY)
+# AI_API_KEY
+# VIDEO_API_KEY
+
+# Optional variables:
+# AI_BASE_URL = "https://api.openai.com/v1/chat/completions"
+# VIDEO_API_URL = "https://your-video-adapter.example/api/generate"
