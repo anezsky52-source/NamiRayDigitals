@@ -7,13 +7,12 @@
 
 ## Deploy the backend
 1. Create a Cloudflare Worker and paste `backend/cloudflare-worker.js`.
-2. Set Worker secret `AI_API_KEY` to a provider API key.
-3. Set Worker variable `AI_BASE_URL` to the provider's OpenAI-compatible chat-completions endpoint (default: `https://api.openai.com/v1/chat/completions`).
-4. Set `AI_MODEL` to a model supported by that provider.
-5. Set `ALLOWED_ORIGIN` to the exact GitHub Pages origin, e.g. `https://anezsky52-source.github.io`.
-6. Deploy and open the Minami AI 2.0 module. In AI Connection, paste the Worker URL and test.
+2. For the free-first option, enable **Workers AI** in Cloudflare and add an AI binding named `AI` to this Worker. The template uses `@cf/meta/llama-3.1-8b-instruct` by default; set `AI_MODEL` to a model currently available to your account if needed. No provider API key is required for this binding.
+3. Alternatively, set Worker secret `AI_API_KEY` and variables `AI_BASE_URL` (default: `https://api.openai.com/v1/chat/completions`) and `AI_MODEL` for an OpenAI-compatible provider.
+4. Set `ALLOWED_ORIGIN` to the exact GitHub Pages origin, e.g. `https://anezsky52-source.github.io`.
+5. Deploy and open the Minami AI 2.0 module. In AI Connection, paste the Worker URL and test.
 
-Do not commit API keys. Do not put provider keys into browser storage, HTML, JavaScript, or GitHub Pages. Provider use may incur charges; check its current free-tier and billing rules. GitHub Pages cannot run this Worker by itself.
+Do not commit API keys. Do not put provider keys into browser storage, HTML, JavaScript, or GitHub Pages. Workers AI and other providers have account-specific quotas and billing terms; confirm current limits before use. GitHub Pages cannot run this Worker by itself.
 
 ## Endpoints
 - `GET /health`
