@@ -22,6 +22,9 @@ jobs:
               pathlib.Path("custom-studio/project-memory/index.html"),
               pathlib.Path("custom-studio/creative-suite-agent/index.html"),
               pathlib.Path("studio.html"),
+              pathlib.Path("custom-studio/minami-ai/index.html"),
+              pathlib.Path("custom-studio/ai-generator/index.html"),
+              pathlib.Path("backend/cloudflare-worker.js"),
           ]
           errors = []
           for path in paths:
