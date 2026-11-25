@@ -8,7 +8,7 @@
 ## Deploy (free-first path)
 1. Create a Cloudflare Worker and paste `backend/cloudflare-worker.js`.
 2. Enable Cloudflare **Workers AI** and add a binding named exactly `AI` to the Worker.
-3. The default chat model is `@cf/meta/llama-3.1-8b-instruct`. The default image model is `@cf/black-forest-labs/flux-1-schnell`. If a model is unavailable to your account, set Worker variables `AI_MODEL` or `IMAGE_MODEL` to supported models.
+3. The default chat model is `@cf/google/gemma-4-26b-a4b-it`; the default image model is `@cf/black-forest-labs/flux-2-klein-4b`. Both are current catalog models in Cloudflare documentation. If a model is unavailable to your account or plan, set Worker variables `AI_MODEL` or `IMAGE_MODEL` to models enabled for your account. FLUX.2 Klein uses multipart input for prompt and dimensions.
 4. Set `ALLOWED_ORIGIN` to `https://anezsky52-source.github.io` (the GitHub Pages origin, without a path).
 5. Deploy. In MINAMI AI 2.0 → AI Connection, paste the Worker URL and test it.
 6. The same backend URL is used by AI Generator. Open AI Generator and select Generate Image; if the Worker is connected, it calls `POST /api/image` and displays the returned image.
