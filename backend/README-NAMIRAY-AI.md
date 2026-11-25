@@ -6,11 +6,11 @@
 - `backend/cloudflare-worker.js`: Cloudflare Worker with chat, image, and video routes. Provider secrets stay on the server.
 
 ## Deploy (free-first path)
-1. Create a Cloudflare Worker and paste `backend/cloudflare-worker.js`.
-2. Enable Cloudflare **Workers AI** and add a binding named exactly `AI` to the Worker.
+1. Create a Cloudflare Worker. For dashboard deployment, paste `backend/cloudflare-worker.js`. For Wrangler deployment, copy `backend/wrangler.toml.example` to `backend/wrangler.toml`, then run `npx wrangler deploy` from the `backend` directory.
+2. Enable Cloudflare **Workers AI** and add a binding named exactly `AI` to the Worker (the Wrangler example already declares this binding).
 3. The default chat model is `@cf/google/gemma-4-26b-a4b-it`; the default image model is `@cf/black-forest-labs/flux-2-klein-4b`. Both are current catalog models in Cloudflare documentation. If a model is unavailable to your account or plan, set Worker variables `AI_MODEL` or `IMAGE_MODEL` to models enabled for your account. FLUX.2 Klein uses multipart input for prompt and dimensions.
 4. Set `ALLOWED_ORIGIN` to `https://anezsky52-source.github.io` (the GitHub Pages origin, without a path).
-5. Deploy. In MINAMI AI 2.0 → AI Connection, paste the Worker URL and test it.
+5. Deploy. In MINAMI AI 2.0 → AI Connection, paste the Worker URL and test it. With Wrangler, use `npx wrangler secret put VIDEO_API_KEY` only if your video adapter requires it.
 6. The same backend URL is used by AI Generator. Open AI Generator and select Generate Image; if the Worker is connected, it calls `POST /api/image` and displays the returned image.
 
 ### Optional chat provider
@@ -40,7 +40,7 @@ It must return JSON, ideally `{"video_url":"https://...","status":"completed"}` 
 
 ## Security and usage notes
 - Do not put provider API keys in browser code, localStorage, HTML, JavaScript, or Git.
-- Restrict `ALLOWED_ORIGIN` to the GitHub Pages origin. Configure Cloudflare rate limiting / abuse protection for public endpoints before sharing widely; public Workers endpoints can otherwise be called by anyone.
+- Restrict `ALLOWED_ORIGIN` to the GitHub Pages origin. Configure Cloudflare rate limiting / abuse protection for public endpoints before sharing widely; public Workers endpoints can otherwise be called by anyone. The example config is a starting point, not a production abuse-control policy.
 - Workers AI and external providers have account-specific quotas, limits, and billing terms. Check your current Cloudflare dashboard and provider terms. “Free-first” does not mean unlimited free generation.
 - GitHub Pages cannot execute the Worker. The Worker must be deployed separately.
 - Local project/character memory and storyboard data are saved in the current browser only. Export project memory and storyboard backups when needed.
