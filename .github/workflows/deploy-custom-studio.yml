@@ -10,6 +10,7 @@ on:
       - "ai-gateway.html"
       - "assets/**"
       - "custom-studio/**"
+      - "pijat-margaasih/**"
       - ".github/workflows/deploy-custom-studio.yml"
   workflow_dispatch:
 
@@ -42,6 +43,7 @@ jobs:
           rm -rf _site
           mkdir -p _site
           cp -a index.html studio.html workspace.html ai-gateway.html assets custom-studio _site/
+          cp -a pijat-margaasih _site/
           test -s _site/index.html
           test -s _site/studio.html
           test -s _site/workspace.html
@@ -49,6 +51,7 @@ jobs:
           test -s _site/custom-studio/index.html
           test -s _site/custom-studio/project-memory/index.html
           test -s _site/custom-studio/creative-suite-agent/index.html
+          test -s _site/pijat-margaasih/index.html
 
       - name: Upload complete website
         uses: actions/upload-pages-artifact@v3
